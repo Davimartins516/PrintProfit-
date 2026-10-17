@@ -1,124 +1,1217 @@
 <!DOCTYPE html>
+
 <html lang="pt-BR">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width,initial-scale=1">
-<meta name="theme-color" content="#071827">
+<meta charset="utf-8"/>
+<meta content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no" name="viewport"/>
+<meta content="#071827" name="theme-color"/>
 <title>PrintProfit</title>
 <style>
-:root{--bg:#071827;--panel:#102a3d;--panel2:#0b2030;--line:#234459;--text:#edf7ff;--muted:#91a7b8;--accent:#21d4c5;--red:#ff7272}
-*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font-family:system-ui,-apple-system,Arial,sans-serif}
-button,input,select,textarea{font:inherit}button{cursor:pointer}header{position:sticky;top:0;z-index:5;background:#071827ed;backdrop-filter:blur(12px);border-bottom:1px solid var(--line);padding:14px;display:flex;align-items:center;gap:12px}
-.brand{font-size:22px;font-weight:850}.brand span{color:var(--accent)}.muted{color:var(--muted);font-size:13px}.menuBtn,.closeBtn{background:var(--panel);color:var(--accent);border:1px solid var(--line);border-radius:12px;padding:9px 13px;font-size:22px}
-#layout{max-width:1000px;margin:auto}main{padding:16px;min-width:0}.screen{display:none}.screen.active{display:block}h2{font-size:21px;margin:4px 0 14px}h3{font-size:16px;margin:0 0 10px}
-.card{background:var(--panel);border:1px solid var(--line);border-radius:17px;padding:16px;margin-bottom:14px;min-width:0}.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
-label{display:block;color:var(--muted);font-size:12px;margin:12px 0 6px}input,select,textarea{display:block;width:100%;min-width:0;border:1px solid #315268;border-radius:11px;padding:12px;background:#081a29;color:white;outline:none}
-input:focus,select:focus,textarea:focus{border-color:var(--accent)}input[type=checkbox]{display:inline-block;width:auto;transform:scale(1.15)}
-.btn{border:0;border-radius:11px;padding:12px 15px;background:var(--accent);color:#041a20;font-weight:800}.btn.secondary{background:#1a3a4e;color:var(--text);border:1px solid var(--line)}.btn.danger{background:#462326;color:#ffdada}.btn.full{width:100%;margin-top:12px}
-.actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}.actions .btn{flex:1}.metric{font-size:23px;font-weight:850;overflow-wrap:anywhere}.money{font-size:28px;font-weight:900;color:var(--accent);overflow-wrap:anywhere}
-.item{padding:12px 0;border-bottom:1px solid var(--line);overflow-wrap:anywhere}.item:last-child{border:0}.itemTop{display:flex;justify-content:space-between;gap:10px;align-items:center}.itemTop strong{overflow-wrap:anywhere}.badge{font-size:11px;border-radius:99px;background:#183e4e;padding:5px 8px;color:var(--accent)}
-#overlay{display:none;position:fixed;inset:0;background:#0009;z-index:9}#overlay.open{display:block}nav{position:fixed;z-index:10;inset:0 auto 0 0;width:min(290px,85vw);background:#071827;border-right:1px solid var(--line);padding:16px;transform:translateX(-105%);transition:transform .2s;overflow-y:auto}nav.open{transform:translateX(0)}
-.navhead{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;padding-bottom:14px;border-bottom:1px solid var(--line)}.navitem{width:100%;display:block;text-align:left;background:transparent;color:var(--muted);border:0;border-radius:11px;padding:13px;margin:3px 0}.navitem.active,.navitem:hover{background:#12364a;color:var(--accent)}
-.tableWrap{overflow-x:auto}table{width:100%;border-collapse:collapse;min-width:450px;font-size:13px}th,td{text-align:left;padding:10px;border-bottom:1px solid var(--line)}th{color:var(--muted)}.smallInput{padding:8px}.toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:#183e4e;border:1px solid var(--line);padding:12px 18px;border-radius:12px;z-index:30;display:none;max-width:90vw}.empty{padding:14px 0;color:var(--muted);font-size:13px}
-.partCalc{border:1px solid var(--line);padding:12px;border-radius:12px;margin:10px 0;background:var(--panel2)}.partCalc h4{margin:0 0 8px}.partSummary{background:#0b2030;padding:12px;border-radius:12px;margin-top:12px}
-@media(min-width:760px){main{padding:24px}.grid.four{grid-template-columns:repeat(4,minmax(0,1fr))}}@media(max-width:420px){.grid{grid-template-columns:1fr 1fr}.metric{font-size:20px}.card{padding:13px}header{padding:12px}}
+*{box-sizing:border-box}body{margin:0;font-family:Arial,sans-serif;background:#071827;color:#eef7ff}
+.app{max-width:520px;margin:auto;min-height:100vh;background:#0b1f30}
+header{padding:22px 18px 14px;background:#071827;position:sticky;top:0;z-index:3}
+.logo{font-size:26px;font-weight:800}.logo span{color:#21d4d0}
+.sub{color:#91a7b8;font-size:13px;margin-top:4px}
+main{padding:16px}
+.card{background:#102a3d;border:1px solid #1d4157;border-radius:18px;padding:16px;margin-bottom:14px}
+h2{font-size:20px;margin:4px 0 14px}.label{font-size:12px;color:#91a7b8;margin:12px 0 6px}
+input,select{width:100%;padding:13px;border-radius:12px;border:1px solid #315268;background:#081a29;color:white;font-size:15px;outline:none}
+.btn{width:100%;padding:14px;border:0;border-radius:13px;background:#20c9c3;color:#03151d;font-weight:800;margin-top:10px;font-size:15px}
+.btn.secondary{background:#18384c;color:#e9f8ff}.btn.small{width:auto;padding:10px 12px;margin:0}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.metric{font-size:23px;font-weight:800}.muted{color:#91a7b8;font-size:12px}
+.price{font-size:30px;font-weight:900;color:#21d4d0}.tag{display:inline-block;background:#163f51;padding:6px 9px;border-radius:999px;font-size:11px;margin:3px}
+.menu-trigger{display:inline-flex;align-items:center;justify-content:center;width:44px;height:44px;border:1px solid #1d4157;border-radius:13px;background:#102a3d;color:#21d4d0;font-size:24px;margin-right:12px;flex-shrink:0}.header-row{display:flex;align-items:center;gap:4px}.header-brand{min-width:0}.menu-overlay{position:fixed;inset:0;background:rgba(0,0,0,.58);z-index:19;display:none}.menu-overlay.open{display:block}nav{position:fixed;top:0;bottom:0;left:0;width:min(290px,82vw);background:#071827;border-right:1px solid #1d4157;display:flex;flex-direction:column;align-items:stretch;justify-content:flex-start;padding:18px 12px;z-index:20;overflow-y:auto;transform:translateX(-105%);transition:transform .22s ease;box-shadow:12px 0 35px rgba(0,0,0,.3)}nav.open{transform:translateX(0)}nav button{width:100%;flex:none;text-align:left;white-space:normal;background:transparent;border:0;border-radius:12px;color:#9eb2c0;padding:14px 13px;font-size:14px;margin:3px 0}nav button.active{background:#12354a;color:#21d4d0!important}.nav-heading{display:flex;align-items:center;justify-content:space-between;padding:4px 8px 16px;margin-bottom:8px;border-bottom:1px solid #1d4157;font-weight:800}.nav-close{background:#18384c;color:#fff;border:0;border-radius:10px;padding:8px 12px;font-size:20px}.active{color:#21d4d0!important}
+.parts-row{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(68px,.6fr) minmax(84px,.8fr) minmax(84px,.8fr);gap:7px;align-items:end;padding:12px 0;border-bottom:1px solid #1d4157}.parts-row label{display:block;color:#91a7b8;font-size:11px;margin:0 0 5px}.parts-row input{min-width:0;padding:10px;font-size:13px}.parts-row .part-remove{padding:10px;border:0;border-radius:9px;background:#351b1b;color:#ffdede}.parts-summary{padding:12px;border-radius:12px;background:#081a29;margin-top:12px;font-size:13px}
+@media(max-width:420px){.parts-row{grid-template-columns:1fr 1fr}.parts-row .part-name{grid-column:1 / -1}}
+.screen{display:none;padding-bottom:80px;animation:pageIn .18s ease-out}.screen.active{display:block}@keyframes pageIn{from{opacity:.5;transform:translateX(10px)}to{opacity:1;transform:translateX(0)}}
+.item{padding:13px 0;border-bottom:1px solid #1d4157}.item:last-child{border:0}
+.stock-dot{display:inline-block;width:14px;height:14px;border-radius:50%;vertical-align:middle;margin-right:7px;border:2px solid rgba(255,255,255,.35)}.stock-table{width:100%;border-collapse:separate;border-spacing:0 7px;min-width:650px;font-size:12px}.stock-table th{color:#91a7b8;text-align:left;padding:7px 8px;font-weight:700;white-space:nowrap}.stock-table td{padding:8px;background:color-mix(in srgb,var(--row-color,#21d4d0) 10%,#0c2435);border-top:1px solid rgba(255,255,255,.08);border-bottom:1px solid rgba(255,255,255,.08)}.stock-table td:first-child{border-left:3px solid var(--row-color,#21d4d0);border-radius:9px 0 0 9px}.stock-table td:last-child{border-radius:0 9px 9px 0}.stock-table input,.stock-table select{padding:9px;border-radius:9px;font-size:13px}.stock-color{width:42px!important;height:38px;padding:3px!important;cursor:pointer}.row-preview{font-weight:800}.row-remove{background:#351b1b;color:#ffdede;border:1px solid #6e3131;border-radius:9px;padding:9px 10px;cursor:pointer}.warning{border-color:#b87916!important;background:#3a2a10!important}.danger{border-color:#a43d3d!important;background:#351b1b!important}.stockbar{height:8px;background:#18384c;border-radius:99px;overflow:hidden;margin-top:9px}.stockbar span{display:block;height:100%;border-radius:99px;background:#21d4d0}.stockbar.low span{background:#f0b429}.stockbar.empty span{background:#e25b5b}.toast{position:fixed;bottom:75px;left:50%;transform:translateX(-50%);background:#16384b;padding:12px 18px;border-radius:12px;display:none;z-index:9}
+
+.calc-piece-row{display:grid;grid-template-columns:minmax(120px,1.3fr) 72px 80px 72px 72px 72px;gap:7px;align-items:end;padding:12px 0;border-bottom:1px solid #234459}.calc-piece-row label{display:block;color:var(--muted);font-size:11px;margin-bottom:5px}.calc-piece-row input{width:100%;min-width:0;padding:10px 7px;font-size:13px}.calc-piece-row .remove-calc-piece{padding:10px;border:0;border-radius:9px;background:#351b1b;color:#ffdede}.calc-piece-result{padding:12px 0;border-bottom:1px solid #234459}.calc-piece-result:last-child{border-bottom:0}@media(max-width:520px){.calc-piece-row{grid-template-columns:1fr 1fr 1fr}.calc-piece-row .calc-piece-name{grid-column:1/-1}.calc-piece-row .remove-calc-piece{grid-column:1/-1}}
+</style>
+
+<style>
+body.stock-form-locked{overflow-x:hidden;overflow-y:auto;overscroll-behavior-x:none;touch-action:pan-y}
 </style>
 </head>
 <body>
-<div id="overlay" onclick="menu(false)"></div>
-<nav id="nav"><div class="navhead"><div class="brand">Print<span>Profit</span></div><button class="closeBtn" onclick="menu(false)">×</button></div>
-<button class="navitem active" data-page="home" onclick="go('home')">⌂　Painel</button><button class="navitem" data-page="calculator" onclick="go('calculator')">▦　Calcular preço</button><button class="navitem" data-page="quotes" onclick="go('quotes')">▤　Orçamentos</button><button class="navitem" data-page="products" onclick="go('products')">▣　Produtos</button><button class="navitem" data-page="orders" onclick="go('orders')">✓　Encomendas</button><button class="navitem" data-page="inventory" onclick="go('inventory')">▥　Estoque de filamentos</button><button class="navitem" data-page="printers" onclick="go('printers')">▧　Impressoras</button><button class="navitem" data-page="settings" onclick="go('settings')">⚙　Configurações</button></nav>
-<div id="layout"><header><button class="menuBtn" onclick="menu(true)" aria-label="Abrir menu">☰</button><div><div class="brand">Print<span>Profit</span></div><div class="muted">Gestão para impressão 3D</div></div></header><main>
-<section class="screen active" id="home"><div class="card"><div class="muted">SEU NEGÓCIO 3D</div><h2>Olá, <span id="hello">empreendedor</span>!</h2><div class="muted">Acompanhe custos, vendas e lucro em um só lugar.</div></div>
-<div class="grid four"><div class="card"><div class="muted">ORÇAMENTOS</div><div class="metric" id="dashQuotes">0</div></div><div class="card"><div class="muted">ENCOMENDAS</div><div class="metric" id="dashOrders">0</div></div><div class="card"><div class="muted">RECEITA</div><div class="metric" id="dashRevenue">R$ 0,00</div></div><div class="card"><div class="muted">LUCRO ESTIMADO</div><div class="metric" id="dashProfit">R$ 0,00</div></div></div>
-<div class="card"><h3>Ações rápidas</h3><div class="grid"><button class="btn" onclick="go('calculator')">Calcular preço</button><button class="btn secondary" onclick="newQuote()">Novo orçamento</button><button class="btn secondary" onclick="go('inventory')">Ver estoque</button><button class="btn secondary" onclick="go('printers')">Cadastrar impressora</button></div></div>
-<div class="card"><h3>Estoque baixo</h3><div id="lowStock" class="empty">Nenhum filamento cadastrado.</div></div><div class="card"><h3>Últimos orçamentos</h3><div id="recentQuotes" class="empty">Seus orçamentos aparecerão aqui.</div></div></section>
+<div class="app">
+<header><div class="header-row"><button class="menu-trigger" type="button" aria-label="Abrir menu" onclick="toggleMenu(true)">☰</button><div class="header-brand"><div class="logo">Print<span>Profit</span></div><div class="sub">Custos, pedidos e lucro para seu negócio 3D</div></div></div></header>
+<section class="screen active" id="register"><main>
+<div class="card" style="margin-top:50px;text-align:center;padding:28px 20px">
+<div class="logo" style="margin-bottom:10px">Print<span>Profit</span></div>
+<div class="muted" style="margin-bottom:24px">Seu controle de impressão 3D</div>
+<h2>Crie sua conta</h2>
+<div class="muted" style="margin-bottom:18px">Informe seu nome para personalizar o aplicativo.</div>
+<div class="label" style="text-align:left">Seu nome</div>
+<input autocomplete="name" id="userName" maxlength="40" placeholder="Digite seu nome" type="text"/>
+<button class="btn" onclick="registerUser()">Continuar</button>
+</div>
+</main></section>
+<section class="screen" id="home"><main>
+<div class="card" style="background:linear-gradient(145deg,#102f45,#0b2032);border-color:#24516b"><div class="muted" style="text-align:right;margin-bottom:6px">Deslize para os lados para navegar</div>
+<div class="muted">PAINEL DE CONTROLE</div>
+<h2 style="font-size:24px;margin-bottom:6px">Olá, <span id="welcomeName">usuário</span></h2>
+<div class="muted">Controle seus custos, pedidos e lucro em um só lugar.</div>
+</div>
+<div class="grid">
+<div class="card"><div class="muted">VENDAS</div><div class="metric" id="dashSales">R$ 0,00</div><div class="muted">este mês</div></div>
+<div class="card"><div class="muted">LUCRO</div><div class="metric" id="dashProfit">R$ 0,00</div><div class="muted">estimado</div></div>
+<div class="card"><div class="muted">PEDIDOS</div><div class="metric" id="dashOrders">0</div><div class="muted">registrados</div></div>
+<div class="card"><div class="muted">CUSTOS</div><div class="metric" id="dashCosts">R$ 0,00</div><div class="muted">estimados</div></div>
+</div>
+<div class="card">
+<div style="display:flex;justify-content:space-between;align-items:center">
+<div><div class="muted">CONTA</div><b id="accountName">Usuário</b></div>
+<button class="btn small secondary" onclick="changeUser()">Alterar nome</button>
+</div>
+</div>
+<div class="card"><div style="display:flex;justify-content:space-between;align-items:center"><div><div class="muted">PLANO</div><b id="homePlan">Teste grátis</b></div><button class="btn small" onclick="show('plans')">Ver planos</button></div><div class="muted" id="homeLimit" style="margin-top:8px">Plano gratuito com recursos limitados.</div></div>
+<div class="card">
+<h2>Ações rápidas</h2>
+<div class="grid">
+<button class="btn" onclick="openCalcFromQuick()"> Calcular preço</button>
+<button class="btn secondary" onclick="show('quote')"> Novo orçamento</button>
+<button class="btn secondary" onclick="show('order')"> Nova encomenda</button>
+<button class="btn secondary" onclick="show('inventory')"> Estoque de filamentos</button>
+</div>
+</div>
+<div class="card">
+<div style="display:flex;justify-content:space-between;align-items:center">
+<h2 style="margin-bottom:0">Seu filamento</h2>
+<span class="tag">RECOMENDADO</span>
+</div>
+<div style="margin-top:14px">
+<div class="metric" id="homeFilament">3D Fila PLA</div>
+<div class="muted" style="margin-top:4px">Preço médio por kg</div>
+<div class="price" id="homeKg">R$ 109,00</div>
+<div style="margin-top:10px">
+<span class="tag" id="homeTemp">Bico 190–220°C</span>
+<span class="tag">Mesa 50–60°C</span>
+</div>
+</div>
+<div class="muted" style="margin-top:10px">Custo por grama: <b id="homeGram">R$ 0,109</b></div>
+</div>
+<div class="card">
+<h2>Resumo da atividade</h2>
+<div class="item"><div style="display:flex;justify-content:space-between"><span>Último preço calculado</span><b id="lastPrice">R$ 0,00</b></div></div>
+<div class="item"><div style="display:flex;justify-content:space-between"><span>Lucro estimado</span><b id="lastProfit">R$ 0,00</b></div></div>
+<div class="item"><div style="display:flex;justify-content:space-between"><span>Margem padrão</span><b>40%</b></div></div>
+<div class="muted" style="margin-top:12px">Preços de referência • atualização: 06/10/2026</div>
+</div>
+<div class="card">
+<h2>PrintProfit</h2>
+<div class="muted">Controle sua produção, seus pedidos e sua margem de lucro.</div>
+</div>
+</main></section>
+<section class="screen" id="calc"><main><div class="card"><h2>Calculadora de preço</h2>
+<div class="label">Filamento para cálculo (estoque ou catálogo)</div><select id="filament" onchange="updateSelected()"></select>
+<div class="label">Peso da peça (g)</div><input id="grams" type="number" value="100"/>
+<div class="label">Tempo de impressão</div>
+<div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px">
+<input id="hoursH" type="number" min="0" step="1" value="0" placeholder="Horas">
+<input id="hoursM" type="number" min="0" max="59" step="1" value="0" placeholder="Minutos">
+<input id="hoursS" type="number" min="0" max="59" step="1" value="0" placeholder="Segundos">
+</div>
+<div class="muted" style="margin-top:6px">Horas · minutos · segundos</div>
+<div class="label">Impressora</div><select id="printerSelect" onchange="applySelectedPrinter()"></select><button class="btn small secondary" type="button" onclick="show('printers')" style="margin-top:8px">Cadastrar / editar impressoras</button><div id="printerCalcInfo" class="muted" style="margin:8px 0 12px"></div>
+<div class="label">Mão de obra (R$)</div><input id="labor" step="0.5" type="number" value="5"/>
+<div class="label">Acabamento/outros (R$)</div><input id="other" step="0.5" type="number" value="0"/>
+<div class="label">Margem de lucro (%)</div><input id="margin" type="number" value="40"/>
+<button class="btn" onclick="calculate()">Calcular</button>
+</div><div class="card" id="result" style="display:none"><div class="muted">PREÇO SUGERIDO</div><div class="price" id="suggested">R$ 0,00</div><div class="grid" style="margin-top:15px"><div><div class="muted">Custo</div><div class="metric" id="cost">R$ 0,00</div></div><div><div class="muted">Lucro</div><div class="metric" id="profit">R$ 0,00</div></div></div></div>
+<div class="card" style="margin-top:14px"><label style="display:flex;align-items:center;gap:10px;cursor:pointer"><input id="enableSeparateCalc" type="checkbox" onchange="toggleSeparateCalc()" style="width:20px;height:20px"><span><b>Calcular peça(s) separadamente (opcional)</b><span class="muted" style="display:block;font-weight:400">Marque somente se quiser calcular uma peça avulsa ou vários modelos no mesmo cálculo.</span></span></label></div><div class="card" id="calcSeparatePieces" style="display:none"><h2>Peças separadas</h2><p class="muted">Use o filamento e a impressora selecionados acima. Você pode adicionar uma única peça avulsa ou várias peças diferentes.</p><div id="separateCalcRows"></div><button class="btn secondary" type="button" onclick="addSeparateCalcRow()">＋ Adicionar peça</button><button class="btn" type="button" onclick="calculateSeparatePieces()" style="margin-top:10px">Calcular peça(s)</button><div id="separateCalcResult" style="display:none;margin-top:14px"></div></div>
+</main></section>
+<section class="screen" id="productCatalog"><main><div class="card" style="margin-top:14px">
+<h2>Produtos dos orçamentos</h2>
+<p class="muted">Pesquise pelo ID ou pelo nome. Você também pode alterar a quantidade e salvar.</p>
+<input id="productCatalogSearch" type="search" placeholder="Buscar por ID ou nome do produto" oninput="renderQuotedProductCatalog()" style="width:100%;margin:8px 0 12px">
+<div id="quotedProductCatalog"></div>
+</div></main></section>
 
-<section class="screen" id="calculator"><div class="card"><h2>Calcular preço</h2><div class="muted">Calcule uma peça por vez ou adicione peças separadas para montar um orçamento.</div>
-<label>Nome da peça</label><input id="calcName" placeholder="Ex.: Suporte de celular"><div class="grid"><div><label>Filamento</label><select id="calcFilament"></select></div><div><label>Impressora</label><select id="calcPrinter"></select></div></div>
-<div class="grid"><div><label>Filamento usado (g)</label><input id="calcGrams" type="number" min="0" step="0.1" value="50"></div><div><label>Tempo (horas)</label><input id="calcHours" type="number" min="0" step="0.1" value="2"></div></div>
-<div class="grid"><div><label>Eletricidade (R$/kWh)</label><input id="calcKwh" type="number" min="0" step="0.001" value="0.90"></div><div><label>Margem de lucro (%)</label><input id="calcMargin" type="number" min="0" step="1" value="40"></div></div>
-<label>Outros custos (R$)</label><input id="calcOther" type="number" min="0" step="0.01" value="0">
-<div class="actions"><button class="btn" onclick="calculate()">Calcular preço desta peça</button><button class="btn secondary" onclick="addCalcPieceToQuote()">Adicionar peça ao orçamento</button></div>
-<div class="muted" style="margin-top:10px">Cada peça mantém seu próprio consumo, tempo, custo, preço e lucro. Para um orçamento com várias peças, calcule cada uma e use “Adicionar peça ao orçamento”.</div></div>
-<div class="card" id="separateCalcCard"><h3>Calcular peças separadas</h3><div class="muted">Adicione cada peça com seu próprio nome, peso, tempo, quantidade e outros custos. O PrintProfit calculará o custo, preço e lucro de cada uma e o total geral.</div><div id="separateCalcRows"></div><div class="actions"><button class="btn secondary" onclick="addSeparateCalcRow()">+ Adicionar peça</button><button class="btn" onclick="calculateSeparatePieces()">Calcular peças separadas</button></div><div id="separateCalcResult" style="display:none;margin-top:14px"></div><div class="actions" id="separateCalcActions" style="display:none"><button class="btn" onclick="sendSeparatePiecesToQuote()">Usar peças no orçamento</button><button class="btn secondary" onclick="clearSeparateCalcRows()">Limpar lista</button></div></div>
-<div class="card" id="calcResult" style="display:none"><div class="muted">PREÇO SUGERIDO DESTA PEÇA</div><div class="money" id="resultPrice">R$ 0,00</div><div class="item">Filamento <strong id="resultFilament"></strong></div><div class="item">Eletricidade <strong id="resultElectric"></strong></div><div class="item">Depreciação/manutenção <strong id="resultDep"></strong></div><div class="item">Outros custos <strong id="resultOther"></strong></div><div class="item">Custo total <strong id="resultCost"></strong></div><div class="item">Lucro estimado <strong id="resultProfit"></strong></div><div class="actions"><button class="btn" onclick="quoteFromCalc()">Criar orçamento desta peça</button><button class="btn secondary" onclick="saveCalcProduct()">Salvar produto</button></div></div>
-<div class="card"><h3>Peças adicionadas ao orçamento em preparação</h3><div id="calcQuoteParts" class="empty">Nenhuma peça adicionada ainda.</div><div id="calcQuoteTotals" class="partSummary" style="display:none"></div><div class="actions"><button class="btn" onclick="startQuoteFromParts()">Abrir orçamento com estas peças</button><button class="btn secondary" onclick="clearCalcParts()">Limpar peças</button></div></div></section>
-
-<section class="screen" id="quotes"><div class="card"><div class="itemTop"><h2>Orçamentos</h2><button class="btn" onclick="newQuote()">+ Novo</button></div><div class="muted">Crie preços para uma peça ou para várias peças separadas, cada uma com seu custo e preço.</div></div>
-<div class="card" id="quoteForm"><h3 id="quoteFormTitle">Novo orçamento</h3><input type="hidden" id="quoteEditId"><label>Nome do orçamento/cliente</label><input id="quoteName" placeholder="Ex.: Pedido do cliente"><label>Modo de orçamento</label><select id="quoteMode" onchange="renderPartRows()"><option value="single">Peça única</option><option value="multiple">Várias peças separadas</option></select>
-<div id="quoteSingle"><label>Nome da peça</label><input id="quotePiece" placeholder="Nome da peça"><div class="grid"><div><label>Quantidade</label><input id="quoteQty" type="number" min="1" value="1"></div><div><label>Preço por peça (R$)</label><input id="quoteUnit" type="number" min="0" step="0.01" value="0"></div></div></div>
-<div id="quoteMultiple" style="display:none"><div class="itemTop"><h3>Peças do orçamento</h3><button class="btn secondary" onclick="addPart()">+ Peça</button></div><div id="partRows"></div><div class="partSummary" id="quoteLiveTotals"></div></div>
-<div class="grid"><div><label>Custo total estimado (R$)</label><input id="quoteCost" type="number" min="0" step="0.01" value="0"></div><div><label>Prazo de entrega</label><input id="quoteDeadline" type="date"></div></div><label>Observações</label><textarea id="quoteNotes" rows="2" placeholder="Detalhes do pedido"></textarea>
-<label style="display:flex;align-items:center;gap:9px;margin-top:14px"><input id="quoteAddProduct" type="checkbox" checked> Adicionar as peças ao catálogo de produtos</label>
-<div class="actions"><button class="btn" onclick="saveQuote()">Salvar orçamento</button><button class="btn secondary" onclick="clearQuote()">Limpar</button></div></div>
-<div class="card"><h3>Orçamentos salvos</h3><div id="quoteList" class="empty">Nenhum orçamento cadastrado.</div></div></section>
-
-<section class="screen" id="products"><div class="card"><h2>Catálogo de produtos</h2><div class="muted">Produtos adicionados pelos seus orçamentos ou pelo calculador.</div><label>Buscar por nome ou ID</label><input id="productSearch" placeholder="Digite nome ou ID" oninput="renderProducts()"><div id="productList" class="empty">Nenhum produto cadastrado.</div></div></section>
-<section class="screen" id="orders"><div class="card"><h2>Encomendas</h2><label>Cliente / identificação</label><input id="orderName" placeholder="Nome do cliente"><label>Produto</label><select id="orderProduct"></select><div class="grid"><div><label>Quantidade</label><input id="orderQty" type="number" min="1" value="1"></div><div><label>Preço total (R$)</label><input id="orderPrice" type="number" min="0" step="0.01" value="0"></div></div><label>Filamento consumido (g) - opcional</label><input id="orderGrams" type="number" min="0" step="0.1" value="0"><label>Status</label><select id="orderStatus"><option value="Pendente">Pendente</option><option value="Em produção">Em produção</option><option value="Concluída">Concluída</option><option value="Falhou">Falhou / desperdício</option></select><button class="btn full" onclick="saveOrder()">Salvar encomenda</button></div><div class="card"><h3>Histórico de encomendas</h3><div id="orderList" class="empty">Nenhuma encomenda cadastrada.</div></div></section>
-<section class="screen" id="inventory"><div class="card"><h2>Estoque de filamentos</h2><div class="muted">Cadastre cada cor separadamente para controlar o consumo.</div><input type="hidden" id="filamentEditId"><label>Marca / nome</label><input id="filamentName" placeholder="Ex.: PLA Basic"><div class="grid"><div><label>Material</label><select id="filamentType"><option>PLA</option><option>PETG</option><option>ABS</option><option>TPU</option><option>ASA</option><option>Outro</option></select></div><div><label>Cor</label><input id="filamentColor" type="text" placeholder="Ex.: Preto"></div></div><div class="grid"><div><label>Preço do rolo (R$)</label><input id="filamentPrice" type="number" min="0" step="0.01" value="100"></div><div><label>Peso do rolo (g)</label><input id="filamentWeight" type="number" min="1" value="1000"></div></div><label>Estoque atual (g)</label><input id="filamentStock" type="number" min="0" value="1000"><div class="actions"><button class="btn" onclick="saveFilament()">Salvar filamento</button><button class="btn secondary" onclick="clearFilament()">Limpar</button></div></div><div class="card"><h3>Filamentos cadastrados</h3><div id="filamentList" class="empty">Nenhum filamento cadastrado.</div></div></section>
-<section class="screen" id="printers"><div class="card"><h2>Impressoras</h2><input type="hidden" id="printerEditId"><label>Nome da impressora</label><input id="printerName" placeholder="Ex.: Ender 3 V3 KE"><div class="grid"><div><label>Valor da impressora (R$)</label><input id="printerValue" type="number" min="0" step="0.01" value="1800"></div><div><label>Vida útil (horas)</label><input id="printerLife" type="number" min="1" value="5000"></div></div><div class="grid"><div><label>Potência (W)</label><input id="printerPower" type="number" min="0" value="350"></div><div><label>Manutenção total estimada (R$)</label><input id="printerMaintenance" type="number" min="0" step="0.01" value="200"></div></div><div class="actions"><button class="btn" onclick="savePrinter()">Salvar impressora</button><button class="btn secondary" onclick="clearPrinter()">Limpar</button></div></div><div class="card"><h3>Minhas impressoras</h3><div id="printerList" class="empty">Nenhuma impressora cadastrada.</div></div></section>
-<section class="screen" id="settings"><div class="card"><h2>Configurações</h2><label>Seu nome</label><input id="settingsName" placeholder="Seu nome"><label>Tarifa de energia (R$/kWh)</label><input id="settingsKwh" type="number" min="0" step="0.001" value="0.90"><button class="btn full" onclick="saveSettings()">Salvar configurações</button></div><div class="card"><h3>Seus dados</h3><div class="muted">Os dados ficam salvos no armazenamento local deste navegador. Eles não são sincronizados automaticamente com outros dispositivos.</div><button class="btn secondary full" onclick="exportData()">Exportar cópia dos dados</button><label>Restaurar cópia JSON</label><input id="importFile" type="file" accept=".json,application/json"><button class="btn secondary full" onclick="importData()">Importar dados</button></div><div class="card"><h3>Limpar dados</h3><div class="muted">Esta ação remove os registros salvos neste navegador.</div><button class="btn danger full" onclick="resetData()">Apagar todos os dados</button></div></section>
-</main></div><div class="toast" id="toast"></div>
+<section class="screen" id="quote"><main><div class="card"><h2>Orçamento</h2><div id="quotePriceNotice" class="card" style="margin-top:12px;border:1px solid #1d4157;background:#0d2536"><b>Orçamento direto</b><p class="muted" style="margin-top:6px">Preencha os dados desta tela e gere o orçamento. A aba Preço é opcional.</p></div>
+<div class="label">Tipo de orçamento</div><select id="quoteType" onchange="toggleQuoteType()"><option value="complete">Peça completa</option><option value="sliced">Peça fatiada</option><option value="parts">Várias peças separadas</option></select>
+<div class="muted" id="quoteTypeHelp" style="margin-top:8px">Informe o preço da peça já pronta. Ideal para peças cujo valor já foi definido.</div>
+<div class="label">Cliente</div><input id="client" placeholder="Nome do cliente"/>
+<div class="label">Produto / peça</div><input id="product" placeholder="Ex.: Suporte personalizado"/>
+<div class="label">Quantidade</div><input id="qty" type="number" min="1" value="1"/>
+<div id="completeQuoteFields">
+<div class="label">Preço da peça completa (R$)</div><input id="unit" step="0.01" min="0" type="number" value="0"/>
+<div class="label">Tempo de impressão (horas)</div><input id="completeQuoteTime" type="number" min="0.1" step="0.1" value="2"/><div class="label">Custo total da produção (R$)</div><input id="completeQuoteCost" type="number" min="0" step="0.01" value="0"/>
+</div>
+<div id="slicedQuoteFields" style="display:none">
+<div class="label">Filamento do estoque</div><select id="quoteStock"></select>
+<div class="label">Peso da peça fatiada (g)</div><input id="quoteWeight" type="number" min="0" step="0.1" value="100"/>
+<div class="label">Tempo de impressão (h)</div><input id="quoteTime" type="number" min="0" step="0.1" value="2"/>
+<div class="label">Custo de energia (R$/hora)</div><input id="quoteEnergy" type="number" min="0" step="0.01" value="0.18"/>
+<div class="label">Custo da impressora (R$/hora)</div><input id="quoteMachine" type="number" min="0" step="0.01" value="2"/>
+<div class="label">Mão de obra (R$)</div><input id="quoteLabor" type="number" min="0" step="0.01" value="5"/>
+<div class="label">Acabamento / outros (R$)</div><input id="quoteOther" type="number" min="0" step="0.01" value="0"/>
+<div class="label">Margem de lucro (%)</div><input id="quoteMargin" type="number" min="0" step="1" value="40"/>
+<div class="muted" id="quoteStockInfo" style="margin-top:8px"></div>
+</div>
+<div id="separatePartsFields" style="display:none">
+<div class="muted" style="margin:10px 0">Adicione cada componente com seu nome, quantidade, preço de venda e custo unitário. O PrintProfit soma tudo no orçamento.</div>
+<div id="separatePartsRows"></div>
+<button class="btn secondary" type="button" onclick="addSeparatePart()">＋ Adicionar peça</button>
+<div class="parts-summary" id="separatePartsSummary">Total das peças: R$ 0,00</div>
+</div>
+<button id="generateQuoteBtn" class="btn" type="button">Gerar orçamento</button>
+</div><div class="card" id="quoteResult" style="display:none"></div><div class="card" id="quoteHistory" style="margin-top:12px"></div></main></section>
+<section class="screen" id="order"><main><div class="card"><h2>Calcular encomenda</h2>
+<div class="label">Filamento do estoque</div><select id="orderStock"></select>
+<div class="label">Quantidade de peças</div><input id="oqty" type="number" value="10"/>
+<div class="label">Peso por peça (g)</div><input id="oweight" type="number" value="30"/>
+<div class="label">Tempo por peça (h)</div><input id="otime" step="0.1" type="number" value="2"/>
+<button class="btn" onclick="makeOrder()">Registrar impressão</button>
+<div class="muted" style="margin-top:10px">O estoque só será alterado quando você finalizar a impressão. Se der erro, todo o filamento usado será registrado como desperdício.</div>
+</div><div class="card" id="orderResult" style="display:none"></div></main></section>
+<section class="screen" id="inventory"><main>
+<div class="card"><div class="muted">ESTOQUE</div><h2>Meus filamentos</h2><div class="grid"><div><div class="muted">Peso disponível</div><div class="metric" id="stockTotalKg">0 kg</div></div><div><div class="muted">Rolos cadastrados</div><div class="metric" id="stockSpools">0</div></div></div><div class="grid" id="materialSummary" style="margin-top:14px"></div><div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:14px"><button class="btn small secondary" onclick="filterStock('Todos')">Todos</button><button class="btn small secondary" onclick="filterStock('PLA')">PLA</button><button class="btn small secondary" onclick="filterStock('PETG')">PETG</button><button class="btn small secondary" onclick="filterStock('TPU')">TPU</button><button class="btn small secondary" onclick="filterStock('ABS')">ABS</button><button class="btn small secondary" onclick="filterStock('ASA')">ASA</button></div><button class="btn" onclick="toggleStockForm()" style="margin-top:12px">Adicionar filamento</button></div>
+<div class="card" id="stockForm" style="display:none"><div style="display:flex;justify-content:space-between;align-items:center;gap:10px"><div><div class="muted">PLANILHA DE ESTOQUE</div><h2 style="margin-bottom:4px">Adicionar filamentos</h2><div class="muted">Cada linha representa um rolo. Os dados ficam salvos neste celular e navegador. Deslize horizontalmente na tabela para ver todos os campos.</div></div><button type="button" class="btn small secondary" onclick="cancelStockForm()">Cancelar cadastro</button></div>
+<div style="overflow-x:auto;margin-top:14px"><table class="stock-table"><thead><tr><th>Cor</th><th>Marca / filamento</th><th>Material</th><th>Quantidade (g)</th><th>Preço (R$/kg)</th><th>Aviso (g)</th><th></th></tr></thead><tbody id="stockRows"></tbody></table></div>
+<div style="display:flex;gap:8px;margin-top:12px"><button type="button" class="btn secondary" onclick="addStockRow()">+ Adicionar linha</button><button type="button" class="btn" onclick="saveStockTable()">Salvar linhas</button></div></div>
+<div id="stockList"></div>
+</main></section>
+<section class="screen" id="printers"><main>
+<div class="card"><div class="muted">CONFIGURAÇÃO</div><h2>Minhas impressoras</h2><div class="muted">Cadastre suas impressoras para usar automaticamente valor, vida útil, consumo de energia, tarifa e taxa de falha nos cálculos.</div><button id="openPrinterBtn" class="btn" type="button" onclick="showPrinterForm(); return false;" style="margin-top:12px">Cadastrar impressora</button></div>
+<div class="card" id="printerForm" style="display:none"><h2 id="printerFormTitle">Nova impressora</h2><input id="printerEditId" type="hidden"><div class="label">Nome da impressora</div><input id="prName" placeholder="Ex.: Ender 3 V3"><div class="label">Valor da impressora (R$)</div><input id="prValue" type="text" inputmode="decimal" min="0" step="0.01"><div class="label">Vida útil (horas)</div><input id="prLife" type="text" inputmode="decimal" min="1" step="1" value="5000"><div class="label">Custo de manutenção durante a vida útil (R$)</div><input id="prMaintenance" type="text" inputmode="decimal" min="0" step="0.1" value="20"><div class="muted">Valor total estimado que será gasto com manutenção durante a vida útil da impressora.</div><div class="label">Consumo de energia (kW)</div><input id="prWatts" type="text" inputmode="decimal" min="0" step="0.001" value="0.150"><div class="label">Tarifa de energia (R$/kWh)</div><input id="prRate" type="text" inputmode="decimal" min="0" step="0.01" value="1"><div class="label">Taxa de falha (%)</div><input id="prFail" type="text" inputmode="decimal" min="0" max="100" step="0.1" value="5"><div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:12px"><button id="savePrinterBtn" class="btn" type="button" >Salvar impressora</button><button id="cancelPrinterBtn" class="btn secondary" type="button" >Cancelar</button></div></div>
+<div id="printerList"></div>
+</main></section><section class="screen" id="plans"><main><div class="card"><div class="muted">ASSINATURA</div><h2>Escolha seu plano</h2><div class="muted">Comece no gratuito e desbloqueie recursos profissionais no PRO.</div></div><div class="card"><div class="muted">PLANO ATUAL</div><h2 id="currentPlan">Grátis</h2><div class="muted" id="planStatus">Recursos limitados</div></div><div class="card"><h2>Teste grátis</h2><div class="price">30 dias</div><div class="item">Acesso completo durante 30 dias</div><div class="item">Teste todos os recursos PRO</div><div class="item">Sem limite de produtos</div><div class="item">Sem limite de orçamentos</div><div class="item">Controle completo de estoque</div><button class="btn secondary" onclick="startTrial()">Iniciar teste grátis</button></div><div class="card" style="border-color:#21d4d0"><div class="tag">RECOMENDADO</div><h2>PRO</h2><div class="price">R$ 5,99</div><div class="muted">por mês</div><div class="item">Produtos ilimitados</div><div class="item">Orçamentos ilimitados</div><div class="item">Controle avançado de custos e lucro</div><div class="item">Relatórios avançados</div><div class="item">Recursos profissionais</div><button class="btn" onclick="setPlan('pro')">Ativar PRO</button></div><div class="card"><h2>PRO anual</h2><div class="price">R$ 49,90</div><div class="muted">por ano</div><button class="btn secondary" onclick="setPlan('pro')">Escolher anual</button></div></main></section></div>
+<div class="menu-overlay" id="menuOverlay" onclick="toggleMenu(false)"></div><nav id="appNav" aria-label="Menu principal"><div class="nav-heading"><span>PrintProfit</span><button class="nav-close" type="button" onclick="toggleMenu(false)" aria-label="Fechar menu">×</button></div>
+<button class="active" onclick="show('home',this)">⌂ &nbsp; Início</button>
+<button onclick="show('calc',this)">⌁ &nbsp; Calcular preço</button>
+<button onclick="show('inventory',this)">▤ &nbsp; Estoque de filamentos</button>
+<button onclick="show('productCatalog',this)">▦ &nbsp; Produtos</button>
+<button onclick="show('quote',this)">▧ &nbsp; Orçamentos</button>
+<button onclick="show('order',this)">▣ &nbsp; Encomendas</button>
+<button onclick="show('printers',this)">▤ &nbsp; Impressoras</button>
+<button onclick="show('plans',this)">☆ &nbsp; Planos</button></nav>
+<div class="toast" id="toast"></div>
 <script>
-const KEY='printprofit_site_data_v1';const $=id=>document.getElementById(id);const money=n=>(Number(n)||0).toLocaleString('pt-BR',{style:'currency',currency:'BRL'});const uid=()=>Date.now().toString(36)+Math.random().toString(36).slice(2,7);
-let state={name:'',kwh:.90,filaments:[],printers:[],quotes:[],products:[],orders:[],lastCalc:null,parts:[],calcQuoteParts:[]};
-function load(){try{const d=JSON.parse(localStorage.getItem(KEY)||'null');if(d&&typeof d==='object')state={...state,...d};if(!Array.isArray(state.calcQuoteParts))state.calcQuoteParts=[];if(!Array.isArray(state.parts))state.parts=[]}catch(e){}}
-function persist(){localStorage.setItem(KEY,JSON.stringify(state));renderAll()}
-function toast(s){const t=$('toast');t.textContent=s;t.style.display='block';clearTimeout(window._toastTimer);window._toastTimer=setTimeout(()=>t.style.display='none',2400)}
-function menu(open){$('nav').classList.toggle('open',open);$('overlay').classList.toggle('open',open)}
-function go(id){document.querySelectorAll('.screen').forEach(s=>s.classList.toggle('active',s.id===id));document.querySelectorAll('.navitem').forEach(b=>b.classList.toggle('active',b.dataset.page===id));menu(false);if(id==='quotes')renderQuotes();if(id==='products')renderProducts();if(id==='orders')renderOrders();if(id==='inventory')renderFilaments();if(id==='printers')renderPrinters();window.scrollTo({top:0,behavior:'smooth'})}
-function saveSettings(){state.name=$('settingsName').value.trim();state.kwh=Math.max(0,Number($('settingsKwh').value)||0);persist();toast('Configurações salvas')}
-function esc(s){return String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
-function renderSelects(){const fs=state.filaments.map(f=>`<option value="${f.id}">${esc(f.name)} — ${esc(f.color||'sem cor')} (${f.stock}g)</option>`).join('');$('calcFilament').innerHTML='<option value="">Sem filamento selecionado</option>'+fs;const ps=state.printers.map(p=>`<option value="${p.id}">${esc(p.name)}</option>`).join('');$('calcPrinter').innerHTML='<option value="">Sem impressora selecionada</option>'+ps;$('orderProduct').innerHTML='<option value="">Selecione um produto</option>'+state.products.map(p=>`<option value="${p.id}">${esc(p.name)} — ${money(p.price)}</option>`).join('')}
-function calculate(){const f=state.filaments.find(x=>x.id===$('calcFilament').value),p=state.printers.find(x=>x.id===$('calcPrinter').value);const grams=Math.max(0,Number($('calcGrams').value)||0),hours=Math.max(0,Number($('calcHours').value)||0),kwh=Math.max(0,Number($('calcKwh').value)||0),margin=Math.max(0,Number($('calcMargin').value)||0),other=Math.max(0,Number($('calcOther').value)||0);const filament=f?grams*(Number(f.price)/Math.max(1,Number(f.weight))):0;const electric=p?hours*(Number(p.power)/1000)*kwh:0;const dep=p?hours*((Number(p.value)+Number(p.maintenance))/Math.max(1,Number(p.life))):0;const cost=filament+electric+dep+other;const price=cost*(1+margin/100);const result={name:$('calcName').value.trim()||'Peça sem nome',filamentId:f?.id||'',printerId:p?.id||'',grams,hours,kwh,margin,other,filament,electric,dep,cost,price,profit:price-cost};state.lastCalc=result;$('calcResult').style.display='block';$('resultPrice').textContent=money(price);$('resultFilament').textContent=money(filament);$('resultElectric').textContent=money(electric);$('resultDep').textContent=money(dep);$('resultOther').textContent=money(other);$('resultCost').textContent=money(cost);$('resultProfit').textContent=money(price-cost);persist();toast('Preço calculado')}
-let separateCalcResults=[];
-function addSeparateCalcRow(data={}){const wrap=$('separateCalcRows');const id='sepCalc_'+Date.now()+'_'+Math.random().toString(36).slice(2,7);const row=document.createElement('div');row.className='partCalc separateCalcRow';row.dataset.rowid=id;row.innerHTML=`<div class="itemTop"><h4>Peça separada</h4><button type="button" class="btn danger" onclick="this.closest('.separateCalcRow').remove()">Remover</button></div><label>Nome da peça</label><input class="scName" placeholder="Ex.: Tampa, suporte, base" value="${esc(data.name||'')}"><div class="grid"><div><label>Quantidade</label><input class="scQty" type="number" min="1" step="1" value="${Number(data.qty)||1}"></div><div><label>Filamento usado (g)</label><input class="scGrams" type="number" min="0" step="0.1" value="${Number(data.grams)||50}"></div></div><div class="grid"><div><label>Tempo de impressão (horas)</label><input class="scHours" type="number" min="0" step="0.1" value="${Number(data.hours)||1}"></div><div><label>Outros custos por peça (R$)</label><input class="scOther" type="number" min="0" step="0.01" value="${Number(data.other)||0}"></div></div>`;wrap.appendChild(row);}
-function clearSeparateCalcRows(){ $('separateCalcRows').innerHTML='';addSeparateCalcRow();separateCalcResults=[];$('separateCalcResult').style.display='none';$('separateCalcActions').style.display='none'; }
-function calculateSeparatePieces(){const f=state.filaments.find(x=>x.id===$('calcFilament').value),p=state.printers.find(x=>x.id===$('calcPrinter').value);if(!f){toast('Cadastre ou selecione o filamento.');return}if(!p){toast('Cadastre ou selecione a impressora.');return}const kwh=Math.max(0,Number($('calcKwh').value)||0),margin=Math.max(0,Number($('calcMargin').value)||0);const rows=[...document.querySelectorAll('.separateCalcRow')];if(!rows.length){toast('Adicione ao menos uma peça.');return}let used=0;const parsed=[];for(const row of rows){const name=row.querySelector('.scName').value.trim();const qty=Math.max(1,Math.floor(Number(row.querySelector('.scQty').value)||1));const grams=Math.max(0,Number(row.querySelector('.scGrams').value)||0);const hours=Math.max(0,Number(row.querySelector('.scHours').value)||0);const other=Math.max(0,Number(row.querySelector('.scOther').value)||0);if(!name){toast('Informe o nome de cada peça.');return}if(grams<=0){toast('Informe o peso de cada peça.');return}used+=grams*qty;const filament=grams*(Number(f.price)/Math.max(1,Number(f.weight)));const electric=hours*(Number(p.power)/1000)*kwh;const dep=hours*((Number(p.value)+Number(p.maintenance))/Math.max(1,Number(p.life)));const cost=filament+electric+dep+other;const price=cost*(1+margin/100);parsed.push({name,qty,grams,hours,other,filament,electric,dep,cost,price,profit:price-cost,filamentId:f.id,printerId:p.id,margin,kwh});}if(Number(f.stock)<used){toast(`Estoque insuficiente: as peças usam ${used.toFixed(1)} g, mas há ${Number(f.stock).toFixed(1)} g.`);return}separateCalcResults=parsed;const total=parsed.reduce((a,x)=>a+x.price*x.qty,0),cost=parsed.reduce((a,x)=>a+x.cost*x.qty,0);$('separateCalcResult').style.display='block';$('separateCalcResult').innerHTML=parsed.map(x=>`<div class="item"><div class="itemTop"><strong>${esc(x.name)} × ${x.qty}</strong><strong>${money(x.price*x.qty)}</strong></div><div class="muted">Preço unitário: ${money(x.price)} · Custo unitário: ${money(x.cost)} · Lucro unitário: ${money(x.profit)}</div><div class="muted">Filamento ${money(x.filament)} · Energia ${money(x.electric)} · Impressora ${money(x.dep)} · Outros ${money(x.other)}</div></div>`).join('')+`<div class="partSummary"><div class="itemTop"><span>Preço total das peças</span><strong>${money(total)}</strong></div><div class="itemTop"><span>Custo total</span><strong>${money(cost)}</strong></div><div class="itemTop"><span>Lucro total estimado</span><strong>${money(total-cost)}</strong></div><div class="muted">Consumo total estimado de filamento: ${used.toFixed(1)} g</div></div>`;$('separateCalcActions').style.display='flex';toast('Preços das peças calculados');}
-function sendSeparatePiecesToQuote(){if(!separateCalcResults.length){calculateSeparatePieces();if(!separateCalcResults.length)return}state.calcQuoteParts=state.calcQuoteParts||[];separateCalcResults.forEach(r=>{const old=state.calcQuoteParts.find(x=>x.name.toLowerCase()===r.name.toLowerCase());if(old){old.qty=r.qty;old.price=r.price;old.cost=r.cost;old.grams=r.grams*r.qty;old.hours=r.hours*r.qty;old.filamentId=r.filamentId;old.printerId=r.printerId;old.margin=r.margin;old.other=r.other}else state.calcQuoteParts.push({...r,grams:r.grams*r.qty,hours:r.hours*r.qty});});persist();renderCalcQuoteParts();toast('Peças adicionadas à lista do orçamento');}
-function quoteFromCalc(){if(!state.lastCalc){toast('Calcule o preço primeiro');return}newQuote();$('quotePiece').value=state.lastCalc.name;$('quoteQty').value=1;$('quoteUnit').value=state.lastCalc.price.toFixed(2);$('quoteCost').value=state.lastCalc.cost.toFixed(2);go('quotes')}
-function saveCalcProduct(){if(!state.lastCalc){toast('Calcule o preço primeiro');return}const r=state.lastCalc;const ex=state.products.find(x=>x.name.toLowerCase()===r.name.toLowerCase());if(ex){ex.price=r.price;ex.cost=r.cost}else state.products.push({id:uid(),name:r.name,price:r.price,cost:r.cost,created:Date.now()});persist();toast('Produto salvo no catálogo')}
-function addCalcPieceToQuote(){if(!state.lastCalc){calculate();if(!state.lastCalc)return}const r=state.lastCalc;const old=state.calcQuoteParts.find(x=>x.name.toLowerCase()===r.name.toLowerCase());if(old){old.qty+=1;old.price=r.price;old.cost=r.cost;old.grams+=r.grams;old.hours+=r.hours}else state.calcQuoteParts.push({name:r.name,qty:1,price:r.price,cost:r.cost,grams:r.grams,hours:r.hours,filamentId:r.filamentId,printerId:r.printerId,margin:r.margin,other:r.other});persist();renderCalcQuoteParts();toast('Peça adicionada ao orçamento')}
-function removeCalcPiece(i){state.calcQuoteParts.splice(i,1);persist();renderCalcQuoteParts()}
-function clearCalcParts(){state.calcQuoteParts=[];persist();renderCalcQuoteParts();toast('Lista de peças limpa')}
-function renderCalcQuoteParts(){const el=$('calcQuoteParts'),tot=$('calcQuoteTotals');if(!el)return;const ps=state.calcQuoteParts||[];el.innerHTML=ps.length?ps.map((p,i)=>`<div class="item"><div class="itemTop"><strong>${esc(p.name)} × ${p.qty}</strong><strong>${money(p.price*p.qty)}</strong></div><div class="muted">Unitário ${money(p.price)} · Custo ${money(p.cost)} por peça · Lucro ${money(p.price-p.cost)} por peça</div><div class="actions"><button class="btn secondary" onclick="editCalcQuotePiece(${i})">Atualizar com calculadora</button><button class="btn danger" onclick="removeCalcPiece(${i})">Remover</button></div></div>`).join(''):'<div class="empty">Nenhuma peça adicionada ainda.</div>';const total=ps.reduce((s,p)=>s+p.qty*p.price,0),cost=ps.reduce((s,p)=>s+p.qty*p.cost,0);tot.style.display=ps.length?'block':'none';tot.innerHTML=`<div class="itemTop"><span>Total do orçamento</span><strong>${money(total)}</strong></div><div class="itemTop"><span>Custo total estimado</span><strong>${money(cost)}</strong></div><div class="itemTop"><span>Lucro estimado</span><strong>${money(total-cost)}</strong></div>`}
-function editCalcQuotePiece(i){const x=state.calcQuoteParts[i];$('calcName').value=x.name;$('calcFilament').value=x.filamentId||'';$('calcPrinter').value=x.printerId||'';$('calcGrams').value=x.grams||0;$('calcHours').value=x.hours||0;$('calcMargin').value=x.margin||0;$('calcOther').value=x.other||0;go('calculator');calculate();toast('Ajuste os dados e clique em adicionar para atualizar a peça')}
-function startQuoteFromParts(){if(!state.calcQuoteParts.length){toast('Adicione ao menos uma peça calculada');return}clearQuote();$('quoteMode').value='multiple';state.parts=state.calcQuoteParts.map(p=>({...p,qty:p.qty||1}));$('quoteCost').value=state.calcQuoteParts.reduce((s,p)=>s+p.cost*p.qty,0).toFixed(2);renderPartRows();go('quotes');toast('Peças transferidas para o orçamento')}
-function newQuote(){clearQuote();go('quotes');$('quoteFormTitle').textContent='Novo orçamento'}
-function clearQuote(){['quoteEditId','quoteName','quotePiece','quoteNotes'].forEach(id=>$(id).value='');$('quoteQty').value=1;$('quoteUnit').value=0;$('quoteCost').value=0;$('quoteDeadline').value='';$('quoteMode').value='single';$('quoteAddProduct').checked=true;state.parts=[];renderPartRows();$('quoteFormTitle').textContent='Novo orçamento'}
-function renderPartRows(){const multiple=$('quoteMode').value==='multiple';$('quoteSingle').style.display=multiple?'none':'block';$('quoteMultiple').style.display=multiple?'block':'none';if(multiple&&!state.parts.length)addPart();else drawPartRows();updateQuoteTotals()}
-function addPart(){state.parts.push({name:'',qty:1,price:0,cost:0});drawPartRows();updateQuoteTotals()}
-function drawPartRows(){if(!$('partRows'))return;$('partRows').innerHTML=state.parts.map((p,i)=>`<div class="partCalc"><div class="itemTop"><h4>Peça ${i+1}</h4><button class="btn danger" onclick="removePart(${i})">Remover</button></div><label>Nome da peça</label><input value="${esc(p.name)}" onchange="updatePart(${i},'name',this.value)" placeholder="Nome da peça"><div class="grid"><div><label>Quantidade</label><input type="number" min="1" value="${p.qty||1}" onchange="updatePart(${i},'qty',this.value)"></div><div><label>Preço unitário (R$)</label><input type="number" min="0" step=".01" value="${p.price||0}" onchange="updatePart(${i},'price',this.value)"></div></div><div class="grid"><div><label>Custo unitário (R$)</label><input type="number" min="0" step=".01" value="${p.cost||0}" onchange="updatePart(${i},'cost',this.value)"></div><div><label>Lucro unitário</label><input value="${money((Number(p.price)||0)-(Number(p.cost)||0))}" disabled></div></div></div>`).join('')}
-function updatePart(i,k,v){if(!state.parts[i])return;state.parts[i][k]=k==='name'?v:Math.max(k==='qty'?1:0,Number(v)||0);updateQuoteTotals()}
-function removePart(i){state.parts.splice(i,1);drawPartRows();updateQuoteTotals()}
-function updateQuoteTotals(){const mode=$('quoteMode')?.value;if(!mode)return;let total=0,cost=0;if(mode==='single'){const qty=Math.max(1,Number($('quoteQty').value)||1),price=Math.max(0,Number($('quoteUnit').value)||0);total=qty*price;cost=Math.max(0,Number($('quoteCost').value)||0)}else{total=state.parts.reduce((s,p)=>s+(Number(p.qty)||1)*(Number(p.price)||0),0);cost=state.parts.reduce((s,p)=>s+(Number(p.qty)||1)*(Number(p.cost)||0),0);$('quoteCost').value=cost.toFixed(2)}const el=$('quoteLiveTotals');if(el)el.innerHTML=`<div class="itemTop"><span>Valor total</span><strong>${money(total)}</strong></div><div class="itemTop"><span>Custo estimado</span><strong>${money(cost)}</strong></div><div class="itemTop"><span>Lucro estimado</span><strong>${money(total-cost)}</strong></div>`}
-function saveQuote(){const mode=$('quoteMode').value,name=$('quoteName').value.trim()||'Orçamento sem nome';let parts;if(mode==='single'){const piece=$('quotePiece').value.trim()||'Peça';parts=[{name:piece,qty:Math.max(1,Number($('quoteQty').value)||1),price:Math.max(0,Number($('quoteUnit').value)||0),cost:Math.max(0,Number($('quoteCost').value)||0)}]}else{parts=state.parts.filter(p=>p.name.trim()).map(p=>({...p,qty:Math.max(1,Number(p.qty)||1),price:Math.max(0,Number(p.price)||0),cost:Math.max(0,Number(p.cost)||0)}));if(!parts.length){toast('Adicione ao menos uma peça com nome');return}}const total=parts.reduce((s,p)=>s+p.qty*p.price,0),cost=parts.reduce((s,p)=>s+p.qty*p.cost,0);const id=$('quoteEditId').value;const q={id:id||uid(),name,mode,parts,cost,total,deadline:$('quoteDeadline').value,notes:$('quoteNotes').value,created:Date.now()};const idx=state.quotes.findIndex(x=>x.id===id);if(idx>=0)state.quotes[idx]=q;else state.quotes.unshift(q);if($('quoteAddProduct').checked){parts.forEach(p=>{const existing=state.products.find(x=>x.name.toLowerCase()===p.name.toLowerCase());if(existing){existing.price=p.price;existing.cost=p.cost}else state.products.push({id:uid(),name:p.name,price:p.price,cost:p.cost,quoteId:q.id,created:Date.now()})})}persist();clearQuote();toast('Orçamento salvo')}
-function editQuote(id){const q=state.quotes.find(x=>x.id===id);if(!q)return;$('quoteEditId').value=q.id;$('quoteName').value=q.name;$('quoteMode').value=q.mode;$('quoteCost').value=q.cost;$('quoteDeadline').value=q.deadline||'';$('quoteNotes').value=q.notes||'';$('quoteAddProduct').checked=false;if(q.mode==='single'){const p=q.parts[0]||{};$('quotePiece').value=p.name||'';$('quoteQty').value=p.qty||1;$('quoteUnit').value=p.price||0}else state.parts=q.parts.map(p=>({...p,cost:p.cost||0}));renderPartRows();$('quoteFormTitle').textContent='Editar orçamento';go('quotes');$('quoteForm').scrollIntoView({behavior:'smooth'})}
-function deleteQuote(id){if(!confirm('Excluir este orçamento?'))return;state.quotes=state.quotes.filter(q=>q.id!==id);persist()}
-function renderQuotes(){$('quoteList').innerHTML=state.quotes.length?state.quotes.map(q=>`<div class="item"><div class="itemTop"><strong>${esc(q.name)}</strong><span class="badge">${q.mode==='multiple'?'Várias peças':'Peça única'}</span></div><div class="muted">${(q.parts||[]).map(p=>`${esc(p.name)} × ${p.qty} — ${money(p.price)} cada`).join(' · ')}</div><div class="itemTop" style="margin-top:8px"><div><div class="money" style="font-size:21px">${money(q.total)}</div><div class="muted">Custo ${money(q.cost)} · Lucro ${money(q.total-q.cost)}</div></div><div class="actions"><button class="btn secondary" onclick="editQuote('${q.id}')">Editar</button><button class="btn danger" onclick="deleteQuote('${q.id}')">Excluir</button></div></div></div>`).join(''):'<div class="empty">Nenhum orçamento cadastrado.</div>';$('recentQuotes').innerHTML=state.quotes.slice(0,3).map(q=>`<div class="itemTop item"><span>${esc(q.name)}</span><strong>${money(q.total)}</strong></div>`).join('')||'<div class="empty">Seus orçamentos aparecerão aqui.</div>'}
-function renderProducts(){const term=($('productSearch')?.value||'').toLowerCase();const list=state.products.filter(p=>p.name.toLowerCase().includes(term)||p.id.toLowerCase().includes(term));$('productList').innerHTML=list.length?list.map(p=>`<div class="item"><div class="itemTop"><strong>${esc(p.name)}</strong><span class="badge">ID ${esc(p.id.slice(-6))}</span></div><div class="itemTop" style="margin-top:8px"><div><div class="money" style="font-size:21px">${money(p.price)}</div><div class="muted">Custo ${money(p.cost||0)}</div></div><div class="actions"><button class="btn secondary" onclick="editProduct('${p.id}')">Editar</button><button class="btn danger" onclick="deleteProduct('${p.id}')">Excluir</button></div></div></div>`).join(''):'<div class="empty">Nenhum produto encontrado.</div>'}
-function editProduct(id){const p=state.products.find(x=>x.id===id);if(!p)return;const name=prompt('Nome do produto:',p.name);if(name===null)return;const price=prompt('Preço de venda (R$):',p.price);if(price===null)return;p.name=name.trim()||p.name;p.price=Math.max(0,Number(price)||0);persist();toast('Produto atualizado')}
-function deleteProduct(id){if(!confirm('Excluir produto do catálogo?'))return;state.products=state.products.filter(p=>p.id!==id);persist()}
-function saveFilament(){const name=$('filamentName').value.trim();if(!name){toast('Informe o nome do filamento');return}const id=$('filamentEditId').value;const f={id:id||uid(),name,type:$('filamentType').value,color:$('filamentColor').value.trim(),price:Math.max(0,Number($('filamentPrice').value)||0),weight:Math.max(1,Number($('filamentWeight').value)||1000),stock:Math.max(0,Number($('filamentStock').value)||0)};const idx=state.filaments.findIndex(x=>x.id===id);if(idx>=0)state.filaments[idx]=f;else state.filaments.push(f);persist();clearFilament();toast('Filamento salvo')}
-function clearFilament(){['filamentEditId','filamentName','filamentColor'].forEach(id=>$(id).value='');$('filamentType').value='PLA';$('filamentPrice').value=100;$('filamentWeight').value=1000;$('filamentStock').value=1000}
-function editFilament(id){const f=state.filaments.find(x=>x.id===id);if(!f)return;$('filamentEditId').value=f.id;$('filamentName').value=f.name;$('filamentType').value=f.type;$('filamentColor').value=f.color;$('filamentPrice').value=f.price;$('filamentWeight').value=f.weight;$('filamentStock').value=f.stock;go('inventory');$('filamentName').scrollIntoView({behavior:'smooth'})}
-function deleteFilament(id){if(!confirm('Excluir este filamento?'))return;state.filaments=state.filaments.filter(f=>f.id!==id);persist()}
-function renderFilaments(){$('filamentList').innerHTML=state.filaments.length?state.filaments.map(f=>{const low=f.stock<100;return `<div class="item"><div class="itemTop"><strong>${esc(f.name)} · ${esc(f.color||'sem cor')}</strong><span class="badge">${esc(f.type)}</span></div><div class="itemTop" style="margin-top:8px"><div><div class="metric">${f.stock} g</div><div class="muted">${money(f.price)} por ${f.weight} g · ${money(f.price/f.weight)}/g</div></div><div class="actions"><button class="btn secondary" onclick="editFilament('${f.id}')">Editar</button><button class="btn danger" onclick="deleteFilament('${f.id}')">Excluir</button></div></div>${low?'<div class="muted" style="color:#ffbd63;margin-top:8px">Estoque baixo</div>':''}</div>`}).join(''):'<div class="empty">Nenhum filamento cadastrado.</div>';renderSelects();$('lowStock').innerHTML=state.filaments.filter(f=>f.stock<100).map(f=>`<div class="itemTop item"><span>${esc(f.name)} · ${esc(f.color)}</span><strong>${f.stock} g</strong></div>`).join('')||'<div class="empty">Nenhum alerta de estoque baixo.</div>'}
-function savePrinter(){const name=$('printerName').value.trim();if(!name){toast('Informe o nome da impressora');return}const id=$('printerEditId').value;const p={id:id||uid(),name,value:Math.max(0,Number($('printerValue').value)||0),life:Math.max(1,Number($('printerLife').value)||1),power:Math.max(0,Number($('printerPower').value)||0),maintenance:Math.max(0,Number($('printerMaintenance').value)||0)};const idx=state.printers.findIndex(x=>x.id===id);if(idx>=0)state.printers[idx]=p;else state.printers.push(p);persist();clearPrinter();toast('Impressora salva')}
-function clearPrinter(){['printerEditId','printerName'].forEach(id=>$(id).value='');$('printerValue').value=1800;$('printerLife').value=5000;$('printerPower').value=350;$('printerMaintenance').value=200}
-function editPrinter(id){const p=state.printers.find(x=>x.id===id);if(!p)return;$('printerEditId').value=p.id;$('printerName').value=p.name;$('printerValue').value=p.value;$('printerLife').value=p.life;$('printerPower').value=p.power;$('printerMaintenance').value=p.maintenance;go('printers')}
-function deletePrinter(id){if(!confirm('Excluir esta impressora?'))return;state.printers=state.printers.filter(p=>p.id!==id);persist()}
-function renderPrinters(){$('printerList').innerHTML=state.printers.length?state.printers.map(p=>`<div class="item"><div class="itemTop"><strong>${esc(p.name)}</strong><span class="badge">${p.power} W</span></div><div class="muted" style="margin-top:6px">Valor ${money(p.value)} · Vida útil ${p.life} h · Manutenção ${money(p.maintenance)}</div><div class="actions"><button class="btn secondary" onclick="editPrinter('${p.id}')">Editar</button><button class="btn danger" onclick="deletePrinter('${p.id}')">Excluir</button></div></div>`).join(''):'<div class="empty">Nenhuma impressora cadastrada.</div>';renderSelects()}
-function saveOrder(){const name=$('orderName').value.trim()||'Cliente';const product=state.products.find(p=>p.id===$('orderProduct').value);const qty=Math.max(1,Number($('orderQty').value)||1);const price=Math.max(0,Number($('orderPrice').value)||0);const grams=Math.max(0,Number($('orderGrams').value)||0);const status=$('orderStatus').value;state.orders.unshift({id:uid(),name,productId:product?.id||'',product:product?.name||'Produto personalizado',qty,price,grams,status,created:Date.now()});persist();$('orderName').value='';toast('Encomenda salva')}
-function setOrderStatus(id,status){const o=state.orders.find(x=>x.id===id);if(!o)return;o.status=status;persist()}
-function deleteOrder(id){if(!confirm('Excluir esta encomenda?'))return;state.orders=state.orders.filter(o=>o.id!==id);persist()}
-function renderOrders(){$('orderList').innerHTML=state.orders.length?state.orders.map(o=>`<div class="item"><div class="itemTop"><strong>${esc(o.name)}</strong><span class="badge">${esc(o.status)}</span></div><div class="muted">${esc(o.product)} × ${o.qty} · ${money(o.price)}</div><label>Alterar status</label><select onchange="setOrderStatus('${o.id}',this.value)">${['Pendente','Em produção','Concluída','Falhou'].map(s=>`<option ${o.status===s?'selected':''}>${s}</option>`).join('')}</select><div class="actions"><button class="btn danger" onclick="deleteOrder('${o.id}')">Excluir</button></div></div>`).join(''):'<div class="empty">Nenhuma encomenda cadastrada.</div>';renderSelects()}
-function renderHome(){$('hello').textContent=state.name||'empreendedor';$('dashQuotes').textContent=state.quotes.length;$('dashOrders').textContent=state.orders.length;const done=state.orders.filter(o=>o.status==='Concluída');$('dashRevenue').textContent=money(done.reduce((s,o)=>s+o.price,0));$('dashProfit').textContent=money(done.reduce((s,o)=>s+o.price,0)-done.reduce((s,o)=>{const p=state.products.find(x=>x.id===o.productId);return s+(p?.cost||0)*o.qty},0))}
-function renderAll(){renderHome();renderQuotes();renderProducts();renderOrders();renderFilaments();renderPrinters();$('settingsName').value=state.name||'';$('settingsKwh').value=state.kwh??.90;renderSelects();renderCalcQuoteParts()}
-function exportData(){const blob=new Blob([JSON.stringify(state,null,2)],{type:'application/json'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='printprofit-backup.json';a.click();URL.revokeObjectURL(a.href)}
-function importData(){const file=$('importFile').files[0];if(!file){toast('Escolha um arquivo JSON');return}const reader=new FileReader();reader.onload=()=>{try{const d=JSON.parse(reader.result);if(!d||!Array.isArray(d.filaments)||!Array.isArray(d.quotes))throw Error();state={...state,...d};persist();toast('Dados importados')}catch(e){toast('Arquivo inválido')}};reader.readAsText(file)}
-function resetData(){if(!confirm('Tem certeza? Todos os dados salvos neste navegador serão apagados.'))return;localStorage.removeItem(KEY);state={name:'',kwh:.90,filaments:[],printers:[],quotes:[],products:[],orders:[],lastCalc:null,parts:[],calcQuoteParts:[]};persist();toast('Dados apagados')}
-load();renderAll();go('home');
-document.addEventListener("DOMContentLoaded",()=>{if($('separateCalcRows')&&!$('separateCalcRows').children.length)addSeparateCalcRow();});
+const data=[
+{name:'3D Fila PLA',type:'PLA',kg:109,rating:4.9,nozzle:'190–220°C',bed:'50–60°C',use:'Peças gerais'},
+{name:'Voolt3D PLA Velvet',type:'PLA',kg:89.37,rating:4.8,nozzle:'190–215°C',bed:'50–60°C',use:'Decoração'},
+{name:'GTMax3D PLA Speed+',type:'PLA',kg:99.90,rating:4.7,nozzle:'195–220°C',bed:'50–60°C',use:'Impressão rápida'},
+{name:'Bambu Lab PLA',type:'PLA',kg:122.50,rating:5.0,nozzle:'190–220°C',bed:'45–55°C',use:'Alta qualidade'},
+{name:'3D Fila PETG XT',type:'PETG',kg:109.42,rating:4.8,nozzle:'230–250°C',bed:'70–80°C',use:'Resistência'},
+{name:'GTMax3D PETG HF',type:'PETG',kg:99.90,rating:4.8,nozzle:'230–250°C',bed:'70–80°C',use:'Peças funcionais'},
+{name:'Voolt3D TPU 95A',type:'TPU',kg:129.90,rating:4.7,nozzle:'210–240°C',bed:'40–60°C',use:'Flexíveis'},
+{name:'GTMax3D ABS',type:'ABS',kg:119.90,rating:4.6,nozzle:'235–260°C',bed:'90–110°C',use:'Alta resistência'}];
+let selected=data[0];
+let calculatorCatalog=null;
+const br=n=>n.toLocaleString('pt-BR',{style:'currency',currency:'BRL'});
+function show(id,el){if(stockFormOpen && stockFormOpen() && id!=='inventory')return;if(!getUserName()&&id!=='register'){toast('Cadastre seu nome primeiro');return}if(id==='quote'&&getStock().length===0){document.querySelectorAll('.screen').forEach(x=>x.classList.remove('active'));document.getElementById('inventory').classList.add('active');document.querySelectorAll('nav button').forEach(x=>x.classList.remove('active'));const buttons=document.querySelectorAll('nav button');if(buttons[2])buttons[2].classList.add('active');toast('Você precisa cadastrar pelo menos 1 filamento antes de fazer um orçamento.');setTimeout(()=>{if(!stockFormOpen())toggleStockForm()},250);return}document.querySelectorAll('.screen').forEach(x=>x.classList.remove('active'));document.getElementById(id).classList.add('active');if(id==='calc'){
+ setTimeout(function(){
+   if(calculatorCatalog){
+     updateCalculatorStock();
+     const s=document.getElementById('filament');
+     if(s){s.value='catalog:'+calculatorCatalog.name;updateSelected();}
+   }else{
+     updateCalculatorStock();
+   }
+ },0);
+ setTimeout(updatePrinterSelect,0);
+ setTimeout(updatePrinterInfo,0)
+}if(id==='quote'){setTimeout(()=>{updateQuotePriceNotice();updateQuoteStock();renderQuoteHistory();const c=getLastCalculation();if(c&&Number(c.price)>0){const unit=document.getElementById('unit');const cost=document.getElementById('completeQuoteCost');if(unit&&!Number(unit.value))unit.value=Number(c.price).toFixed(2);if(cost&&!Number(cost.value))cost.value=Number(c.cost).toFixed(2);const ct=document.getElementById('completeQuoteTime');if(ct&&Number(c.hours)>0)ct.value=Number(c.hours);}},0)}if(id==='productCatalog'){setTimeout(renderQuotedProductCatalog,0)}if(id==='inventory'){setTimeout(renderStock,0)}if(id==='printers'){setTimeout(renderPrinters,0)}if(el){document.querySelectorAll('nav button').forEach(x=>x.classList.remove('active'));el.classList.add('active')}else document.querySelectorAll('nav button').forEach(x=>x.classList.toggle('active',x.textContent.includes(id==='home'?'Início':id==='calc'?'Calcular preço':id==='inventory'?'Estoque':id==='productCatalog'?'Produtos':id==='quote'?'Orçamentos':id==='order'?'Encomendas':id==='printers'?'Impressoras':id==='plans'?'Planos':'Orçamentos')));toggleMenu(false)}
+const PRINTER_KEY='pp_printers';
+let printerMemory=[];
+function safeGetPrinters(){
+  try{
+    const raw=localStorage.getItem(PRINTER_KEY);
+    const a=raw?JSON.parse(raw):[];
+    if(Array.isArray(a)) return a;
+  }catch(e){}
+  try{
+    const raw=sessionStorage.getItem(PRINTER_KEY);
+    const a=raw?JSON.parse(raw):[];
+    if(Array.isArray(a)) return a;
+  }catch(e){}
+  return [];
+}
+function loadPrinterMemory(){
+  printerMemory=safeGetPrinters();
+  refreshPrinterUI();
+}
+function refreshPrinterUI(){
+  renderPrinters();
+  updatePrinterSelect();
+  updatePrinterInfo();
+}
+function getPrinters(){return Array.isArray(printerMemory)?printerMemory:[]}
+function persistPrinters(list){
+  printerMemory=list.slice();
+  const json=JSON.stringify(printerMemory);
+  try{localStorage.setItem(PRINTER_KEY,json)}catch(e){}
+  try{sessionStorage.setItem(PRINTER_KEY,json)}catch(e){}
+}
+function savePrinters(list){persistPrinters(list);refreshPrinterUI()}
+function renderPrinters(){
+  const box=document.getElementById('printerList');
+  if(!box)return;
+  const list=getPrinters();
+  if(!list.length){
+    box.innerHTML='<div class="card"><div class="muted">Nenhuma impressora cadastrada.</div></div>';
+    return;
+  }
+  box.innerHTML=list.map(function(x){
+    const dep=(Number(x.value||0)+Number(x.maintenance||0))/Math.max(1,Number(x.life||1));
+    return '<div class="card"><h3>'+escapeHtml(x.name)+'</h3>'+
+      '<div class="muted">Valor: '+br(Number(x.value||0))+' · Vida útil: '+Number(x.life||0)+' h</div>'+
+      '<div class="muted">Consumo: '+Number(x.watts||0).toFixed(3)+' kW · Tarifa: '+br(Number(x.rate||0))+'/kWh · Manutenção: '+br(Number(x.maintenance||0))+' · Falha: '+Number(x.fail||0).toFixed(1)+'%</div>'+
+      '<div class="muted" style="margin-top:8px">Custo depreciação + manutenção: '+br(dep)+' / h</div>'+
+      '<div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:12px">'+
+      '<button class="btn small secondary" type="button" onclick="editPrinter(\''+String(x.id)+'\')">Editar</button>'+
+      '<button class="btn small secondary" type="button" onclick="deletePrinter(\''+String(x.id)+'\')">Excluir</button></div></div>';
+  }).join('');
+}
+function escapeHtml(v){return String(v==null?'':v).replace(/[&<>'"]/g,function(c){return {'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[c]})}
+function showPrinterForm(id){
+  const f=document.getElementById('printerForm');if(!f)return false;
+  const set=function(k,v){const e=document.getElementById(k);if(e)e.value=v};
+  set('printerEditId','');set('printerFormTitle','Nova impressora');set('prName','');set('prValue','');set('prLife','5000');set('prMaintenance','0');set('prWatts','0.150');set('prRate','0.95');set('prFail','5');
+  f.style.display='block';f.hidden=false;try{f.scrollIntoView({behavior:'smooth',block:'start'})}catch(e){}return false;
+}
+function hidePrinterForm(){const f=document.getElementById('printerForm');if(f)f.style.display='none'}
+function editPrinter(id){
+  const x=getPrinters().find(function(p){return String(p.id)===String(id)});if(!x){toast('Impressora não encontrada');return}
+  showPrinterForm();document.getElementById('printerFormTitle').textContent='Editar impressora';
+  document.getElementById('printerEditId').value=x.id;document.getElementById('prName').value=x.name||'';document.getElementById('prValue').value=x.value||0;document.getElementById('prLife').value=x.life||5000;document.getElementById('prMaintenance').value=x.maintenance||0;document.getElementById('prWatts').value=Number(x.watts||0).toFixed(3);document.getElementById('prRate').value=x.rate||0;document.getElementById('prFail').value=x.fail||0;
+}
+function numBR(value){
+  if(value==null)return 0;let s=String(value).trim().replace(/\s/g,'');if(!s)return 0;
+  if(s.includes(',')&&s.includes('.')){if(s.lastIndexOf(',')>s.lastIndexOf('.'))s=s.replace(/\./g,'').replace(',','.');else s=s.replace(/,/g,'');}
+  else if(s.includes(','))s=s.replace(',','.');
+  const n=Number(s);return Number.isFinite(n)?n:0;
+}
+function savePrinter(){
+  const get=function(id){const e=document.getElementById(id);return e?String(e.value||'').trim():''};
+  const printer={
+    id:get('printerEditId')||('printer_'+Date.now()+'_'+Math.floor(Math.random()*100000)),
+    name:get('prName')||'Minha impressora',
+    value:Math.max(0,numBR(get('prValue'))),life:Math.max(1,numBR(get('prLife'))||5000),
+    maintenance:Math.max(0,numBR(get('prMaintenance'))),watts:Math.max(0,numBR(get('prWatts'))||0.150),
+    rate:Math.max(0,numBR(get('prRate'))||0.95),fail:Math.min(100,Math.max(0,numBR(get('prFail'))))
+  };
+  const list=getPrinters().slice();
+  const idx=list.findIndex(function(x){return String(x.id)===String(printer.id)});
+  if(idx>=0)list[idx]=printer;else list.push(printer);
+  persistPrinters(list);
+  try{localStorage.setItem('pp_selected_printer',String(printer.id))}catch(e){}
+  hidePrinterForm();
+  refreshPrinterUI();
+  const ok=getPrinters().some(function(x){return String(x.id)===String(printer.id)});
+  if(ok)toast('Impressora salva com sucesso.');else toast('Não foi possível cadastrar a impressora.');
+  return false;
+}
+function deletePrinter(id){
+  const list=getPrinters().filter(function(x){return String(x.id)!==String(id)});
+  persistPrinters(list);refreshPrinterUI();
+  try{if(String(localStorage.getItem('pp_selected_printer')||'')===String(id))localStorage.removeItem('pp_selected_printer')}catch(e){}
+  toast('Impressora excluída.');
+}
+function updatePrinterSelect(){
+  const s=document.getElementById('printerSelect');if(!s)return;
+  const list=getPrinters();s.innerHTML='';
+  if(!list.length){s.add(new Option('Nenhuma impressora cadastrada',''));updatePrinterInfo();return}
+  list.forEach(function(x){s.add(new Option(x.name,String(x.id)))});
+  let old='';try{old=localStorage.getItem('pp_selected_printer')||''}catch(e){}
+  if(!list.some(function(x){return String(x.id)===String(old)}))old=String(list[0].id);
+  s.value=old;try{localStorage.setItem('pp_selected_printer',old)}catch(e){}
+  updatePrinterInfo();
+}
+function applySelectedPrinter(){updatePrinterInfo()}
+function updatePrinterInfo(){
+  const info=document.getElementById('printerCalcInfo');if(!info)return;const s=document.getElementById('printerSelect');const x=getPrinters().find(p=>String(p.id)===String(s?.value));
+  if(!x){info.innerHTML='Nenhuma impressora cadastrada. <b>Cadastre uma impressora</b> para usar energia e depreciação automaticamente.';return}
+  const dep=(Number(x.value||0)+Number(x.maintenance||0))/Math.max(1,Number(x.life||1));
+  info.innerHTML=`Consumo ${Number(x.watts||0).toFixed(3)} kW · ${br(x.rate)}/kWh · Depreciação + manutenção ${br(dep)}/h · Falha ${Number(x.fail||0).toFixed(1)}%`;
+}
+function init(){render(data);renderStock();updateOrderStock();updateCalculatorStock();updateQuotePriceNotice();loadPrinterMemory();}
+function updateCalculatorStock(){
+ const s=document.getElementById('filament');if(!s)return;
+ const list=getStock();
+ s.innerHTML='';
+ if(list.length){
+   list.forEach(x=>{
+     const price=Number(x.pricePerKg||0);
+     s.add(new Option(x.type+' · '+x.name+' · '+x.colorName+' · '+(Math.max(0,x.grams)/1000).toFixed(3)+' kg · '+br(price)+'/kg','stock:'+String(x.id)));
+   });
+ }
+ if(calculatorCatalog){
+   s.add(new Option('CATÁLOGO · '+calculatorCatalog.name+' · '+calculatorCatalog.type+' · '+br(calculatorCatalog.kg)+'/kg','catalog:'+calculatorCatalog.name));
+   s.value='catalog:'+calculatorCatalog.name;
+ }else if(list.length){
+   s.selectedIndex=0;
+ }else{
+   s.add(new Option('Nenhum filamento cadastrado',''));
+ }
+ updateSelected();
+}
+function updateSelected(){
+ const s=document.getElementById('filament');
+ const id=String(s&&s.value||'');
+ if(id.indexOf('catalog:')===0){
+   const name=id.slice(8);
+   const ref=data.find(x=>x.name===name);
+   if(ref){
+     selected=Object.assign({},ref,{
+       stockId:null,
+       stockName:ref.name,
+       stockColor:'Catálogo',
+       stockGrams:null,
+       kg:Number(ref.kg||0),
+       catalog:true
+     });
+     document.getElementById('homeFilament').textContent=ref.name;
+     document.getElementById('homeKg').textContent=br(Number(ref.kg||0));
+     document.getElementById('homeGram').textContent=br(Number(ref.kg||0)/1000);
+     document.getElementById('homeTemp').textContent='Bico '+ref.nozzle;
+     return;
+   }
+ }
+ const raw=id.indexOf('stock:')===0?id.slice(6):id;
+ const list=getStock();
+ const stock=list.find(x=>String(x.id)===raw);
+ const ref=stock?data.find(d=>d.type===stock.type):null;
+ calculatorCatalog=null;
+ selected=stock?Object.assign({},ref||{nozzle:'—'},{stockId:stock.id,stockName:stock.name,stockColor:stock.colorName,stockGrams:stock.grams,kg:Number(stock.pricePerKg||0),catalog:false}):null;
+ document.getElementById('homeFilament').textContent=selected?selected.stockName:'Sem estoque';
+ document.getElementById('homeKg').textContent=selected?br(selected.kg):br(0);
+ document.getElementById('homeGram').textContent=selected?br(selected.kg/1000):br(0);
+ document.getElementById('homeTemp').textContent=selected?'Bico '+selected.nozzle:'Sem filamento';
+}
+function updateDashboard(){
+  const sales = Number(localStorage.getItem('pp_sales')||0);
+  const profitValue = Number(localStorage.getItem('pp_profit')||0);
+  const orders = Number(localStorage.getItem('pp_orders')||0);
+  const costs = Number(localStorage.getItem('pp_costs')||0);
+  document.getElementById('dashSales').textContent=br(sales);
+  document.getElementById('dashProfit').textContent=br(profitValue);
+  document.getElementById('dashOrders').textContent=orders;
+  document.getElementById('dashCosts').textContent=br(costs);
+}
+function parsePrintHours(value){
+ const raw=String(value??'').trim();
+ if(!raw)return 0;
+ if(raw.includes(':')){
+   const parts=raw.split(':').map(Number);
+   const hours=Number.isFinite(parts[0])?parts[0]:0;
+   const minutes=Number.isFinite(parts[1])?parts[1]:0;
+   const seconds=Number.isFinite(parts[2])?parts[2]:0;
+   return Math.max(0,hours+minutes/60+seconds/3600);
+ }
+ return Math.max(0,Number(raw)||0);
+}
+function getPrintTimeHours(){
+ const h=Math.max(0,parseInt(document.getElementById('hoursH')?.value||0,10)||0);
+ const m=Math.min(59,Math.max(0,parseInt(document.getElementById('hoursM')?.value||0,10)||0));
+ const s=Math.min(59,Math.max(0,parseInt(document.getElementById('hoursS')?.value||0,10)||0));
+ return h+m/60+s/3600;
+}
+function setPrintTimeHours(total){
+ total=Math.max(0,Number(total)||0);
+ const h=Math.floor(total), m=Math.floor((total-h)*60);
+ const s=Math.round((total-h-m/60)*3600);
+ document.getElementById('hoursH').value=h;
+ document.getElementById('hoursM').value=Math.min(59,m);
+ document.getElementById('hoursS').value=Math.min(59,s);
+}
+function formatPrintTime(total){
+ total=Math.max(0,Number(total)||0);
+ const h=Math.floor(total),m=Math.floor((total-h)*60);
+ let s=Math.round((total-h-m/60)*3600);
+ if(s>=60){s=0;return String(h).padStart(2,'0')+':'+String(m+1).padStart(2,'0')+':00';}
+ return String(h).padStart(2,'0')+':'+String(m).padStart(2,'0')+':'+String(s).padStart(2,'0');
+}
+function calculate(){
+ const select=document.getElementById('filament');
+ const g=Number(document.getElementById('grams').value||0);
+ const h=parsePrintHours(getPrintTimeHours());
+ const printer=getPrinters().find(x=>String(x.id)===String(document.getElementById('printerSelect')?.value));
+ if(!printer){toast('Cadastre e selecione uma impressora primeiro.');show('printers');return}
+ const energyUse=numBR(printer.watts);
+ const energyRate=Math.max(0,numBR(printer.rate));
+ const printerValue=Math.max(0,numBR(printer.value));
+ const printerLife=numBR(printer.life);
+ const failRate=Math.min(100,Math.max(0,numBR(printer.fail)))/100;
+ const l=Number(document.getElementById('labor').value||0);
+ const o=Number(document.getElementById('other').value||0);
+ const mar=Number(document.getElementById('margin').value||0)/100;
+ const id=String(select.value||'');
+ let current=null;
+ let catalogMode=false;
+ let catalogRef=null;
+ if(id.indexOf('catalog:')===0){
+   catalogMode=true;
+   catalogRef=data.find(x=>x.name===id.slice(8))||null;
+ }else{
+   const raw=id.indexOf('stock:')===0?id.slice(6):id;
+   current=getStock().find(x=>String(x.id)===raw);
+ }
+ if(!current && !catalogRef){toast('Selecione um filamento.');updateCalculatorStock();return}
+ if(g<=0){toast('Informe o peso da peça.');return}
+ const priceKg=catalogMode?Number(catalogRef.kg||0):Number(current.pricePerKg||0);
+ if(priceKg<=0){toast('O filamento selecionado não possui preço por kg.');return}
+ if(!catalogMode && g>Number(current.grams||0)){toast('Peso maior que o filamento disponível no estoque.');return}
+ if(catalogMode){
+   selected=Object.assign({},catalogRef,{stockId:null,stockName:catalogRef.name,stockColor:'Catálogo',stockGrams:null,kg:priceKg,catalog:true});
+ }else{
+   selected=Object.assign({},data.find(x=>x.type===current.type)||{nozzle:'—'},{stockId:current.id,stockName:current.name,stockColor:current.colorName,stockGrams:current.grams,kg:priceKg,catalog:false});
+ }
+ const filamentCost=(g/1000)*priceKg;
+ if(energyUse<0||energyRate<0){toast('Informe custos de energia válidos.');return}
+ if(printerValue<0||printerLife<=0){toast('Informe o valor e a vida útil da impressora.');return}
+ const energyCost=h*energyUse*energyRate;
+ const maintenanceCost=Math.max(0,numBR(printer.maintenance));
+ const depreciationPerHour=(printerValue+maintenanceCost)/printerLife;
+ const machineCost=h*depreciationPerHour;
+ const baseCost=filamentCost+energyCost+machineCost+l+o;
+ const failureReserve=baseCost*failRate;
+ const c=baseCost+failureReserve;
+ const p=c*(1+mar);
+ const pr=p-c;
+ document.getElementById('result').style.display='block';
+ document.getElementById('suggested').textContent=br(p);
+ document.getElementById('cost').textContent=br(c);
+ document.getElementById('profit').textContent=br(pr);
+ const detail=document.getElementById('costDetails');if(detail)detail.innerHTML=`Filamento: ${br(filamentCost)} · Eletricidade: ${br(energyCost)} · Depreciação: ${br(machineCost)} · Falhas: ${br(failureReserve)} · Tempo: ${h.toFixed(2)} h · Tarifa: ${br(energyRate)}/kWh`;
+ let breakdown=document.getElementById('costBreakdown');
+ if(!breakdown){
+   breakdown=document.createElement('div');
+   breakdown.id='costBreakdown';
+   breakdown.className='muted';
+   breakdown.style.marginTop='14px';
+   document.getElementById('result').appendChild(breakdown);
+ }
+ breakdown.innerHTML=`Filamento: <b>${br(filamentCost)}</b> · Eletricidade: <b>${br(energyCost)}</b> · Depreciação: <b>${br(machineCost)}</b> · Mão de obra: <b>${br(l)}</b> · Outros: <b>${br(o)}</b> · Reserva por falhas (${printer.fail}%): <b>${br(failureReserve)}</b>`;
+ document.getElementById('lastPrice').textContent=br(p);
+ document.getElementById('lastProfit').textContent=br(pr);
+ localStorage.setItem('pp_sales',p.toFixed(2));
+ localStorage.setItem('pp_profit',pr.toFixed(2));
+ localStorage.setItem('pp_costs',c.toFixed(2));
+ localStorage.setItem('pp_last_calculation',JSON.stringify({price:p,profit:pr,cost:c,grams:g,hours:h,stockId:catalogMode?null:current.id,filamentCost,energyCost,machineCost,depreciationPerHour,printerValue,printerLife,maintenanceCost,energyUse,energyRate,printerId:printer.id,printerName:printer.name,failRate:printer.fail,failureReserve,catalogMode,filamentName:selected?selected.stockName:'',createdAt:Date.now()}));
+ updateDashboard();
+ updateQuotePriceNotice();
+ toast('Preço calculado com sucesso. Agora você pode fazer o orçamento.');
+}
+
+function render(arr){catalog.innerHTML=arr.map(x=>`<div class="card"><h2>${x.name}</h2><div class="grid"><div><div class="muted">Preço médio/kg</div><div class="metric">${br(x.kg)}</div></div><div><div class="muted">Avaliação</div><div class="metric">★ ${x.rating}</div></div></div><p><span class="tag">${x.type}</span><span class="tag">Bico ${x.nozzle}</span><span class="tag">Mesa ${x.bed}</span></p><div class="muted">Indicado para: ${x.use}</div><button class="btn" onclick="selectFil('${x.name}')">Usar no cálculo</button></div>`).join('')}
+
+function toggleQuoteType(){const type=document.getElementById('quoteType').value;const complete=document.getElementById('completeQuoteFields');const sliced=document.getElementById('slicedQuoteFields');const parts=document.getElementById('separatePartsFields');const help=document.getElementById('quoteTypeHelp');complete.style.display=type==='complete'?'block':'none';sliced.style.display=type==='sliced'?'block':'none';if(parts)parts.style.display=type==='parts'?'block':'none';help.textContent=type==='complete'?'Informe o preço da peça já pronta. Ideal para peças cujo valor já foi definido.':type==='sliced'?'Informe os dados da peça fatiada. O orçamento será calculado usando o filamento selecionado no estoque.':'Cadastre cada componente separadamente, com preço e custo próprios. O total será somado automaticamente.';if(type==='sliced'){updateQuoteStock();updateQuoteStockInfo()}if(type==='parts'){if(!document.querySelector('#separatePartsRows .parts-row'))addSeparatePart();updateSeparatePartsSummary()}}
+function addSeparatePart(name='',qty=1,price='',cost=''){const box=document.getElementById('separatePartsRows');if(!box)return;const row=document.createElement('div');row.className='parts-row';row.innerHTML=`<div class="part-name"><label>Nome da peça</label><input class="part-title" maxlength="80" placeholder="Ex.: Tampa" value="${escapeHtml(name)}"></div><div><label>Qtd.</label><input class="part-qty" type="number" min="1" step="1" value="${Math.max(1,Number(qty)||1)}"></div><div><label>Venda/un. R$</label><input class="part-price" type="number" min="0" step="0.01" placeholder="0,00" value="${price}"></div><div><label>Custo/un. R$</label><input class="part-cost" type="number" min="0" step="0.01" placeholder="0,00" value="${cost}"></div><button class="part-remove" type="button" onclick="this.closest('.parts-row').remove();updateSeparatePartsSummary()">Remover</button>`;row.querySelectorAll('input').forEach(i=>i.addEventListener('input',updateSeparatePartsSummary));box.appendChild(row);updateSeparatePartsSummary()}
+function readSeparateParts(){return [...document.querySelectorAll('#separatePartsRows .parts-row')].map(r=>({name:r.querySelector('.part-title').value.trim(),qty:Math.max(1,Number(r.querySelector('.part-qty').value)||1),price:Math.max(0,Number(r.querySelector('.part-price').value)||0),cost:Math.max(0,Number(r.querySelector('.part-cost').value)||0)})).filter(p=>p.name)}
+function updateSeparatePartsSummary(){const parts=readSeparateParts();const total=parts.reduce((s,p)=>s+p.qty*p.price,0);const cost=parts.reduce((s,p)=>s+p.qty*p.cost,0);const el=document.getElementById('separatePartsSummary');if(el)el.innerHTML=`<div style="display:flex;justify-content:space-between"><span>Total de venda</span><b>${br(total)}</b></div><div style="display:flex;justify-content:space-between;margin-top:6px"><span>Custo total</span><b>${br(cost)}</b></div><div style="display:flex;justify-content:space-between;margin-top:6px;color:#21d4d0"><span>Lucro estimado</span><b>${br(total-cost)}</b></div>`}
+function updateQuoteStock(){const s=document.getElementById('quoteStock');if(!s)return;const list=getStock();s.innerHTML=list.length?list.map(x=>`<option value="${x.id}">${x.type} · ${x.name} · ${x.colorName} · ${(Math.max(0,x.grams)/1000).toFixed(3)} kg</option>`).join(''):'<option value="">Nenhum rolo cadastrado</option>';updateQuoteStockInfo()}
+function updateQuoteStockInfo(){const s=document.getElementById('quoteStock');const info=document.getElementById('quoteStockInfo');if(!s||!info)return;const item=getStock().find(x=>x.id===Number(s.value));if(!item){info.textContent='Cadastre um filamento no estoque para usar este tipo de orçamento.';return}const ref=data.find(x=>x.type===item.type);const price=ref?ref.kg:0;info.textContent=`Disponível: ${(Math.max(0,item.grams)/1000).toFixed(3)} kg · referência do material: ${br(price)}/kg · cor: ${item.colorName}`}
+function getLastCalculation(){
+  try{
+    const raw=localStorage.getItem('pp_last_calculation');
+    if(raw){
+      const c=JSON.parse(raw);
+      if(c&&Number(c.price)>0)return c;
+    }
+  }catch(e){}
+  try{
+    const price=Number(String(localStorage.getItem('pp_sales')||'').replace(',','.'));
+    const cost=Number(String(localStorage.getItem('pp_costs')||'').replace(',','.'));
+    const profit=Number(String(localStorage.getItem('pp_profit')||'').replace(',','.'));
+    if(price>0){
+      return {
+        price,
+        cost:Number.isFinite(cost)?cost:0,
+        profit:Number.isFinite(profit)?profit:price-(Number.isFinite(cost)?cost:0),
+        grams:Number(document.getElementById('grams')?.value||0),
+        hours:parsePrintHours(document.getElementById('hours')?.value||0),
+        createdAt:Date.now()
+      };
+    }
+  }catch(e){}
+  return null;
+}
+function goToPriceFromQuote(){show('calc');updateCalculatorStock();toast('Calcule o preço e depois volte para Orçamento.')}
+function updateQuotePriceNotice(){
+ const box=document.getElementById('quotePriceNotice');
+ if(!box)return;
+ const c=getLastCalculation();
+ if(c&&Number(c.price)>0){box.style.display='none';return}
+ box.style.display='block';
+}
+function formatQuoteBR(value){
+  const n=Number(value)||0;
+  return n.toLocaleString('pt-BR',{style:'currency',currency:'BRL'});
+}
+function quoteText(value){
+  return String(value==null?'':value).replace(/[&<>'"]/g,function(c){
+    return {'&':'&amp;','<':'&lt;','>':'&gt;',"'":'&#39;','"':'&quot;'}[c];
+  });
+}
+function generateQuoteNow(e){
+  if(e){e.preventDefault();e.stopPropagation();}
+  makeQuoteDireto();
+  return false;
+}
+function makeQuoteDireto(){
+  try{
+    const nameEl=document.getElementById('product');
+    const clientEl=document.getElementById('client');
+    const qtyEl=document.getElementById('qty');
+    const typeEl=document.getElementById('quoteType');
+
+    const name=(nameEl&&nameEl.value?nameEl.value:'').trim();
+    const client=(clientEl&&clientEl.value?clientEl.value:'').trim();
+    const quantity=Math.max(1,parseFloat(qtyEl&&qtyEl.value?qtyEl.value:1)||1);
+    const type=typeEl&&['sliced','parts'].includes(typeEl.value)?typeEl.value:'complete';
+
+    if(!name){
+      toast('Informe o produto ou peça.');
+      if(nameEl)nameEl.focus();
+      return;
+    }
+
+    let unitPrice=0;
+    let unitCost=0;
+    let time=0;
+    let stockId=0;
+    let weight=0;
+    let details='';
+
+    if(type==='parts'){
+      const parts=readSeparateParts();
+      if(!parts.length){toast('Adicione pelo menos uma peça separada.');return;}
+      if(parts.some(p=>!p.name||p.price<=0)){toast('Informe o nome e o preço de venda de cada peça.');return;}
+      const totalParts=parts.reduce((sum,p)=>sum+p.qty*p.price,0);
+      const totalCost=parts.reduce((sum,p)=>sum+p.qty*p.cost,0);
+      unitPrice=totalParts;unitCost=totalCost;time=0;weight=0;stockId=0;
+      details='<p><b>Tipo:</b> Peças separadas</p>'+parts.map(p=>'<div style="display:flex;justify-content:space-between;gap:8px;padding:8px 0;border-bottom:1px solid #1d4157"><span>'+quoteText(p.name)+' × '+p.qty+'<br><small class="muted">Venda/un.: '+formatQuoteBR(p.price)+' · Custo/un.: '+formatQuoteBR(p.cost)+'</small></span><b>'+formatQuoteBR(p.qty*p.price)+'</b></div>').join('')+'<p><b>Total de componentes:</b> '+parts.length+'</p>';
+    }else if(type==='complete'){
+      const priceEl=document.getElementById('unit');
+      const timeEl=document.getElementById('completeQuoteTime');
+      const costEl=document.getElementById('completeQuoteCost');
+
+      unitPrice=Math.max(0,parseFloat(String(priceEl&&priceEl.value||'0').replace(',','.'))||0);
+      time=Math.max(0,parseFloat(String(timeEl&&timeEl.value||'0').replace(',','.'))||0);
+      unitCost=Math.max(0,parseFloat(String(costEl&&costEl.value||'0').replace(',','.'))||0);
+
+      if(unitPrice<=0){
+        toast('Informe o preço da peça.');
+        if(priceEl)priceEl.focus();
+        return;
+      }
+      if(time<=0){
+        toast('Informe o tempo de impressão.');
+        if(timeEl)timeEl.focus();
+        return;
+      }
+
+      details=
+        '<p><b>Tipo:</b> Peça completa</p>'+
+        '<p><b>Preço por unidade:</b> '+formatQuoteBR(unitPrice)+'</p>'+
+        '<p><b>Custo por unidade:</b> '+formatQuoteBR(unitCost)+'</p>'+
+        '<p><b>Tempo:</b> '+time.toFixed(2)+' h</p>';
+
+    }else{
+      const stockEl=document.getElementById('quoteStock');
+      const itemList=JSON.parse(localStorage.getItem('pp_inventory')||'[]');
+      stockId=Number(stockEl&&stockEl.value||0);
+      const item=itemList.find(function(x){return Number(x.id)===stockId;});
+      const weightEl=document.getElementById('quoteWeight');
+      const timeEl=document.getElementById('quoteTime');
+      const energyEl=document.getElementById('quoteEnergy');
+      const machineEl=document.getElementById('quoteMachine');
+      const laborEl=document.getElementById('quoteLabor');
+      const otherEl=document.getElementById('quoteOther');
+      const marginEl=document.getElementById('quoteMargin');
+
+      weight=Math.max(0,parseFloat(String(weightEl&&weightEl.value||'0').replace(',','.'))||0);
+      time=Math.max(0,parseFloat(String(timeEl&&timeEl.value||'0').replace(',','.'))||0);
+      const energy=Math.max(0,parseFloat(String(energyEl&&energyEl.value||'0').replace(',','.'))||0);
+      const machine=Math.max(0,parseFloat(String(machineEl&&machineEl.value||'0').replace(',','.'))||0);
+      const labor=Math.max(0,parseFloat(String(laborEl&&laborEl.value||'0').replace(',','.'))||0);
+      const other=Math.max(0,parseFloat(String(otherEl&&otherEl.value||'0').replace(',','.'))||0);
+      const margin=Math.max(0,parseFloat(String(marginEl&&marginEl.value||'0').replace(',','.'))||0)/100;
+
+      if(!item){
+        toast('Selecione um filamento do estoque.');
+        return;
+      }
+      if(weight<=0){
+        toast('Informe o peso da peça.');
+        if(weightEl)weightEl.focus();
+        return;
+      }
+      if(time<=0){
+        toast('Informe o tempo de impressão.');
+        if(timeEl)timeEl.focus();
+        return;
+      }
+
+      const priceKg=Number(item.pricePerKg)||0;
+      if(priceKg<=0){
+        toast('Cadastre o preço por kg do filamento no estoque.');
+        return;
+      }
+      if(weight*quantity>Number(item.grams||0)){
+        toast('O estoque não possui filamento suficiente.');
+        return;
+      }
+
+      const filamentCost=weight*priceKg/1000;
+      unitCost=filamentCost+(time*energy)+(time*machine)+labor+other;
+      unitPrice=unitCost*(1+margin);
+
+      details=
+        '<p><b>Tipo:</b> Peça fatiada</p>'+
+        '<p><b>Filamento:</b> '+quoteText(item.name||'')+' · '+quoteText(item.type||'')+'</p>'+
+        '<p><b>Consumo:</b> '+(weight*quantity).toFixed(1)+' g</p>'+
+        '<p><b>Custo por unidade:</b> '+formatQuoteBR(unitCost)+'</p>'+
+        '<p><b>Preço por unidade:</b> '+formatQuoteBR(unitPrice)+'</p>'+
+        '<p><b>Tempo:</b> '+time.toFixed(2)+' h</p>';
+    }
+
+    const total=type==='parts'?unitPrice:unitPrice*quantity;
+    const costTotal=type==='parts'?unitCost:unitCost*quantity;
+    const profit=total-costTotal;
+
+    const quote={
+      id:Date.now(),
+      client:client,
+      name:name,
+      quantity:type==='parts'?1:quantity,
+      parts:type==='parts'?readSeparateParts():undefined,
+      stockId:stockId,
+      weight:weight,
+      time:time,
+      total:total,
+      profit:profit,
+      costTotal:costTotal,
+      type:type,
+      createdAt:Date.now()
+    };
+
+    localStorage.setItem('pp_last_quote',JSON.stringify(quote));
+
+    quote.productId=null;
+
+    let quotes=[];
+    try{
+      quotes=JSON.parse(localStorage.getItem('pp_quotes')||'[]');
+      if(!Array.isArray(quotes))quotes=[];
+    }catch(err){quotes=[]}
+
+    quotes.unshift(quote);
+    if(quotes.length>100)quotes=quotes.slice(0,100);
+    localStorage.setItem('pp_quotes',JSON.stringify(quotes));
+    localStorage.setItem('pp_quotes_month',String((Number(localStorage.getItem('pp_quotes_month')||0)+1)));
+
+    const result=document.getElementById('quoteResult');
+    if(!result){
+      toast('Resultado do orçamento não encontrado.');
+      return;
+    }
+
+    result.style.display='block';
+    result.innerHTML=
+      '<h2>Orçamento gerado</h2>'+
+      '<p><b>Cliente:</b> '+quoteText(client||'Não informado')+'</p>'+
+      '<p><b>Peça:</b> '+quoteText(name)+'</p>'+
+      '<p><b>Quantidade:</b> '+quantity+'</p>'+
+      details+
+      '<div style="margin-top:14px"><div class="muted">VALOR TOTAL</div><div class="price">'+formatQuoteBR(total)+'</div></div>'+
+      '<div class="card" style="margin-top:10px">'+
+        '<div class="muted">GANHO ESTIMADO</div>'+
+        '<div class="metric">'+formatQuoteBR(profit)+'</div>'+
+      '</div>'+
+      '<button class="btn" type="button" onclick="addQuoteToProducts('+quote.id+')">Adicionar aos produtos</button>'+
+      '<button class="btn secondary" style="margin-top:8px" type="button" onclick="toast(\'Orçamento mantido salvo sem cadastrar como produto.\')">Manter só no orçamento</button>';
+
+    try{renderQuoteHistory();}catch(err){}
+    try{renderQuotedProductCatalog();}catch(err){}
+    try{result.scrollIntoView({behavior:'smooth',block:'start'});}catch(err){}
+    toast('Orçamento gerado e salvo com sucesso.');
+  }catch(err){
+    console.error('Erro no orçamento:',err);
+    toast('Erro ao gerar orçamento. Tente novamente.');
+  }
+}
+function normalizeProductIds(){
+ let products=[];try{products=JSON.parse(localStorage.getItem('pp_product_catalog')||'[]');if(!Array.isArray(products))products=[]}catch(e){products=[]}
+ let next=1;
+ products.forEach(p=>{const m=String(p.id||'').match(/^P(\d+)$/);if(m)next=Math.max(next,Number(m[1])+1)});
+ let changed=false;
+ products.forEach(p=>{
+   if(!/^P\d+$/.test(String(p.id||''))){
+     const old=String(p.id||'');
+     p.id='P'+String(next++).padStart(3,'0');changed=true;
+     let quotes=[];try{quotes=JSON.parse(localStorage.getItem('pp_quotes')||'[]');if(!Array.isArray(quotes))quotes=[]}catch(e){quotes=[]}
+     quotes.forEach(q=>{if(String(q.productId||'')===old)q.productId=p.id});
+     localStorage.setItem('pp_quotes',JSON.stringify(quotes));
+   }
+ });
+ if(changed)localStorage.setItem('pp_product_catalog',JSON.stringify(products));
+}
+function renderQuotedProductCatalog(){
+  const box=document.getElementById('quotedProductCatalog');
+  if(!box)return;
+  normalizeProductIds();
+  let items=[];
+  try{items=JSON.parse(localStorage.getItem('pp_product_catalog')||'[]');if(!Array.isArray(items))items=[]}catch(e){items=[]}
+  const search=(document.getElementById('productCatalogSearch')?.value||'').trim().toLowerCase();
+  const filtered=items.filter(p=>String(p.id||'').toLowerCase().includes(search)||String(p.name||'').toLowerCase().includes(search));
+  if(!filtered.length){box.innerHTML=items.length?'<div class="muted">Nenhum produto encontrado para essa busca.</div>':'<div class="muted">Nenhum produto cadastrado ainda.</div>';return}
+  box.innerHTML=filtered.map(p=>{
+    const i=items.findIndex(x=>String(x.id)===String(p.id));
+    return `<div class="card" style="margin-top:10px">
+      <h3>${quoteText(p.name||'Produto')}</h3>
+      <div class="muted">ID: <b>${quoteText(p.id||'')}</b></div>
+      <div class="metric" style="margin:8px 0">${formatQuoteBR(p.price)}</div>
+      <div class="label">Quantidade</div>
+      <div style="display:flex;gap:8px;align-items:center">
+        <input id="productCatalogQty_${i}" type="number" min="1" step="1" value="${Math.max(1,Number(p.quantity)||1)}" style="flex:1;min-width:0"/>
+        <button class="btn small" type="button" onclick="saveQuotedProductQuantity('${quoteText(p.id)}','productCatalogQty_${i}')">Salvar</button>
+      </div>
+      <button class="btn" style="margin-top:8px" type="button" onclick="editQuotedProduct('${quoteText(p.id)}')">Editar produto</button>
+      <button class="btn secondary" style="margin-top:8px" type="button" onclick="removeQuotedProduct('${quoteText(p.id)}')">Remover dos produtos</button>
+    </div>`;
+  }).join('');
+}
+function editQuotedProduct(id){
+ let items=[];try{items=JSON.parse(localStorage.getItem('pp_product_catalog')||'[]');if(!Array.isArray(items))items=[]}catch(e){items=[]}
+ const item=items.find(p=>String(p.id)===String(id));if(!item){toast('Produto não encontrado.');return}
+ document.getElementById('editQuotedProductModal')?.remove();
+ const modal=document.createElement('div');modal.id='editQuotedProductModal';modal.style.cssText='position:fixed;inset:0;background:rgba(0,0,0,.72);display:flex;align-items:center;justify-content:center;z-index:10000;padding:18px;box-sizing:border-box';
+ modal.innerHTML=`<form id="editQuotedProductForm" class="card" style="width:min(460px,100%);max-height:90%;overflow:auto;margin:0;box-sizing:border-box"><h2 style="margin-top:0">Editar produto</h2><label class="label" for="editProductName">Nome do produto</label><input id="editProductName" type="text" maxlength="100" required value="${quoteText(item.name||'')}" style="width:100%;box-sizing:border-box;margin-bottom:12px"><label class="label" for="editProductPrice">Preço de venda por unidade (R$)</label><input id="editProductPrice" type="number" min="0" step="0.01" required value="${Number(item.price||0)}" style="width:100%;box-sizing:border-box;margin-bottom:12px"><label class="label" for="editProductQuantity">Quantidade disponível</label><input id="editProductQuantity" type="number" min="1" step="1" required value="${Math.max(1,Number(item.quantity)||1)}" style="width:100%;box-sizing:border-box;margin-bottom:16px"><div style="display:flex;gap:8px;flex-wrap:wrap"><button class="btn" type="submit" style="flex:1">Salvar alterações</button><button class="btn secondary" id="cancelEditQuotedProduct" type="button" style="flex:1">Cancelar</button></div></form>`;
+ document.body.appendChild(modal);
+ document.getElementById('cancelEditQuotedProduct').onclick=()=>modal.remove();
+ modal.addEventListener('click',e=>{if(e.target===modal)modal.remove()});
+ document.getElementById('editQuotedProductForm').onsubmit=e=>{
+  e.preventDefault();const name=document.getElementById('editProductName').value.trim();const price=Number(document.getElementById('editProductPrice').value);const quantity=Number(document.getElementById('editProductQuantity').value);
+  if(!name){toast('O nome do produto não pode ficar vazio.');return}
+  const normalized=normalizeProductName(name);if(items.some(p=>String(p.id)!==String(id)&&normalizeProductName(p.name)===normalized)){toast('Já existe um produto com esse nome. Escolha outro nome.');return}
+  if(!Number.isFinite(price)||price<0){toast('Informe um preço válido.');return}if(!Number.isInteger(quantity)||quantity<1){toast('Informe uma quantidade válida.');return}
+  item.name=name;item.price=price;item.quantity=quantity;item.updatedAt=Date.now();localStorage.setItem('pp_product_catalog',JSON.stringify(items));
+  let quotes=[];try{quotes=JSON.parse(localStorage.getItem('pp_quotes')||'[]');if(!Array.isArray(quotes))quotes=[]}catch(e){quotes=[]}
+  const quote=quotes.find(q=>String(q.id)===String(item.quoteId));if(quote){const oldQty=Math.max(1,Number(quote.quantity)||1);const costPerUnit=Number(quote.costTotal||0)/oldQty;quote.name=name;quote.quantity=quantity;quote.total=price*quantity;quote.costTotal=costPerUnit*quantity;quote.profit=quote.total-quote.costTotal;quote.updatedAt=Date.now();quote.productId=item.id;localStorage.setItem('pp_quotes',JSON.stringify(quotes))}
+  modal.remove();renderQuotedProductCatalog();renderQuoteHistory();toast('Produto atualizado.');
+ };
+}
+
+function saveQuotedProductQuantity(id,inputId){
+  const input=document.getElementById(inputId);
+  const quantity=Math.max(1,Math.floor(Number(input&&input.value)||1));
+  let items=[];
+  try{items=JSON.parse(localStorage.getItem('pp_product_catalog')||'[]');if(!Array.isArray(items))items=[]}catch(e){items=[]}
+  const item=items.find(p=>String(p.id)===String(id));
+  if(!item){toast('Produto não encontrado.');return}
+  item.quantity=quantity;
+  item.updatedAt=Date.now();
+  localStorage.setItem('pp_product_catalog',JSON.stringify(items));
+  renderQuotedProductCatalog();
+  toast('Quantidade atualizada.');
+}
+function renderQuoteHistory(){
+ const box=document.getElementById('quoteHistory');if(!box)return;
+ let q=[];try{q=JSON.parse(localStorage.getItem('pp_quotes')||'[]');if(!Array.isArray(q))q=[]}catch(e){q=[]}
+ box.innerHTML=q.length?'<h3>Orçamentos salvos</h3>'+q.slice(0,100).map(x=>{
+   let inProducts=false;try{inProducts=JSON.parse(localStorage.getItem('pp_product_catalog')||'[]').some(p=>String(p.quoteId)===String(x.id))}catch(e){}
+   return `<div class="card" style="margin-top:8px"><b>${escapeHtml(x.name||'Peça')}</b><div class="muted">${escapeHtml(x.client||'Sem cliente')} · ${x.quantity} un. · ${br(x.total)}</div><div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:8px">${inProducts?'<span class="muted">Já está em Produtos</span>':`<button class="btn small" type="button" onclick="addQuoteToProducts(${Number(x.id)})">Colocar em produtos</button>`}<button class="btn small" type="button" onclick="editSavedQuote(${Number(x.id)})">Editar orçamento</button><button class="btn small secondary" type="button" onclick="removeSavedQuote(${Number(x.id)})">Remover orçamento</button></div></div>`;
+ }).join(''):'<div class="muted">Nenhum orçamento salvo ainda.</div>';
+}
+function editSavedQuote(id){
+ let quotes=[];try{quotes=JSON.parse(localStorage.getItem('pp_quotes')||'[]');if(!Array.isArray(quotes))quotes=[]}catch(e){quotes=[]}
+ const q=quotes.find(x=>String(x.id)===String(id));if(!q){toast('Orçamento não encontrado.');return}
+ const name=prompt('Nome da peça:',q.name||'');if(name===null)return;if(!name.trim()){toast('O nome da peça não pode ficar vazio.');return}
+ const client=prompt('Nome do cliente:',q.client||'');if(client===null)return;
+ const quantityRaw=prompt('Quantidade:',String(q.quantity||1));if(quantityRaw===null)return;const quantity=Math.floor(Number(quantityRaw));if(!Number.isFinite(quantity)||quantity<1){toast('Informe uma quantidade válida.');return}
+ const unitOld=Number(q.total||0)/Math.max(1,Number(q.quantity)||1);
+ const unitRaw=prompt('Preço de venda por unidade (R$):',unitOld.toFixed(2).replace('.',','));if(unitRaw===null)return;const unit=Number(String(unitRaw).replace(',','.'));if(!Number.isFinite(unit)||unit<0){toast('Informe um preço válido.');return}
+ const oldQty=Math.max(1,Number(q.quantity)||1),oldCostPerUnit=Number(q.costTotal||0)/oldQty;
+ q.name=name.trim();q.client=client.trim();q.quantity=quantity;q.total=unit*quantity;q.costTotal=oldCostPerUnit*quantity;q.profit=q.total-q.costTotal;q.updatedAt=Date.now();
+ localStorage.setItem('pp_quotes',JSON.stringify(quotes));
+ let products=[];try{products=JSON.parse(localStorage.getItem('pp_product_catalog')||'[]');if(!Array.isArray(products))products=[]}catch(e){products=[]}
+ products.forEach(p=>{if(String(p.quoteId)===String(q.id)){p.name=q.name;p.price=unit;p.quantity=quantity;p.updatedAt=Date.now()}});
+ localStorage.setItem('pp_product_catalog',JSON.stringify(products));renderQuoteHistory();renderQuotedProductCatalog();toast('Orçamento atualizado.');
+}
+
+function normalizeProductName(name){return String(name||'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').trim().replace(/\s+/g,' ').toLocaleLowerCase('pt-BR')}
+function addQuoteToProducts(quoteId){
+ let quotes=[],products=[];
+ try{quotes=JSON.parse(localStorage.getItem('pp_quotes')||'[]');if(!Array.isArray(quotes))quotes=[]}catch(e){quotes=[]}
+ try{products=JSON.parse(localStorage.getItem('pp_product_catalog')||'[]');if(!Array.isArray(products))products=[]}catch(e){products=[]}
+ const q=quotes.find(x=>String(x.id)===String(quoteId));
+ if(!q){toast('Orçamento não encontrado.');return}
+ if(products.some(p=>String(p.quoteId)===String(q.id))){toast('Esse orçamento já está em Produtos.');return}
+ if(products.some(p=>normalizeProductName(p.name)===normalizeProductName(q.name))){toast('Já existe um produto com esse nome. Use um nome diferente.');return}
+ let nextId=1;
+products.forEach(p=>{const m=String(p.id||'').match(/^P(\d+)$/);if(m)nextId=Math.max(nextId,Number(m[1])+1)});
+const id='P'+String(nextId).padStart(3,'0');
+ products.unshift({id,name:q.name||'Produto',price:Number(q.total)/(Math.max(1,Number(q.quantity)||1)),quantity:Math.max(1,Number(q.quantity)||1),quoteId:q.id,updatedAt:Date.now()});
+ q.productId=id;
+ localStorage.setItem('pp_product_catalog',JSON.stringify(products));localStorage.setItem('pp_quotes',JSON.stringify(quotes));
+ renderQuotedProductCatalog();renderQuoteHistory();toast('Produto adicionado ao catálogo.');
+}
+function removeQuotedProduct(id){
+ let products=[];try{products=JSON.parse(localStorage.getItem('pp_product_catalog')||'[]');if(!Array.isArray(products))products=[]}catch(e){products=[]}
+ const removed=products.find(p=>String(p.id)===String(id));
+ products=products.filter(p=>String(p.id)!==String(id));localStorage.setItem('pp_product_catalog',JSON.stringify(products));
+ if(removed){let quotes=[];try{quotes=JSON.parse(localStorage.getItem('pp_quotes')||'[]');if(!Array.isArray(quotes))quotes=[]}catch(e){quotes=[]}quotes.forEach(q=>{if(String(q.id)===String(removed.quoteId))q.productId=null});localStorage.setItem('pp_quotes',JSON.stringify(quotes))}
+ renderQuotedProductCatalog();renderQuoteHistory();toast('Produto removido. O orçamento continua salvo.');
+}
+function removeSavedQuote(id){
+ let quotes=[];try{quotes=JSON.parse(localStorage.getItem('pp_quotes')||'[]');if(!Array.isArray(quotes))quotes=[]}catch(e){quotes=[]}
+ quotes=quotes.filter(x=>String(x.id)!==String(id));localStorage.setItem('pp_quotes',JSON.stringify(quotes));
+ let products=[];try{products=JSON.parse(localStorage.getItem('pp_product_catalog')||'[]');if(!Array.isArray(products))products=[]}catch(e){products=[]}
+ products=products.filter(p=>String(p.quoteId)!==String(id));localStorage.setItem('pp_product_catalog',JSON.stringify(products));
+ renderQuoteHistory();renderQuotedProductCatalog();toast('Orçamento removido.');
+}
+
+function getStock(){try{return JSON.parse(localStorage.getItem('pp_inventory')||'[]')}catch(e){return []}}
+function addStockRow(values={}){const tbody=document.getElementById('stockRows');if(!tbody)return;const tr=document.createElement('tr');tr.style.setProperty('--row-color',values.color||'#21d4d0');tr.innerHTML=`<td><input class="stock-color" type="color" value="${values.color||'#21d4d0'}" oninput="this.closest('tr').style.setProperty('--row-color',this.value)"></td><td><input class="row-name" placeholder="Ex.: 3D Fila PLA" value="${values.name||''}"></td><td><select class="row-type"><option ${values.type==='PLA'||!values.type?'selected':''}>PLA</option><option ${values.type==='PETG'?'selected':''}>PETG</option><option ${values.type==='TPU'?'selected':''}>TPU</option><option ${values.type==='ABS'?'selected':''}>ABS</option><option ${values.type==='ASA'?'selected':''}>ASA</option><option ${values.type==='Outro'?'selected':''}>Outro</option></select></td><td><input class="row-grams" type="number" min="1" value="${values.grams||1000}"></td><td><input class="row-price" type="number" min="0" step="0.01" value="${values.pricePerKg||0}"></td><td><input class="row-low" type="number" min="0" value="${values.low||150}"></td><td><button class="row-remove" onclick="this.closest('tr').remove()">Remover</button></td>`;tbody.appendChild(tr)}
+function saveStockTable(){const rows=[...document.querySelectorAll('#stockRows tr')];if(!rows.length){toast('Adicione pelo menos uma linha');return}const list=getStock();let added=0;for(const row of rows){const name=row.querySelector('.row-name').value.trim();const type=row.querySelector('.row-type').value;const color=row.querySelector('.stock-color').value;const grams=Number(row.querySelector('.row-grams').value||0);const pricePerKg=Number(row.querySelector('.row-price').value||0);const low=Number(row.querySelector('.row-low').value||150);if(!name||grams<=0||pricePerKg<0){toast('Preencha nome e quantidade em todas as linhas');return}list.push({id:Date.now()+added,name,type,color,colorName:'Cor personalizada',grams,initialGrams:grams,low,waste:0,pricePerKg});added++}localStorage.setItem('pp_inventory',JSON.stringify(list));document.getElementById('stockRows').innerHTML='';toggleStockForm();renderStock();updateOrderStock();updateQuoteStock();updateCalculatorStock();toast(`${added} filamento(s) adicionado(s)`) }
+function toggleStockForm(){
+  const x=document.getElementById('stockForm');
+  const open=x.style.display==='none';
+  x.style.display=open?'block':'none';
+  document.body.classList.toggle('stock-form-locked',open);
+  if(open&&!document.querySelector('#stockRows tr')){addStockRow()}
+}
+function cancelStockForm(){
+  const x=document.getElementById('stockForm');
+  const rows=document.getElementById('stockRows');
+  if(rows)rows.innerHTML='';
+  if(x)x.style.display='none';
+  document.body.classList.remove('stock-form-locked');
+  toast('Cadastro de filamento cancelado');
+}
+function stockStatus(x){if(x.grams<=0)return 'empty';if(x.grams<=x.low)return 'low';return 'ok'}
+function filterStock(type){renderStock(type)}
+function renderStock(type='Todos'){const list=getStock(),box=document.getElementById('stockList');if(!box)return;const total=list.reduce((a,x)=>a+Math.max(0,x.grams),0);document.getElementById('stockTotalKg').textContent=(total/1000).toLocaleString('pt-BR',{maximumFractionDigits:2})+' kg';document.getElementById('stockSpools').textContent=list.length;const materials=['PLA','PETG','TPU','ABS','ASA'];document.getElementById('materialSummary').innerHTML=materials.map(m=>{const items=list.filter(x=>x.type===m);const grams=items.reduce((a,x)=>a+Math.max(0,x.grams),0);const waste=items.reduce((a,x)=>a+(x.waste||0),0);return `<div class="card" style="margin:0;padding:12px"><div class="muted">${m}</div><b>${(grams/1000).toFixed(3)} kg</b><div class="muted">${items.length} rolo(s) · ${waste.toFixed(0)} g desperdício</div></div>`}).join('');if(!list.length){box.innerHTML='<div class="card"><div class="muted">Nenhum filamento no estoque. Adicione seus rolos para acompanhar consumo e desperdício.</div></div>';return}const visible=type==='Todos'?list:list.filter(x=>x.type===type);if(!visible.length){box.innerHTML=`<div class="card"><div class="muted">Nenhum filamento ${type} cadastrado.</div></div>`;return}box.innerHTML=visible.map(x=>{const st=stockStatus(x),pct=Math.max(0,Math.min(100,(x.grams/x.initialGrams)*100));const waste=x.waste||0;const title=st==='empty'?'FILAMENTO ESGOTADO':st==='low'?'FILAMENTO ACABANDO':'ESTOQUE NORMAL';return `<div class="card ${st==='empty'?'danger':st==='low'?'warning':''}"><div style="display:flex;justify-content:space-between;gap:10px"><div><h2 style="margin-bottom:6px"><span class="stock-dot" style="background:${x.color}"></span>${x.name}</h2><div class="muted">${x.type} · ${x.colorName}</div></div><span class="tag">${title}</span></div><div style="margin-top:14px;display:flex;justify-content:space-between"><span><b>${(Math.max(0,x.grams)/1000).toFixed(3)} kg</b> disponível</span><span class="muted">${Math.max(0,x.grams).toFixed(0)} g</span></div><div class="stockbar ${st}"><span style="width:${pct}%"></span></div><div class="grid" style="margin-top:12px"><div><div class="muted">Desperdício acumulado</div><b>${waste.toFixed(0)} g</b></div><div><div class="muted">Aviso em</div><b>${x.low} g</b></div></div><button class="btn" onclick="consumeStock('${x.id}')">Registrar retirada</button><button class="btn secondary" onclick="editStock('${x.id}')">Editar filamento</button><button class="btn secondary" onclick="deleteStock('${x.id}')">Excluir rolo</button></div>`}).join('')}
+function updateOrderStock(){const s=document.getElementById('orderStock');if(!s)return;const list=getStock();s.innerHTML=list.length?list.map(x=>`<option value="${x.id}">${x.type} · ${x.name} · ${x.colorName} · ${(Math.max(0,x.grams)/1000).toFixed(3)} kg</option>`).join(''):'<option value="">Nenhum rolo cadastrado</option>'}
+function consumeStock(id){
+ const x=getStock().find(a=>String(a.id)===String(id));
+ if(!x){toast('Filamento não encontrado');return}
+ const old=document.getElementById('withdrawModal');
+ if(old)old.remove();
+ const modal=document.createElement('div');
+ modal.id='withdrawModal';
+ modal.style.cssText='position:fixed;inset:0;background:rgba(0,0,0,.72);display:flex;align-items:center;justify-content:center;z-index:9999;padding:20px';
+ modal.innerHTML=`<div class="card" style="width:min(420px,100%);margin:0"><h2>Registrar retirada</h2><p class="muted">${x.name} · ${x.type} · ${(Math.max(0,x.grams)/1000).toFixed(3)} kg disponíveis</p><div class="label">Quantidade a retirar (g)</div><input id="withdrawAmount" type="number" min="1" max="${Math.max(0,x.grams)}" value="100"><div style="display:flex;gap:8px;margin-top:12px"><button class="btn secondary" type="button" onclick="closeWithdrawModal()">Cancelar</button><button class="btn" type="button" onclick="confirmWithdraw('${x.id}')">Retirar</button></div></div>`;
+ document.body.appendChild(modal);
+ setTimeout(()=>document.getElementById('withdrawAmount')?.focus(),50);
+}
+function closeWithdrawModal(){document.getElementById('withdrawModal')?.remove()}
+function confirmWithdraw(id){
+ const amount=Number(document.getElementById('withdrawAmount')?.value||0);
+ const list=getStock();
+ const item=list.find(a=>String(a.id)===String(id));
+ if(!item){closeWithdrawModal();toast('Filamento não encontrado');return}
+ if(amount<=0){toast('Informe uma quantidade válida');return}
+ if(amount>item.grams){toast('Quantidade maior que o estoque disponível');return}
+ item.grams=Math.max(0,item.grams-amount);
+ localStorage.setItem('pp_inventory',JSON.stringify(list));
+ closeWithdrawModal();
+ renderStock();
+ updateOrderStock();
+ updateQuoteStock();
+ updateCalculatorStock();
+ if(item.grams<=item.low&&item.grams>0)toast('Atenção: este filamento está acabando');
+ else if(item.grams<=0)toast('Filamento esgotado');
+ else toast(`${amount} g retirados do estoque`);
+}
+
+function editStock(id){
+ const item=getStock().find(x=>String(x.id)===String(id));
+ if(!item){toast('Filamento não encontrado');return}
+ const old=document.getElementById('editStockModal');if(old)old.remove();
+ const modal=document.createElement('div');modal.id='editStockModal';modal.style.cssText='position:fixed;inset:0;background:rgba(0,0,0,.72);display:flex;align-items:center;justify-content:center;z-index:9999;padding:20px;overflow:auto';
+ modal.innerHTML=`<div class="card" style="width:min(480px,100%);margin:0"><h2>Editar filamento</h2><div class="label">Nome / marca</div><input id="editName" value="${String(item.name||'').replace(/\"/g,'&quot;')}"><div class="label">Material</div><select id="editType"><option>PLA</option><option>PETG</option><option>TPU</option><option>ABS</option><option>ASA</option><option>Outro</option></select><div class="label">Cor</div><input id="editColor" type="color" value="${item.color||'#21d4d0'}"><div class="label">Quantidade disponível (g)</div><input id="editGrams" type="number" min="0" value="${Math.max(0,item.grams)}"><div class="label">Preço (R$/kg)</div><input id="editPrice" type="number" min="0" step="0.01" value="${Number(item.pricePerKg||0)}"><div class="label">Aviso de estoque (g)</div><input id="editLow" type="number" min="0" value="${Number(item.low||150)}"><div style="display:flex;gap:8px;margin-top:14px"><button class="btn secondary" type="button" onclick="closeEditStock()">Cancelar</button><button class="btn" type="button" onclick="saveEditStock('${item.id}')">Salvar alterações</button></div></div>`;document.body.appendChild(modal);document.getElementById('editType').value=item.type||'PLA';}
+function closeEditStock(){document.getElementById('editStockModal')?.remove()}
+function saveEditStock(id){
+ const list=getStock();const item=list.find(x=>String(x.id)===String(id));if(!item){closeEditStock();toast('Filamento não encontrado');return}
+ const name=document.getElementById('editName')?.value.trim();const grams=Number(document.getElementById('editGrams')?.value||0);const price=Number(document.getElementById('editPrice')?.value||0);const low=Number(document.getElementById('editLow')?.value||0);
+ if(!name||grams<0||price<0||low<0){toast('Preencha os dados corretamente');return}
+ item.name=name;item.type=document.getElementById('editType')?.value||item.type;item.color=document.getElementById('editColor')?.value||item.color;item.colorName='Cor personalizada';item.grams=grams;item.pricePerKg=price;item.low=low;
+ if(!item.initialGrams||grams>item.initialGrams)item.initialGrams=grams;
+ localStorage.setItem('pp_inventory',JSON.stringify(list));closeEditStock();renderStock();updateOrderStock();updateQuoteStock();updateCalculatorStock();toast('Filamento atualizado');
+}
+function deleteStock(id){const sid=String(id);const list=getStock();const item=list.find(x=>String(x.id)===sid);if(!item){toast('Filamento não encontrado');return}const next=list.filter(x=>String(x.id)!==sid);localStorage.setItem('pp_inventory',JSON.stringify(next));const pending=localStorage.getItem('pp_pending_print');if(pending){try{const p=JSON.parse(pending);if(String(p.stockId)===sid)localStorage.removeItem('pp_pending_print')}catch(e){}}renderStock();updateOrderStock();updateCalculatorStock();toast('Filamento excluído do estoque')}
+function makeOrder(){let q=+oqty.value||0,w=+oweight.value||0,t=+otime.value||0;let total=w*q;const stockId=Number(document.getElementById('orderStock').value||0);const list=getStock();const item=list.find(x=>x.id===stockId);if(q<=0||w<=0){toast('Informe a quantidade e o peso da peça');return}if(!item){toast('Selecione um rolo do estoque');return}if(total>item.grams){toast('Estoque insuficiente para essa impressão');return}const pending={id:Date.now(),stockId,total,time:t*q,qty:q,weight:w,createdAt:new Date().toISOString()};localStorage.setItem('pp_pending_print',JSON.stringify(pending));orderResult.style.display='block';orderResult.innerHTML=`<h2>Impressão registrada</h2><div class="grid"><div><div class="muted">Filamento previsto</div><div class="metric">${total} g</div></div><div><div class="muted">Tempo</div><div class="metric">${(t*q).toFixed(1)} h</div></div></div><p><b>${item.name}</b> · ${item.type} · ${item.colorName}</p><div class="card" style="margin:12px 0 0;background:#0b2233"><h2 style="font-size:17px">A impressão terminou?</h2><div class="muted">Escolha o resultado. O estoque só será descontado agora.</div><button class="btn" onclick="finishPrint('success')">Deu certo</button><button class="btn secondary" onclick="finishPrint('error')">Deu erro — registrar desperdício</button></div>`;toast('Impressão aguardando resultado')}
+function finishPrint(result){const raw=localStorage.getItem('pp_pending_print');if(!raw){toast('Nenhuma impressão pendente');return}const pending=JSON.parse(raw);const list=getStock();const item=list.find(x=>String(x.id)===String(pending.stockId));if(!item){toast('O rolo desta impressão não existe mais');return}if(pending.total>item.grams){toast('Estoque insuficiente para finalizar esta impressão');return}item.grams=Math.max(0,item.grams-pending.total);if(result==='error'){item.waste=(item.waste||0)+pending.total}localStorage.removeItem('pp_pending_print');localStorage.setItem('pp_orders',String((Number(localStorage.getItem('pp_orders')||0)+1)));renderStock();updateOrderStock();updateDashboard();orderResult.style.display='block';orderResult.innerHTML=result==='error'?`<h2>Impressão finalizada com erro</h2><p><b>${pending.total} g</b> foram retirados do estoque e registrados como <b>desperdício</b>.</p><p class="muted">${item.name} agora tem ${Math.max(0,item.grams).toFixed(0)} g restantes.</p>`:`<h2>Impressão finalizada com sucesso</h2><p><b>${pending.total} g</b> foram consumidos normalmente. Nenhum desperdício foi registrado.</p><p class="muted">${item.name} agora tem ${Math.max(0,item.grams).toFixed(0)} g restantes.</p>`;if(item.grams<=item.low&&item.grams>0)toast('Atenção: filamento está acabando');else if(item.grams<=0)toast('Filamento esgotado');else toast(result==='error'?'Desperdício registrado':'Impressão concluída')}
+
+function openCalcFromQuick(){
+  if(getStock().length===0){
+    toast('Você precisa cadastrar pelo menos 1 filamento antes de calcular o preço.');
+    show('inventory');
+    setTimeout(()=>{
+      const form=document.getElementById('stockForm');
+      if(form && form.style.display==='none') toggleStockForm();
+    },100);
+    return;
+  }
+  show('calc');
+  updateCalculatorStock();
+}
+
+function toast(t){const x=document.getElementById('toast');x.textContent=t;x.style.display='block';setTimeout(()=>x.style.display='none',1800)}
+
+
+
+const swipePages=['home','calc','inventory','filaments','quote','products','printers','plans'];
+let swipeStartX=0,swipeStartY=0,swipeActive=false;
+function currentSwipePage(){
+  const active=document.querySelector('.screen.active');
+  return active?active.id:'home';
+}
+function stockFormOpen(){
+  const form=document.getElementById('stockForm');
+  return !!form && form.style.display!=='none';
+}
+function navigateSwipe(direction){
+  if(stockFormOpen()) return;
+  const current=currentSwipePage();
+  let i=swipePages.indexOf(current);
+  if(i<0)i=0;
+  const next=i+direction;
+  if(next<0||next>=swipePages.length){return}
+  show(swipePages[next]);
+  document.querySelectorAll('nav button').forEach(x=>x.classList.remove('active'));
+  const navMap={home:0,calc:1,inventory:2,filaments:3,quote:4,products:5,printers:6,plans:7};
+  if(navMap[swipePages[next]]!==undefined){
+    const buttons=document.querySelectorAll('nav button');
+    if(buttons[navMap[swipePages[next]]])buttons[navMap[swipePages[next]]].classList.add('active');
+  }
+}
+document.addEventListener('touchstart',function(e){
+  if(e.touches.length!==1)return;
+  swipeStartX=e.touches[0].clientX;
+  swipeStartY=e.touches[0].clientY;
+  swipeActive=true;
+},{passive:true});
+document.addEventListener('touchend',function(e){
+  if(stockFormOpen()) { swipeActive=false; return; }
+  if(!swipeActive||e.changedTouches.length!==1)return;
+  swipeActive=false;
+  const x=e.changedTouches[0].clientX,y=e.changedTouches[0].clientY;
+  const dx=x-swipeStartX,dy=y-swipeStartY;
+  if(Math.abs(dx)<70||Math.abs(dx)<Math.abs(dy)*1.25)return;
+  const tag=(e.target.tagName||'').toLowerCase();
+  if(['input','textarea','select','button'].includes(tag))return;
+  navigateSwipe(dx<0?1:-1);
+},{passive:true});
+function getProducts(){
+  try{return JSON.parse(localStorage.getItem('pp_products')||'[]')}catch(e){return []}
+}
+function updateProductStockOptions(selectedId){
+ const s=document.getElementById('pstock');if(!s)return;
+ const list=getStock();
+ s.innerHTML='<option value="">Sem filamento definido</option>'+
+   (list.length?list.map(x=>`<option value="${x.id}">${x.type} · ${x.name} · ${x.colorName} · ${(Math.max(0,x.grams)/1000).toFixed(3)} kg</option>`).join(''):'');
+ if(selectedId!=null&&selectedId!==0&&list.some(x=>String(x.id)===String(selectedId)))s.value=String(selectedId);
+ else s.value='';
+ syncProductStock();
+}
+function syncProductStock(){const id=Number(document.getElementById('pstock')?.value||0);const item=getStock().find(x=>x.id===id);const w=document.getElementById('pweight');if(item&&w&&!w.dataset.manual){w.value=w.value||100}}
+function registerQuotedProduct(){toast('A aba Produtos foi removida do aplicativo.');}
+function notificationSupported(){return typeof Notification!=='undefined'}
+async function requestNotificationPermission(){
+  if(!notificationSupported()){toast('Este dispositivo/conversor não disponibiliza notificações do navegador.');return 'unsupported'}
+  if(Notification.permission==='granted')return 'granted'
+  if(Notification.permission==='denied'){toast('As notificações estão bloqueadas. Ative-as nas configurações do aplicativo.');return 'denied'}
+  try{const permission=await Notification.requestPermission();if(permission==='granted')toast('Notificações ativadas. Você será avisado quando a impressão terminar.');else toast('Permissão de notificações não concedida.');return permission}catch(e){toast('Não foi possível solicitar as notificações.');return 'error'}
+}
+function sendProductionNotification(product){
+  if(!notificationSupported()||Notification.permission!=='granted')return false
+  try{new Notification('PrintProfit — Impressão concluída',{body:`O tempo de impressão de ${product.name} terminou. Informe se o produto foi concluído.`,tag:'printprofit-'+product.id});return true}catch(e){return false}
+}
+function scheduleProductionNotification(product){
+  const totalHours=Math.max(0,Number(product.time||0))*Math.max(1,Number(product.qty||1));
+  if(totalHours<=0)return
+  const endAt=Number(product.productionEndAt||0)|| (Date.now()+totalHours*3600000);
+  product.productionEndAt=endAt;
+  product.notificationSent=false;
+  const products=getProducts();
+  const idx=products.findIndex(x=>String(x.id)===String(product.id));
+  if(idx>=0){products[idx]=product;localStorage.setItem('pp_products',JSON.stringify(products))}
+  armProductionTimer(product);
+}
+function armProductionTimer(product){
+  if(!product||product.productionStatus!=='pendente'||product.notificationSent)return
+  const remaining=Number(product.productionEndAt||0)-Date.now();
+  if(remaining<=0){
+    product.notificationSent=true;
+    const products=getProducts(),idx=products.findIndex(x=>String(x.id)===String(product.id));
+    if(idx>=0){products[idx]=product;localStorage.setItem('pp_products',JSON.stringify(products))}
+    sendProductionNotification(product);
+    renderProducts();
+    toast(`O tempo de impressão de ${product.name} terminou.`);
+    return
+  }
+  setTimeout(()=>armProductionTimer(product),Math.min(remaining,2147483647));
+}
+function checkProductionTimers(){
+  getProducts().filter(x=>x.productionStatus==='pendente'&&Number(x.productionEndAt||0)>0).forEach(armProductionTimer);
+}
+
+function saveProduct(){
+ try{
+  if(!trialActive() && getPlan()!=='pro' && getProducts().length>=3){
+   show('plans');toast('O plano grátis permite até 3 produtos.');return;
+  }
+  const name=(document.getElementById('pname').value||'').trim();
+  if(!name){toast('Informe o nome do produto');return}
+  if(getProducts().some(p=>normalizeProductName(p.name)===normalizeProductName(name))){toast('Já existe um produto com esse nome. Use um nome diferente.');return}
+  const stockValue=document.getElementById('pstock').value||'';
+  const product={
+   id:Date.now(),
+   name,
+   category:(document.getElementById('pcategory').value||'').trim()||'Sem categoria',
+   material:document.getElementById('pmaterial').value,
+   stockId:stockValue?Number(stockValue):0,
+   weight:Math.max(0,Number(document.getElementById('pweight').value)||0),
+   qty:Math.max(1,Number(document.getElementById('pqty').value)||1),
+   time:Math.max(0,Number(document.getElementById('ptime').value)||0),
+   cost:Math.max(0,Number(document.getElementById('pcost').value)||0),
+   price:Math.max(0,Number(document.getElementById('pprice').value)||0),
+   productionStatus:'pendente',
+   stockConsumed:0,
+   waste:0
+  };
+  if(product.weight<=0){toast('Informe o peso da peça');return}
+  const list=getProducts();
+  list.push(product);
+  localStorage.setItem('pp_products',JSON.stringify(list));
+  document.getElementById('pname').value='';
+  document.getElementById('pcategory').value='';
+  document.getElementById('pweight').value='100';
+  document.getElementById('pqty').value='1';
+  document.getElementById('ptime').value='3';
+  document.getElementById('pcost').value='0';
+  document.getElementById('pprice').value='0';
+  hideProductForm();
+  renderProducts();
+  try{
+   const n=requestNotificationPermission();
+   if(n&&typeof n.then==='function')n.then(()=>{try{scheduleProductionNotification(product)}catch(e){}}).catch(()=>{});
+  }catch(e){}
+  toast('Produto salvo com sucesso. Agora informe quando a produção terminar.');
+ }catch(e){
+  console.error('saveProduct',e);
+  toast('Não foi possível salvar o produto. Confira os dados.');
+ }
+}
+function deleteProduct(id){localStorage.setItem('pp_products',JSON.stringify(getProducts().filter(x=>x.id!==id)));renderProducts();toast('Produto removido')}
+function useProduct(id){const x=getProducts().find(p=>p.id===id);if(!x)return;document.getElementById('product').value=x.name;document.getElementById('unit').value=x.price;show('quote');toast('Produto carregado no orçamento')}
+function renderProducts(){const list=getProducts(),box=document.getElementById('productList');if(!box)return;if(!list.length){box.innerHTML='<div class="card"><div class="muted">Nenhum produto cadastrado ainda.</div></div>';return}box.innerHTML=list.map(x=>{const profit=x.price-x.cost;const item=getStock().find(s=>String(s.id)===String(x.stockId));let status=x.productionStatus==='concluido'?'PRODUÇÃO CONCLUÍDA':x.productionStatus==='nao_concluido'?'NÃO CONCLUÍDA':'AGUARDANDO RESULTADO';return `<div class="card"><h2>${x.name}</h2><div class="muted">${x.category} · ${x.material} · ${x.weight} g/peça · ${x.qty} unidade(s)</div><div class="muted" style="margin-top:8px">Filamento: ${item?item.name+' · '+item.colorName:'não encontrado'}</div><div class="tag" style="margin-top:10px">${status}</div>${x.productionStatus==='pendente'&&x.productionEndAt?`<div class="muted" style="margin-top:8px">Aviso previsto: <b>${new Date(x.productionEndAt).toLocaleString('pt-BR')}</b></div>`:''}<div class="grid" style="margin-top:14px"><div><div class="muted">Custo</div><div class="metric">${br(x.cost)}</div></div><div><div class="muted">Venda</div><div class="metric">${br(x.price)}</div></div></div><div class="muted" style="margin-top:10px">Lucro por unidade: <b>${br(profit)}</b></div>${x.productionStatus==='pendente'?`<button class="btn" type="button" onclick="openProductionResult(${x.id})">Informar resultado da produção</button>`:''}<button class="btn secondary" type="button" onclick="useProduct(${x.id})">Usar no orçamento</button><button class="btn secondary" type="button" onclick="deleteProduct(${x.id})">Excluir produto</button></div>`}).join('')}
+function showProductForm(){document.getElementById('productForm').style.display='block';updateProductStockOptions()}
+function hideProductForm(){document.getElementById('productForm').style.display='none'}
+function openProductionResult(id){const p=getProducts().find(x=>x.id===id);if(!p)return;const old=document.getElementById('productionModal');if(old)old.remove();const item=getStock().find(x=>String(x.id)===String(p.stockId));const expected=p.weight*p.qty;const modal=document.createElement('div');modal.id='productionModal';modal.style.cssText='position:fixed;inset:0;background:rgba(0,0,0,.74);display:flex;align-items:center;justify-content:center;z-index:9999;padding:20px';modal.innerHTML=`<div class="card" style="width:min(460px,100%);margin:0"><h2>Resultado da produção</h2><p><b>${p.name}</b></p><p class="muted">Quantidade: ${p.qty} · Consumo previsto: ${expected.toFixed(1)} g${item?' · '+item.name:''}</p><p class="muted">Informe se o produto foi concluído.</p><button class="btn" type="button" onclick="finishProductProduction(${p.id},'success','auto')">Concluiu o produto</button><button class="btn secondary" type="button" onclick="finishProductProduction(${p.id},'fail','auto')">Não concluiu — retirar automaticamente</button><button class="btn secondary" type="button" onclick="openManualProduction(${p.id})">Não concluiu — informar gramas manualmente</button><button class="btn secondary" type="button" onclick="closeProductionModal()">Cancelar</button></div>`;document.body.appendChild(modal)}
+function closeProductionModal(){document.getElementById('productionModal')?.remove();document.getElementById('manualProductionModal')?.remove()}
+function openManualProduction(id){const p=getProducts().find(x=>x.id===id);if(!p)return;document.getElementById('productionModal')?.remove();const item=getStock().find(x=>String(x.id)===String(p.stockId));const modal=document.createElement('div');modal.id='manualProductionModal';modal.style.cssText='position:fixed;inset:0;background:rgba(0,0,0,.74);display:flex;align-items:center;justify-content:center;z-index:10000;padding:20px';modal.innerHTML=`<div class="card" style="width:min(420px,100%);margin:0"><h2>Retirada manual</h2><p class="muted">${p.name} · previsto ${ (p.weight*p.qty).toFixed(1)} g${item?' · disponível '+Math.max(0,item.grams).toFixed(1)+' g':''}</p><div class="label">Gramas realmente perdidas/usadas</div><input id="manualProductionGrams" type="number" min="0" step="0.1" value="${Math.min(p.weight*p.qty,item?item.grams:p.weight*p.qty).toFixed(1)}"><button class="btn" type="button" onclick="finishProductProduction(${p.id},'fail','manual')">Confirmar retirada</button><button class="btn secondary" type="button" onclick="closeProductionModal()">Cancelar</button></div>`;document.body.appendChild(modal)}
+function finishProductProduction(id,result,mode){const products=getProducts();const p=products.find(x=>x.id===id);if(!p)return;const list=getStock();const item=list.find(x=>String(x.id)===String(p.stockId));if(!item){toast('O filamento selecionado não existe mais no estoque');return}let grams=Number(p.weight||0)*Math.max(1,Number(p.qty||1));if(mode==='manual')grams=Number(document.getElementById('manualProductionGrams')?.value||0);if(grams<0||grams>item.grams){toast('Quantidade inválida para o estoque disponível');return}item.grams=Math.max(0,item.grams-grams);if(result==='fail')item.waste=(item.waste||0)+grams;p.productionStatus=result==='success'?'concluido':'nao_concluido';p.productionEndAt=0;p.notificationSent=true;p.stockConsumed=(p.stockConsumed||0)+grams;p.waste=result==='fail'?grams:0;localStorage.setItem('pp_inventory',JSON.stringify(list));localStorage.setItem('pp_products',JSON.stringify(products));closeProductionModal();renderStock();updateOrderStock();updateQuoteStock();updateCalculatorStock();renderProducts();updateDashboard();toast(result==='success'?`Produção concluída. ${grams.toFixed(1)} g retirados do estoque.`:`Produção não concluída. ${grams.toFixed(1)} g retirados e registrados como desperdício.`)}
+function getUserName(){return localStorage.getItem('pp_user_name')||''}
+function registerUser(){
+  const name=document.getElementById('userName').value.trim();
+  if(!name){toast('Digite seu nome para continuar');return}
+  localStorage.setItem('pp_user_name',name);
+  applyUser();
+  show('home');
+  document.querySelectorAll('nav button').forEach(x=>x.classList.remove('active'));
+  document.querySelector('nav button').classList.add('active');
+}
+function applyUser(){
+  const name=getUserName();
+  if(!name)return;
+  const welcome=document.getElementById('welcomeName');
+  const account=document.getElementById('accountName');
+  if(welcome)welcome.textContent=name;
+  if(account)account.textContent=name;
+}
+function changeUser(){
+  const current=getUserName();
+  const name=prompt('Digite o novo nome:',current);
+  if(name && name.trim()){
+    localStorage.setItem('pp_user_name',name.trim());
+    applyUser();
+    toast('Nome atualizado');
+  }
+}
+function checkLogin(){
+  const name=getUserName();
+  if(name){
+    document.getElementById('register').classList.remove('active');
+    document.getElementById('home').classList.add('active');
+    applyUser();
+  }else{
+    document.getElementById('register').classList.add('active');
+    document.getElementById('home').classList.remove('active');
+    document.querySelectorAll('nav button').forEach(x=>x.classList.remove('active'));
+  }
+}
+// Botão de orçamento
+(function(){
+  function bindQuoteButton(){
+    var b=document.getElementById('generateQuoteBtn');
+    if(!b)return;
+    b.type='button';
+    b.onclick=function(e){
+      if(e){e.preventDefault();e.stopPropagation();}
+      makeQuoteDireto();
+      return false;
+    };
+  }
+  if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',bindQuoteButton);
+  else bindQuoteButton();
+})();
+
+// Garante que os botões do app não submetam formulários nem recarreguem a página.
+document.querySelectorAll('button').forEach(function(btn){ btn.type='button'; });
+
+(function(){
+  function bindPrinterButtons(){
+    var open=document.getElementById('openPrinterBtn');
+    var save=document.getElementById('savePrinterBtn');
+    var cancel=document.getElementById('cancelPrinterBtn');
+    if(open){open.onclick=function(e){e.preventDefault();showPrinterForm();};}
+    if(save){save.onclick=function(e){e.preventDefault();savePrinter();};}
+    if(cancel){cancel.onclick=function(e){e.preventDefault();hidePrinterForm();};}
+  }
+  if(document.readyState==='loading') document.addEventListener('DOMContentLoaded',bindPrinterButtons); else bindPrinterButtons();
+})();
+
+// Fallback robusto para conversores ZIP->APK/WebView que alteram handlers de botões.
+document.addEventListener('click',function(e){
+  var el=e.target && e.target.closest ? e.target.closest('#openPrinterBtn,#savePrinterBtn,#cancelPrinterBtn') : null;
+  if(!el)return;
+  e.preventDefault();e.stopPropagation();
+  if(el.id==='openPrinterBtn')showPrinterForm();
+  else if(el.id==='savePrinterBtn')savePrinter();
+  else hidePrinterForm();
+},true);
+
+init();updateDashboard();renderProducts();updateQuoteStock();checkLogin();setTimeout(checkProductionTimers,100);document.addEventListener('keydown',e=>{if(e.key==='Escape')toggleMenu(false)});window.addEventListener('storage',e=>{if(['pp_inventory','pp_printers'].includes(e.key)){renderStock();renderPrinters();updateCalculatorStock();updateQuoteStock()}});
+
+function toggleSeparateCalc(){const enabled=!!document.getElementById('enableSeparateCalc')?.checked;const card=document.getElementById('calcSeparatePieces');if(card)card.style.display=enabled?'block':'none';if(enabled&&!document.querySelector('#separateCalcRows .calc-piece-row'))addSeparateCalcRow('',1,50,0,30,0);if(!enabled){const result=document.getElementById('separateCalcResult');if(result){result.style.display='none';result.innerHTML='';}}}
+function addSeparateCalcRow(name='',qty=1,grams=50,h=0,m=30,sec=0){const box=document.getElementById('separateCalcRows');if(!box)return;const row=document.createElement('div');row.className='calc-piece-row';row.innerHTML=`<div class="calc-piece-name"><label>Nome da peça</label><input class="scp-name" maxlength="80" placeholder="Ex.: Tampa" value="${escapeHtml(name)}"></div><div><label>Qtd.</label><input class="scp-qty" type="number" min="1" step="1" value="${Math.max(1,Number(qty)||1)}"></div><div><label>Peso (g)</label><input class="scp-grams" type="number" min="0.1" step="0.1" value="${Math.max(.1,Number(grams)||50)}"></div><div><label>Horas</label><input class="scp-h" type="number" min="0" step="1" value="${Math.max(0,Number(h)||0)}"></div><div><label>Min.</label><input class="scp-m" type="number" min="0" max="59" step="1" value="${Math.max(0,Math.min(59,Number(m)||0))}"></div><div><label>Seg.</label><input class="scp-s" type="number" min="0" max="59" step="1" value="${Math.max(0,Math.min(59,Number(sec)||0))}"></div><button type="button" class="remove-calc-piece" onclick="this.closest('.calc-piece-row').remove()">Remover peça</button>`;box.appendChild(row)}
+function calculateSeparatePieces(){const rows=[...document.querySelectorAll('#separateCalcRows .calc-piece-row')];if(!rows.length){toast('Adicione pelo menos uma peça.');return}const select=document.getElementById('filament');const id=String(select?.value||'');let current=null,catalogRef=null,catalogMode=false;if(id.startsWith('catalog:')){catalogMode=true;catalogRef=data.find(x=>x.name===id.slice(8))||null}else{const raw=id.startsWith('stock:')?id.slice(6):id;current=getStock().find(x=>String(x.id)===raw)}if(!current&&!catalogRef){toast('Selecione um filamento.');updateCalculatorStock();return}const printer=getPrinters().find(x=>String(x.id)===String(document.getElementById('printerSelect')?.value));if(!printer){toast('Cadastre e selecione uma impressora primeiro.');show('printers');return}const priceKg=catalogMode?Number(catalogRef.kg||0):Number(current.pricePerKg||0);if(priceKg<=0){toast('O filamento selecionado não possui preço por kg.');return}const stockGrams=catalogMode?Infinity:Number(current.grams||0);const watts=Math.max(0,numBR(printer.watts)),rate=Math.max(0,numBR(printer.rate)),printerValue=Math.max(0,numBR(printer.value)),life=numBR(printer.life),fail=Math.min(100,Math.max(0,numBR(printer.fail)))/100;if(!catalogMode&&rows.reduce((a,r)=>a+Math.max(0,Number(r.querySelector('.scp-grams').value)||0)*Math.max(1,Number(r.querySelector('.scp-qty').value)||1),0)>stockGrams){toast('O peso total das peças é maior que o filamento disponível no estoque.');return}if(life<=0){toast('Confira a vida útil da impressora cadastrada.');return}const labor=Math.max(0,Number(document.getElementById('labor').value)||0),other=Math.max(0,Number(document.getElementById('other').value)||0),margin=Math.max(0,Number(document.getElementById('margin').value)||0)/100;let totalCost=0,totalPrice=0,totalQty=0;const results=[];for(let i=0;i<rows.length;i++){const row=rows[i],name=row.querySelector('.scp-name').value.trim()||`Peça ${i+1}`,qty=Math.max(1,Math.floor(Number(row.querySelector('.scp-qty').value)||1)),g=Math.max(0,Number(row.querySelector('.scp-grams').value)||0),h=Math.max(0,Number(row.querySelector('.scp-h').value)||0)+Math.max(0,Math.min(59,Number(row.querySelector('.scp-m').value)||0))/60+Math.max(0,Math.min(59,Number(row.querySelector('.scp-s').value)||0))/3600;if(g<=0){toast(`Informe o peso da peça: ${name}.`);return}const filament=(g/1000)*priceKg,energy=h*watts*rate/1000,machine=h*(printerValue+Math.max(0,numBR(printer.maintenance)))/life,base=filament+energy+machine+labor+other,cost=(base+base*fail),price=cost*(1+margin),profit=price-cost;results.push({name,qty,g,h,cost,price,profit});totalCost+=cost*qty;totalPrice+=price*qty;totalQty+=qty}const target=document.getElementById('separateCalcResult');target.style.display='block';target.innerHTML=`<h3>Resultado das peças</h3>${results.map(x=>`<div class="calc-piece-result"><b>${escapeHtml(x.name)}</b><div class="muted">${x.qty} un. · ${x.g} g/un. · ${formatPrintTime(x.h)} por unidade</div><div class="grid" style="margin-top:8px"><div><div class="muted">Preço/un.</div><b>${br(x.price)}</b></div><div><div class="muted">Custo/un.</div><b>${br(x.cost)}</b></div><div><div class="muted">Lucro/un.</div><b>${br(x.profit)}</b></div><div><div class="muted">Subtotal</div><b>${br(x.price*x.qty)}</b></div></div></div>`).join('')}<div class="card" style="margin-top:12px"><div class="muted">TOTAL DE ${totalQty} PEÇAS</div><div class="price">${br(totalPrice)}</div><div class="grid"><div><div class="muted">Custo total</div><div class="metric">${br(totalCost)}</div></div><div><div class="muted">Lucro total</div><div class="metric">${br(totalPrice-totalCost)}</div></div></div></div>`;target.scrollIntoView({behavior:'smooth',block:'nearest'});toast('Cálculo das peças concluído.');}
+
+const PP_TRIAL_KEY='pp_trial_start';
+const PP_TRIAL_DAYS=30;
+function trialStart(){return Number(localStorage.getItem(PP_TRIAL_KEY)||0)}
+function trialDaysLeft(){const start=trialStart();if(!start)return 30;return Math.max(0,PP_TRIAL_DAYS-Math.floor((Date.now()-start)/86400000))}
+function trialActive(){return trialStart()>0&&trialDaysLeft()>0}
+function startTrial(){if(trialStart()){toast(trialActive()?'Seu teste já foi iniciado.':'Seu período de teste de 30 dias terminou.');return}localStorage.setItem(PP_TRIAL_KEY,String(Date.now()));updatePlanUI();toast('Teste grátis de 30 dias iniciado.')}
+const PP_PLAN_KEY='pp_plan';
+function getPlan(){return localStorage.getItem(PP_PLAN_KEY)||'free'}
+function updatePlanUI(){const p=getPlan(); const pro=p==='pro'; const trial=trialActive(); ['currentPlan','homePlan'].forEach(id=>{const e=document.getElementById(id);if(e)e.textContent=pro?'PRO':(trial?'Teste grátis':'Teste encerrado')}); const s=document.getElementById('planStatus');if(s)s.textContent=pro?'Todos os recursos desbloqueados':(trial?trialDaysLeft()+' dias restantes no teste':'Período de teste encerrado'); const h=document.getElementById('homeLimit');if(h)h.textContent=pro?'PRO ativo: recursos profissionais liberados.':(trial?'Teste grátis: '+trialDaysLeft()+' dias restantes.':'Teste grátis encerrado. Escolha o PRO para continuar.');}
+function setPlan(p){localStorage.setItem(PP_PLAN_KEY,p);updatePlanUI();show('plans');toast(p==='pro'?'PRO ativado nesta demonstração.':'Plano grátis selecionado.')}
+function requirePro(message){if(getPlan()!=='pro'){show('plans');toast(message||'Este recurso está disponível no PRO.');return false}return true}
+</script>
+<script>updatePlanUI();
+
+const PLAN_KEY='pp_plan';
+function getPlan(){return localStorage.getItem(PLAN_KEY)||'free'}
+function setPlan(p){localStorage.setItem(PLAN_KEY,p);updatePlanUI();show('plans');toast(p==='pro'?'PRO ativado nesta demonstração.':'Plano grátis selecionado.')}
+function requirePro(message){if(getPlan()!=='pro'){show('plans');toast(message||'Este recurso é exclusivo do PRO.');return false}return true}
+function updatePlanUI(){const p=getPlan(), pro=p==='pro', trial=trialActive(); const c=document.getElementById('currentPlan'); if(c)c.textContent=pro?'PRO':(trial?'Teste grátis':'Teste encerrado'); const s=document.getElementById('planStatus'); if(s)s.textContent=pro?'Todos os recursos desbloqueados':(trial?trialDaysLeft()+' dias restantes no teste':'Período de teste encerrado'); const h=document.getElementById('homePlan'); if(h)h.textContent=pro?'PRO':(trial?'Teste grátis':'Teste encerrado'); const l=document.getElementById('homeLimit'); if(l)l.textContent=pro?'PRO ativo: recursos profissionais liberados.':(trial?'Teste grátis: '+trialDaysLeft()+' dias restantes.':'Teste grátis encerrado. Escolha o PRO para continuar.')}
 </script></body></html>
