@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
@@ -8,194 +7,218 @@
 <title>PrintProfit</title>
 <style>
 :root{--bg:#071827;--panel:#102a3d;--panel2:#0b2030;--line:#234459;--text:#edf7ff;--muted:#91a7b8;--accent:#21d4c5;--red:#ff7272}
-*{box-sizing:border-box}
-body{margin:0;background:var(--bg);color:var(--text);font-family:system-ui,-apple-system,Arial,sans-serif}
-button,input,select,textarea{font:inherit}
-button{cursor:pointer}
-header{position:sticky;top:0;z-index:5;background:#071827ed;backdrop-filter:blur(12px);border-bottom:1px solid var(--line);padding:14px;display:flex;align-items:center;gap:12px}
-.brand{font-size:22px;font-weight:850}.brand span{color:var(--accent)}
-.muted{color:var(--muted);font-size:13px}
-.menuBtn,.closeBtn{background:var(--panel);color:var(--accent);border:1px solid var(--line);border-radius:12px;padding:9px 13px;font-size:22px}
-#layout{max-width:1000px;margin:auto}
-main{padding:16px;min-width:0}
-.screen{display:none}.screen.active{display:block}
-h2{font-size:21px;margin:4px 0 14px}h3{font-size:16px;margin:0 0 10px}
-.card{background:var(--panel);border:1px solid var(--line);border-radius:17px;padding:16px;margin-bottom:14px;min-width:0}
-.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
-label{display:block;color:var(--muted);font-size:12px;margin:12px 0 6px}
-input,select,textarea{display:block;width:100%;min-width:0;border:1px solid #315268;border-radius:11px;padding:12px;background:#081a29;color:white;outline:none}
-input:focus,select:focus,textarea:focus{border-color:var(--accent)}
-.btn{border:0;border-radius:11px;padding:12px 15px;background:var(--accent);color:#041a20;font-weight:800}
-.btn.secondary{background:#1a3a4e;color:var(--text);border:1px solid var(--line)}
-.btn.danger{background:#462326;color:#ffdada}
-.btn.full{width:100%;margin-top:12px}
-.actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}
-.actions .btn{flex:1}
-.metric{font-size:23px;font-weight:850;overflow-wrap:anywhere}
-.money{font-size:28px;font-weight:900;color:var(--accent);overflow-wrap:anywhere}
-.item{padding:12px 0;border-bottom:1px solid var(--line);overflow-wrap:anywhere}
-.item:last-child{border:0}
-.itemTop{display:flex;justify-content:space-between;gap:10px;align-items:center}
-.itemTop strong{overflow-wrap:anywhere}
-.badge{font-size:11px;border-radius:99px;background:#183e4e;padding:5px 8px;color:var(--accent)}
-#overlay{display:none;position:fixed;inset:0;background:#0009;z-index:9}
-#overlay.open{display:block}
-nav{position:fixed;z-index:10;inset:0 auto 0 0;width:min(290px,85vw);background:#071827;border-right:1px solid var(--line);padding:16px;transform:translateX(-105%);transition:transform .2s;overflow-y:auto}
-nav.open{transform:translateX(0)}
-.navhead{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;padding-bottom:14px;border-bottom:1px solid var(--line)}
-.navitem{width:100%;display:block;text-align:left;background:transparent;color:var(--muted);border:0;border-radius:11px;padding:13px;margin:3px 0}
-.navitem.active,.navitem:hover{background:#12364a;color:var(--accent)}
-.tableWrap{overflow-x:auto}
-table{width:100%;border-collapse:collapse;min-width:450px;font-size:13px}
-th,td{text-align:left;padding:10px;border-bottom:1px solid var(--line)}
-th{color:var(--muted)}
-.smallInput{padding:8px}
-.toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:#183e4e;border:1px solid var(--line);padding:12px 18px;border-radius:12px;z-index:30;display:none;max-width:90vw}
-.empty{padding:14px 0;color:var(--muted);font-size:13px}
-@media(min-width:760px){main{padding:24px}.grid.four{grid-template-columns:repeat(4,minmax(0,1fr))}}
-@media(max-width:420px){.grid{grid-template-columns:1fr 1fr}.metric{font-size:20px}.card{padding:13px}header{padding:12px}}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--text);font-family:system-ui,-apple-system,Arial,sans-serif}
+button,input,select,textarea{font:inherit}button{cursor:pointer}header{position:sticky;top:0;z-index:5;background:#071827ed;backdrop-filter:blur(12px);border-bottom:1px solid var(--line);padding:14px;display:flex;align-items:center;gap:12px}
+.brand{font-size:22px;font-weight:850}.brand span{color:var(--accent)}.muted{color:var(--muted);font-size:13px}.menuBtn,.closeBtn{background:var(--panel);color:var(--accent);border:1px solid var(--line);border-radius:12px;padding:9px 13px;font-size:22px}
+#layout{max-width:1000px;margin:auto}main{padding:16px;min-width:0}.screen{display:none}.screen.active{display:block}h2{font-size:21px;margin:4px 0 14px}h3{font-size:16px;margin:0 0 10px}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:17px;padding:16px;margin-bottom:14px;min-width:0}.grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:10px}
+label{display:block;color:var(--muted);font-size:12px;margin:12px 0 6px}input,select,textarea{display:block;width:100%;min-width:0;border:1px solid #315268;border-radius:11px;padding:12px;background:#081a29;color:white;outline:none}
+input:focus,select:focus,textarea:focus{border-color:var(--accent)}input[type=checkbox]{display:inline-block;width:auto;transform:scale(1.15)}
+.btn{border:0;border-radius:11px;padding:12px 15px;background:var(--accent);color:#041a20;font-weight:800}.btn.secondary{background:#1a3a4e;color:var(--text);border:1px solid var(--line)}.btn.danger{background:#462326;color:#ffdada}.btn.full{width:100%;margin-top:12px}
+.actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:12px}.actions .btn{flex:1}.metric{font-size:23px;font-weight:850;overflow-wrap:anywhere}.money{font-size:28px;font-weight:900;color:var(--accent);overflow-wrap:anywhere}
+.item{padding:12px 0;border-bottom:1px solid var(--line);overflow-wrap:anywhere}.item:last-child{border:0}.itemTop{display:flex;justify-content:space-between;gap:10px;align-items:center}.itemTop strong{overflow-wrap:anywhere}.badge{font-size:11px;border-radius:99px;background:#183e4e;padding:5px 8px;color:var(--accent)}
+#overlay{display:none;position:fixed;inset:0;background:#0009;z-index:9}#overlay.open{display:block}nav{position:fixed;z-index:10;inset:0 auto 0 0;width:min(290px,85vw);background:#071827;border-right:1px solid var(--line);padding:16px;transform:translateX(-105%);transition:transform .2s;overflow-y:auto}nav.open{transform:translateX(0)}
+.navhead{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;padding-bottom:14px;border-bottom:1px solid var(--line)}.navitem{width:100%;display:block;text-align:left;background:transparent;color:var(--muted);border:0;border-radius:11px;padding:13px;margin:3px 0}.navitem.active,.navitem:hover{background:#12364a;color:var(--accent)}
+.tableWrap{overflow-x:auto}table{width:100%;border-collapse:collapse;min-width:450px;font-size:13px}th,td{text-align:left;padding:10px;border-bottom:1px solid var(--line)}th{color:var(--muted)}.smallInput{padding:8px}.toast{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:#183e4e;border:1px solid var(--line);padding:12px 18px;border-radius:12px;z-index:30;display:none;max-width:90vw}.empty{padding:14px 0;color:var(--muted);font-size:13px}
+.partCalc{border:1px solid var(--line);padding:12px;border-radius:12px;margin:10px 0;background:var(--panel2)}.partCalc h4{margin:0 0 8px}.partSummary{background:#0b2030;padding:12px;border-radius:12px;margin-top:12px}
+@media(min-width:760px){main{padding:24px}.grid.four{grid-template-columns:repeat(4,minmax(0,1fr))}}@media(max-width:420px){.grid{grid-template-columns:1fr 1fr}.metric{font-size:20px}.card{padding:13px}header{padding:12px}}
 </style>
 </head>
 <body>
 <div id="overlay" onclick="menu(false)"></div>
-<nav id="nav">
- <div class="navhead"><div class="brand">Print<span>Profit</span></div><button class="closeBtn" onclick="menu(false)">×</button></div>
- <button class="navitem active" data-page="home" onclick="go('home')">⌂　Painel</button>
- <button class="navitem" data-page="calculator" onclick="go('calculator')">▦　Calcular preço</button>
- <button class="navitem" data-page="quotes" onclick="go('quotes')">▤　Orçamentos</button>
- <button class="navitem" data-page="products" onclick="go('products')">▣　Produtos</button>
- <button class="navitem" data-page="orders" onclick="go('orders')">✓　Encomendas</button>
- <button class="navitem" data-page="inventory" onclick="go('inventory')">▥　Estoque de filamentos</button>
- <button class="navitem" data-page="printers" onclick="go('printers')">▧　Impressoras</button>
- <button class="navitem" data-page="settings" onclick="go('settings')">⚙　Configurações</button>
-</nav>
-<div id="layout">
-<header><button class="menuBtn" onclick="menu(true)" aria-label="Abrir menu">☰</button><div><div class="brand">Print<span>Profit</span></div><div class="muted">Gestão para impressão 3D</div></div></header>
-<main>
+<nav id="nav"><div class="navhead"><div class="brand">Print<span>Profit</span></div><button class="closeBtn" onclick="menu(false)">×</button></div>
+<button class="navitem active" data-page="home" onclick="go('home')">⌂　Painel</button><button class="navitem" data-page="calculator" onclick="go('calculator')">▦　Calcular preço</button><button class="navitem" data-page="quotes" onclick="go('quotes')">▤　Orçamentos</button><button class="navitem" data-page="products" onclick="go('products')">▣　Produtos</button><button class="navitem" data-page="orders" onclick="go('orders')">✓　Encomendas</button><button class="navitem" data-page="inventory" onclick="go('inventory')">▥　Estoque de filamentos</button><button class="navitem" data-page="printers" onclick="go('printers')">▧　Impressoras</button><button class="navitem" data-page="settings" onclick="go('settings')">⚙　Configurações</button></nav>
+<div id="layout"><header><button class="menuBtn" onclick="menu(true)" aria-label="Abrir menu">☰</button><div><div class="brand">Print<span>Profit</span></div><div class="muted">Gestão para impressão 3D</div></div></header><main>
 <section class="screen active" id="home">
- <div class="card"><div class="muted">SEU NEGÓCIO 3D</div><h2>Olá, <span id="hello">empreendedor</span>!</h2><div class="muted">Acompanhe custos, vendas e lucro em um só lugar.</div></div>
- <div class="grid four">
-  <div class="card"><div class="muted">ORÇAMENTOS</div><div class="metric" id="dashQuotes">0</div></div>
-  <div class="card"><div class="muted">ENCOMENDAS</div><div class="metric" id="dashOrders">0</div></div>
-  <div class="card"><div class="muted">RECEITA</div><div class="metric" id="dashRevenue">R$ 0,00</div></div>
-  <div class="card"><div class="muted">LUCRO ESTIMADO</div><div class="metric" id="dashProfit">R$ 0,00</div></div>
- </div>
- <div class="card"><h3>Ações rápidas</h3><div class="grid"><button class="btn" onclick="go('calculator')">Calcular preço</button><button class="btn secondary" onclick="newQuote()">Novo orçamento</button><button class="btn secondary" onclick="go('inventory')">Ver estoque</button><button class="btn secondary" onclick="go('printers')">Cadastrar impressora</button></div></div>
- <div class="card"><h3>Estoque baixo</h3><div id="lowStock" class="empty">Nenhum filamento cadastrado.</div></div>
- <div class="card"><h3>Últimos orçamentos</h3><div id="recentQuotes" class="empty">Seus orçamentos aparecerão aqui.</div></div>
-</section>
-
+<div class="card"><div class="muted">SEU NEGÓCIO 3D</div><h2>Olá, <span id="hello">empreendedor</span>!</h2><div class="muted">Acompanhe custos, vendas e lucro em um só lugar.</div></div>
+<div class="grid four">
+<div class="card"><div class="muted">ORÇAMENTOS</div><div class="metric" id="dashQuotes">0</div></div>
+<div class="card"><div class="muted">ENCOMENDAS</div><div class="metric" id="dashOrders">0</div></div>
+<div class="card"><div class="muted">RECEITA</div><div class="metric" id="dashRevenue">R$ 0,00</div></div>
+<div class="card"><div class="muted">LUCRO ESTIMADO</div><div class="metric" id="dashProfit">R$ 0,00</div></div></div>
+<div class="card"><h3>Ações rápidas</h3><div class="grid">
+<button class="btn" onclick="go('calculator')">Calcular preço</button><button class="btn secondary" onclick="newQuote()">Novo orçamento</button><button class="btn secondary" onclick="go('inventory')">Ver estoque</button><button class="btn secondary" onclick="go('printers')">Cadastrar impressora</button></div></div>
+<div class="card"><h3>Estoque baixo</h3><div id="lowStock" class="empty">Nenhum filamento cadastrado.</div></div>
+<div class="card"><h3>Últimos orçamentos</h3><div id="recentQuotes" class="empty">Seus orçamentos aparecerão aqui.</div></div></section>
 <section class="screen" id="calculator">
- <div class="card"><h2>Calcular preço</h2><div class="muted">Informe o consumo, tempo e os custos da impressão.</div>
-  <label>Nome da peça</label><input id="calcName" placeholder="Ex.: Suporte de celular">
-  <div class="grid"><div><label>Filamento</label><select id="calcFilament"></select></div><div><label>Impressora</label><select id="calcPrinter"></select></div></div>
-  <div class="grid"><div><label>Filamento usado (g)</label><input id="calcGrams" type="number" min="0" step="0.1" value="50"></div><div><label>Tempo (horas)</label><input id="calcHours" type="number" min="0" step="0.1" value="2"></div></div>
-  <div class="grid"><div><label>Eletricidade (R$/kWh)</label><input id="calcKwh" type="number" min="0" step="0.01" value="0.90"></div><div><label>Margem de lucro (%)</label><input id="calcMargin" type="number" min="0" step="1" value="40"></div></div>
-  <label>Outros custos (R$)</label><input id="calcOther" type="number" min="0" step="0.01" value="0">
-  <button class="btn full" onclick="calculate()">Calcular preço</button>
- </div>
- <div class="card" id="calcResult" style="display:none"><div class="muted">PREÇO SUGERIDO</div><div class="money" id="resultPrice">R$ 0,00</div><div class="item">Filamento <strong id="resultFilament"></strong></div><div class="item">Eletricidade <strong id="resultElectric"></strong></div><div class="item">Depreciação/manutenção <strong id="resultDep"></strong></div><div class="item">Custo total <strong id="resultCost"></strong></div><div class="item">Lucro estimado <strong id="resultProfit"></strong></div><div class="actions"><button class="btn" onclick="quoteFromCalc()">Criar orçamento</button><button class="btn secondary" onclick="saveCalcProduct()">Salvar produto</button></div></div>
+<div class="card"><h2>Calcular preço</h2><div class="muted">Calcule uma peça por vez ou adicione peças separadas para montar um orçamento.</div>
+<label>Nome da peça</label><input id="calcName" placeholder="Ex.: Suporte de celular">
+<div class="grid"><div><label>Filamento</label><select id="calcFilament"></select></div><div><label>Impressora</label><select id="calcPrinter"></select></div></div>
+<div class="grid"><div><label>Filamento usado (g)</label><input id="calcGrams" type="number" min="0" step="0.1" value="50"></div><div><label>Tempo (horas)</label><input id="calcHours" type="number" min="0" step="0.1" value="2"></div></div>
+<div class="grid"><div><label>Eletricidade (R$/kWh)</label><input id="calcKwh" type="number" min="0" step="0.001" value="0.90"></div><div><label>Margem de lucro (%)</label><input id="calcMargin" type="number" min="0" step="1" value="40"></div></div>
+<label>Outros custos (R$)</label><input id="calcOther" type="number" min="0" step="0.01" value="0">
+<div class="actions"><button class="btn" onclick="calculate()">Calcular preço desta peça</button><button class="btn secondary" onclick="addCalcPieceToQuote()">Adicionar peça ao orçamento</button></div>
+<div class="muted" style="margin-top:10px">Cada peça mantém seu próprio consumo, tempo, custo, preço e lucro. Para um orçamento com várias peças, calcule cada uma e use “Adicionar peça ao orçamento”.</div></div>
+<div class="card" id="calcResult" style="display:none"><div class="muted">PREÇO SUGERIDO DESTA PEÇA</div><div class="money" id="resultPrice">R$ 0,00</div>
+<div class="item">Filamento <strong id="resultFilament"></strong></div><div class="item">Eletricidade <strong id="resultElectric"></strong></div><div class="item">Depreciação/manutenção <strong id="resultDep"></strong></div><div class="item">Outros custos <strong id="resultOther"></strong></div><div class="item">Custo total <strong id="resultCost"></strong></div><div class="item">Lucro estimado <strong id="resultProfit"></strong></div>
+<div class="actions"><button class="btn" onclick="quoteFromCalc()">Criar orçamento desta peça</button><button class="btn secondary" onclick="saveCalcProduct()">Salvar produto</button></div></div>
+<div class="card"><h3>Peças adicionadas ao orçamento em preparação</h3><div id="calcQuoteParts" class="empty">Nenhuma peça adicionada ainda.</div><div id="calcQuoteTotals" class="partSummary" style="display:none"></div>
+<div class="actions"><button class="btn" onclick="startQuoteFromParts()">Abrir orçamento com estas peças</button><button class="btn secondary" onclick="clearCalcParts()">Limpar peças</button></div></div>
 </section>
-
 <section class="screen" id="quotes">
- <div class="card"><div class="itemTop"><h2>Orçamentos</h2><button class="btn" onclick="newQuote()">+ Novo</button></div><div class="muted">Crie preços para uma peça ou para várias peças separadas.</div></div>
- <div class="card" id="quoteForm">
-  <h3 id="quoteFormTitle">Novo orçamento</h3><input type="hidden" id="quoteEditId">
-  <label>Nome do orçamento/cliente</label><input id="quoteName" placeholder="Ex.: Pedido do cliente">
-  <label>Modo de orçamento</label><select id="quoteMode" onchange="renderPartRows()"><option value="single">Peça única</option><option value="multiple">Várias peças separadas</option></select>
-  <div id="quoteSingle">
-   <label>Nome da peça</label><input id="quotePiece" placeholder="Nome da peça">
-   <div class="grid"><div><label>Quantidade</label><input id="quoteQty" type="number" min="1" value="1"></div><div><label>Preço por peça (R$)</label><input id="quoteUnit" type="number" min="0" step="0.01" value="0"></div></div>
-  </div>
-  <div id="quoteMultiple" style="display:none">
-   <div class="itemTop"><h3>Peças do orçamento</h3><button class="btn secondary" onclick="addPart()">+ Peça</button></div><div id="partRows"></div>
-  </div>
-  <div class="grid"><div><label>Custo total estimado (R$)</label><input id="quoteCost" type="number" min="0" step="0.01" value="0"></div><div><label>Prazo de entrega</label><input id="quoteDeadline" type="date"></div></div>
-  <label>Observações</label><textarea id="quoteNotes" rows="2" placeholder="Detalhes do pedido"></textarea>
-  <label class="itemTop" style="margin-top:14px"><span>Adicionar ao catálogo de produtos</span><input id="quoteAddProduct" type="checkbox" checked style="width:auto"></label>
-  <div class="actions"><button class="btn" onclick="saveQuote()">Salvar orçamento</button><button class="btn secondary" onclick="clearQuote()">Limpar</button></div>
- </div>
- <div class="card"><h3>Orçamentos salvos</h3><div id="quoteList" class="empty">Nenhum orçamento cadastrado.</div></div>
-</section>
-
-<section class="screen" id="products">
- <div class="card"><h2>Catálogo de produtos</h2><div class="muted">Produtos adicionados pelos seus orçamentos ou pelo calculador.</div><label>Buscar por nome ou ID</label><input id="productSearch" placeholder="Digite nome ou ID" oninput="renderProducts()"><div id="productList" class="empty">Nenhum produto cadastrado.</div></div>
-</section>
-
-<section class="screen" id="orders">
- <div class="card"><h2>Encomendas</h2><label>Cliente / identificação</label><input id="orderName" placeholder="Nome do cliente"><label>Produto</label><select id="orderProduct"></select><div class="grid"><div><label>Quantidade</label><input id="orderQty" type="number" min="1" value="1"></div><div><label>Preço total (R$)</label><input id="orderPrice" type="number" min="0" step="0.01" value="0"></div></div><label>Filamento consumido (g) - opcional</label><input id="orderGrams" type="number" min="0" step="0.1" value="0"><label>Status</label><select id="orderStatus"><option value="Pendente">Pendente</option><option value="Em produção">Em produção</option><option value="Concluída">Concluída</option><option value="Falhou">Falhou / desperdício</option></select><button class="btn full" onclick="saveOrder()">Salvar encomenda</button></div>
- <div class="card"><h3>Histórico de encomendas</h3><div id="orderList" class="empty">Nenhuma encomenda cadastrada.</div></div>
-</section>
-
-<section class="screen" id="inventory">
- <div class="card"><h2>Estoque de filamentos</h2><div class="muted">Cadastre cada cor separadamente para controlar o consumo.</div><input type="hidden" id="filamentEditId"><label>Marca / nome</label><input id="filamentName" placeholder="Ex.: PLA Basic"><div class="grid"><div><label>Material</label><select id="filamentType"><option>PLA</option><option>PETG</option><option>ABS</option><option>TPU</option><option>ASA</option><option>Outro</option></select></div><div><label>Cor</label><input id="filamentColor" type="text" placeholder="Ex.: Preto"></div></div><div class="grid"><div><label>Preço do rolo (R$)</label><input id="filamentPrice" type="number" min="0" step="0.01" value="100"></div><div><label>Peso do rolo (g)</label><input id="filamentWeight" type="number" min="1" value="1000"></div></div><label>Estoque atual (g)</label><input id="filamentStock" type="number" min="0" value="1000"><div class="actions"><button class="btn" onclick="saveFilament()">Salvar filamento</button><button class="btn secondary" onclick="clearFilament()">Limpar</button></div></div>
- <div class="card"><h3>Filamentos cadastrados</h3><div id="filamentList" class="empty">Nenhum filamento cadastrado.</div></div>
-</section>
-
-<section class="screen" id="printers">
- <div class="card"><h2>Impressoras</h2><input type="hidden" id="printerEditId"><label>Nome da impressora</label><input id="printerName" placeholder="Ex.: Ender 3 V3 KE"><div class="grid"><div><label>Valor da impressora (R$)</label><input id="printerValue" type="number" min="0" step="0.01" value="1800"></div><div><label>Vida útil (horas)</label><input id="printerLife" type="number" min="1" value="5000"></div></div><div class="grid"><div><label>Potência (W)</label><input id="printerPower" type="number" min="0" value="350"></div><div><label>Manutenção total estimada (R$)</label><input id="printerMaintenance" type="number" min="0" step="0.01" value="200"></div></div><div class="actions"><button class="btn" onclick="savePrinter()">Salvar impressora</button><button class="btn secondary" onclick="clearPrinter()">Limpar</button></div></div>
- <div class="card"><h3>Minhas impressoras</h3><div id="printerList" class="empty">Nenhuma impressora cadastrada.</div></div>
-</section>
-
-<section class="screen" id="settings">
- <div class="card"><h2>Configurações</h2><label>Seu nome</label><input id="settingsName" placeholder="Seu nome"><label>Tarifa de energia (R$/kWh)</label><input id="settingsKwh" type="number" min="0" step="0.01" value="0.90"><button class="btn full" onclick="saveSettings()">Salvar configurações</button></div>
- <div class="card"><h3>Seus dados</h3><div class="muted">Os dados ficam salvos no armazenamento local deste navegador. Eles não são sincronizados automaticamente com outros dispositivos.</div><button class="btn secondary full" onclick="exportData()">Exportar cópia dos dados</button><label>Restaurar cópia JSON</label><input id="importFile" type="file" accept=".json,application/json"><button class="btn secondary full" onclick="importData()">Importar dados</button></div>
- <div class="card"><h3>Limpar dados</h3><div class="muted">Esta ação remove os registros salvos neste navegador.</div><button class="btn danger full" onclick="resetData()">Apagar todos os dados</button></div>
-</section>
-</main>
-</div>
-<div class="toast" id="toast"></div>
+<div class="card"><div class="itemTop"><h2>Orçamentos</h2><button class="btn" onclick="newQuote()">+ Novo</button></div><div class="muted">Crie preços para uma peça ou para várias peças separadas, cada uma com seu custo e preço.</div></div>
+<div class="card" id="quoteForm"><h3 id="quoteFormTitle">Novo orçamento</h3><input type="hidden" id="quoteEditId">
+<label>Nome do orçamento/cliente</label><input id="quoteName" placeholder="Ex.: Pedido do cliente">
+<label>Modo de orçamento</label><select id="quoteMode" onchange="renderPartRows()"><option value="single">Peça única</option><option value="multiple">Várias peças separadas</option></select>
+<div id="quoteSingle"><label>Nome da peça</label><input id="quoteSingleName" placeholder="Nome da peça"><div class="grid"><div><label>Quantidade</label><input id="quoteSingleQty" type="number" min="1" value="1"></div><div><label>Preço por peça (R$)</label><input id="quoteSinglePrice" type="number" min="0" step="0.01" value="0"></div></div><label>Custo por peça (R$)</label><input id="quoteSingleCost" type="number" min="0" step="0.01" value="0"></div>
+<div id="quoteMultiple" style="display:none"><div id="quotePartsRows"></div><button class="btn secondary full" onclick="addQuotePartRow()">+ Adicionar outra peça</button></div>
+<div class="partSummary"><div class="itemTop"><span>Preço total</span><strong id="quoteTotal">R$ 0,00</strong></div><div class="itemTop"><span>Custo total</span><strong id="quoteCost">R$ 0,00</strong></div><div class="itemTop"><span>Lucro estimado</span><strong id="quoteProfit">R$ 0,00</strong></div></div>
+<label><input type="checkbox" id="quoteAddProducts" checked> Adicionar as peças ao catálogo de produtos ao salvar</label>
+<div class="actions"><button class="btn" onclick="saveQuote()">Salvar orçamento</button><button class="btn secondary" onclick="newQuote()">Limpar formulário</button></div></div>
+<div class="card"><h3>Orçamentos salvos</h3><div id="quoteList" class="empty">Nenhum orçamento cadastrado.</div></div></section>
+<section class="screen" id="products"><div class="card"><h2>Catálogo de produtos</h2><div class="muted">Os produtos podem ser adicionados ao salvar um orçamento.</div><label>Pesquisar por nome ou ID</label><input id="productSearch" placeholder="Digite nome ou ID" oninput="renderProducts()"><div id="productList" class="empty">Nenhum produto cadastrado.</div></div></section>
+<section class="screen" id="orders"><div class="card"><h2>Encomendas</h2><label>Cliente</label><input id="orderName" placeholder="Nome do cliente"><label>Produto</label><select id="orderProduct"></select><div class="grid"><div><label>Quantidade</label><input id="orderQty" type="number" min="1" value="1"></div><div><label>Preço total (R$)</label><input id="orderPrice" type="number" min="0" step="0.01" value="0"></div></div><label>Filamento utilizado (g)</label><input id="orderGrams" type="number" min="0" value="0"><label>Status</label><select id="orderStatus"><option>Pendente</option><option>Em produção</option><option>Concluída</option><option>Falhou</option></select><button class="btn full" onclick="saveOrder()">Salvar encomenda</button></div><div class="card"><h3>Encomendas cadastradas</h3><div id="orderList" class="empty">Nenhuma encomenda cadastrada.</div></div></section>
+<section class="screen" id="inventory"><div class="card"><h2>Estoque de filamentos</h2><input type="hidden" id="filamentEditId"><label>Nome do filamento</label><input id="filamentName" placeholder="Ex.: PLA Voolt"><div class="grid"><div><label>Tipo</label><select id="filamentType"><option>PLA</option><option>PETG</option><option>ABS</option><option>TPU</option><option>Resina</option><option>Outro</option></select></div><div><label>Cor</label><input id="filamentColor" placeholder="Ex.: Preto"></div></div><div class="grid"><div><label>Preço do rolo (R$)</label><input id="filamentPrice" type="number" min="0" step="0.01" value="100"></div><div><label>Peso do rolo (g)</label><input id="filamentWeight" type="number" min="1" value="1000"></div></div><label>Estoque atual (g)</label><input id="filamentStock" type="number" min="0" value="1000"><div class="actions"><button class="btn" onclick="saveFilament()">Salvar filamento</button><button class="btn secondary" onclick="clearFilament()">Limpar</button></div></div><div class="card"><h3>Filamentos cadastrados</h3><div id="filamentList" class="empty">Nenhum filamento cadastrado.</div></div></section>
+<section class="screen" id="printers"><div class="card"><h2>Impressoras</h2><input type="hidden" id="printerEditId"><label>Nome da impressora</label><input id="printerName" placeholder="Ex.: Ender 3 V3 KE"><div class="grid"><div><label>Valor da impressora (R$)</label><input id="printerValue" type="number" min="0" value="1800"></div><div><label>Vida útil estimada (horas)</label><input id="printerLife" type="number" min="1" value="5000"></div></div><div class="grid"><div><label>Potência (W)</label><input id="printerPower" type="number" min="0" value="350"></div><div><label>Manutenção estimada (R$)</label><input id="printerMaintenance" type="number" min="0" step="0.01" value="200"></div></div><div class="actions"><button class="btn" onclick="savePrinter()">Salvar impressora</button><button class="btn secondary" onclick="clearPrinter()">Limpar</button></div></div><div class="card"><h3>Impressoras cadastradas</h3><div id="printerList" class="empty">Nenhuma impressora cadastrada.</div></div></section>
+<section class="screen" id="settings"><div class="card"><h2>Configurações</h2><label>Seu nome</label><input id="settingsName" placeholder="Como quer ser chamado?"><label>Tarifa de energia (R$/kWh)</label><input id="settingsKwh" type="number" min="0" step="0.001" value="0.90"><button class="btn full" onclick="saveSettings()">Salvar configurações</button></div><div class="card"><h3>Backup dos dados</h3><div class="muted">Exporte uma cópia para guardar seus dados ou importe um backup anterior.</div><div class="actions"><button class="btn secondary" onclick="exportData()">Exportar cópia dos dados</button><label class="btn secondary" style="text-align:center">Importar cópia<input id="importFile" type="file" accept="application/json" onchange="importData()" style="display:none"></label></div><button class="btn danger full" onclick="resetData()">Apagar todos os dados</button></div></section>
+</main></div><div class="toast" id="toast"></div>
 <script>
-const KEY='printprofit_site_data_v1';
 const $=id=>document.getElementById(id);
+const KEY='printprofit_data_v3';
 const money=n=>(Number(n)||0).toLocaleString('pt-BR',{style:'currency',currency:'BRL'});
-const uid=()=>Date.now().toString(36)+Math.random().toString(36).slice(2,7);
-let state={name:'',kwh:0.90,filaments:[],printers:[],quotes:[],products:[],orders:[],lastCalc:null,parts:[]};
-function load(){try{const d=JSON.parse(localStorage.getItem(KEY)||'null');if(d&&typeof d==='object')state={...state,...d}}catch(e){}}
+const uid=()=>Date.now().toString(36)+Math.random().toString(36).slice(2,8);
+const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
+let state={name:'',kwh:.90,filaments:[],printers:[],quotes:[],products:[],orders:[],lastCalc:null,parts:[],calcQuoteParts:[]};
+function load(){try{const d=JSON.parse(localStorage.getItem(KEY)||'null');if(d)state={...state,...d};}catch(e){}state.filaments=state.filaments||[];state.printers=state.printers||[];state.quotes=state.quotes||[];state.products=state.products||[];state.orders=state.orders||[];state.calcQuoteParts=state.calcQuoteParts||[]}
 function persist(){localStorage.setItem(KEY,JSON.stringify(state));renderAll()}
-function toast(s){const t=$('toast');t.textContent=s;t.style.display='block';clearTimeout(window._toastTimer);window._toastTimer=setTimeout(()=>t.style.display='none',2400)}
+function toast(msg){const t=$('toast');t.textContent=msg;t.style.display='block';clearTimeout(window.__toastTimer);window.__toastTimer=setTimeout(()=>t.style.display='none',2600)}
 function menu(open){$('nav').classList.toggle('open',open);$('overlay').classList.toggle('open',open)}
-function go(id){document.querySelectorAll('.screen').forEach(s=>s.classList.toggle('active',s.id===id));document.querySelectorAll('.navitem').forEach(b=>b.classList.toggle('active',b.dataset.page===id));menu(false);if(id==='quotes')renderQuotes();if(id==='products')renderProducts();if(id==='orders')renderOrders();if(id==='inventory')renderFilaments();if(id==='printers')renderPrinters();window.scrollTo({top:0,behavior:'smooth'})}
+function go(page){document.querySelectorAll('.screen').forEach(s=>s.classList.toggle('active',s.id===page));document.querySelectorAll('.navitem').forEach(b=>b.classList.toggle('active',b.dataset.page===page));menu(false);window.scrollTo({top:0,behavior:'smooth'})}
+function renderSelects(){const fs=$('calcFilament'),ps=$('calcPrinter'),op=$('orderProduct');if(!fs||!ps||!op)return;const oldF=fs.value,oldP=ps.value,oldO=op.value;fs.innerHTML='<option value="">Selecione um filamento</option>'+state.filaments.map(f=>`<option value="${f.id}">${esc(f.name)} · ${esc(f.color||'sem cor')}</option>`).join('');ps.innerHTML='<option value="">Selecione uma impressora</option>'+state.printers.map(p=>`<option value="${p.id}">${esc(p.name)}</option>`).join('');op.innerHTML='<option value="">Produto personalizado</option>'+state.products.map(p=>`<option value="${p.id}">${esc(p.name)} — ${money(p.price)}</option>`).join('');if([...fs.options].some(o=>o.value===oldF))fs.value=oldF;if([...ps.options].some(o=>o.value===oldP))ps.value=oldP;if([...op.options].some(o=>o.value===oldO))op.value=oldO}
 function saveSettings(){state.name=$('settingsName').value.trim();state.kwh=Math.max(0,Number($('settingsKwh').value)||0);persist();toast('Configurações salvas')}
-function renderSelects(){const fs=state.filaments.map(f=>`<option value="${f.id}">${esc(f.name)} — ${esc(f.color||'sem cor')} (${f.stock}g)</option>`).join('');$('calcFilament').innerHTML='<option value="">Sem filamento selecionado</option>'+fs;const ps=state.printers.map(p=>`<option value="${p.id}">${esc(p.name)}</option>`).join('');$('calcPrinter').innerHTML='<option value="">Sem impressora selecionada</option>'+ps;$('orderProduct').innerHTML='<option value="">Selecione um produto</option>'+state.products.map(p=>`<option value="${p.id}">${esc(p.name)} — ${money(p.price)}</option>`).join('')}
-function esc(s){return String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]))}
-function calculate(){const f=state.filaments.find(x=>x.id===$('calcFilament').value),p=state.printers.find(x=>x.id===$('calcPrinter').value);const grams=Math.max(0,Number($('calcGrams').value)||0),hours=Math.max(0,Number($('calcHours').value)||0),kwh=Math.max(0,Number($('calcKwh').value)||0),margin=Math.max(0,Number($('calcMargin').value)||0),other=Math.max(0,Number($('calcOther').value)||0);const filament=f?grams*(Number(f.price)/Math.max(1,Number(f.weight))):0;const electric=p?hours*(Number(p.power)/1000)*kwh:0;const dep=p?hours*((Number(p.value)+Number(p.maintenance))/Math.max(1,Number(p.life))):0;const cost=filament+electric+dep+other;const price=cost*(1+margin/100);const result={name:$('calcName').value.trim()||'Peça sem nome',filamentId:f?.id||'',printerId:p?.id||'',grams,hours,kwh,margin,other,filament,electric,dep,cost,price,profit:price-cost};state.lastCalc=result;$('calcResult').style.display='block';$('resultPrice').textContent=money(price);$('resultFilament').textContent=money(filament);$('resultElectric').textContent=money(electric);$('resultDep').textContent=money(dep);$('resultCost').textContent=money(cost);$('resultProfit').textContent=money(price-cost);persist();toast('Preço calculado')}
-function quoteFromCalc(){if(!state.lastCalc){toast('Calcule o preço primeiro');return}newQuote();$('quotePiece').value=state.lastCalc.name;$('quoteQty').value=1;$('quoteUnit').value=state.lastCalc.price.toFixed(2);$('quoteCost').value=state.lastCalc.cost.toFixed(2);go('quotes')}
-function saveCalcProduct(){if(!state.lastCalc){toast('Calcule o preço primeiro');return}const r=state.lastCalc;state.products.push({id:uid(),name:r.name,price:r.price,cost:r.cost,created:Date.now()});persist();toast('Produto salvo no catálogo')}
-function newQuote(){clearQuote();go('quotes');$('quoteFormTitle').textContent='Novo orçamento'}
-function clearQuote(){['quoteEditId','quoteName','quotePiece','quoteNotes'].forEach(id=>$(id).value='');$('quoteQty').value=1;$('quoteUnit').value=0;$('quoteCost').value=0;$('quoteDeadline').value='';$('quoteMode').value='single';$('quoteAddProduct').checked=true;state.parts=[];renderPartRows();$('quoteFormTitle').textContent='Novo orçamento'}
-function renderPartRows(){const multiple=$('quoteMode').value==='multiple';$('quoteSingle').style.display=multiple?'none':'block';$('quoteMultiple').style.display=multiple?'block':'none';if(multiple&&!state.parts.length)addPart();else drawPartRows()}
-function addPart(){state.parts.push({name:'',qty:1,price:0});drawPartRows()}
-function drawPartRows(){if(!$('partRows'))return;$('partRows').innerHTML=state.parts.map((p,i)=>`<div class="card" style="padding:12px;margin-top:8px"><div class="itemTop"><strong>Peça ${i+1}</strong><button class="btn danger" onclick="removePart(${i})">Remover</button></div><label>Nome da peça</label><input value="${esc(p.name)}" onchange="state.parts[${i}].name=this.value" placeholder="Nome"><div class="grid"><div><label>Quantidade</label><input type="number" min="1" value="${p.qty}" onchange="state.parts[${i}].qty=Math.max(1,Number(this.value)||1)"></div><div><label>Preço unitário (R$)</label><input type="number" min="0" step=".01" value="${p.price}" onchange="state.parts[${i}].price=Math.max(0,Number(this.value)||0)"></div></div></div>`).join('');}
-function removePart(i){state.parts.splice(i,1);drawPartRows()}
-function saveQuote(){const mode=$('quoteMode').value,name=$('quoteName').value.trim()||'Orçamento sem nome',cost=Math.max(0,Number($('quoteCost').value)||0);let parts;if(mode==='single'){const piece=$('quotePiece').value.trim()||'Peça';parts=[{name:piece,qty:Math.max(1,Number($('quoteQty').value)||1),price:Math.max(0,Number($('quoteUnit').value)||0)}]}else{parts=state.parts.filter(p=>p.name.trim()).map(p=>({...p,qty:Math.max(1,Number(p.qty)||1),price:Math.max(0,Number(p.price)||0)}));if(!parts.length){toast('Adicione ao menos uma peça com nome');return}}const total=parts.reduce((s,p)=>s+p.qty*p.price,0);const id=$('quoteEditId').value;const q={id:id||uid(),name,mode,parts,cost,total,deadline:$('quoteDeadline').value,notes:$('quoteNotes').value,created:Date.now()};const idx=state.quotes.findIndex(x=>x.id===id);if(idx>=0)state.quotes[idx]=q;else state.quotes.unshift(q);if($('quoteAddProduct').checked){parts.forEach(p=>{const existing=state.products.find(x=>x.name.toLowerCase()===p.name.toLowerCase());if(existing){existing.price=p.price;existing.cost=cost/parts.length}else state.products.push({id:uid(),name:p.name,price:p.price,cost:cost/parts.length,quoteId:q.id,created:Date.now()})})}persist();clearQuote();toast('Orçamento salvo')}
-function editQuote(id){const q=state.quotes.find(x=>x.id===id);if(!q)return;$('quoteEditId').value=q.id;$('quoteName').value=q.name;$('quoteMode').value=q.mode;$('quoteCost').value=q.cost;$('quoteDeadline').value=q.deadline||'';$('quoteNotes').value=q.notes||'';$('quoteAddProduct').checked=false;if(q.mode==='single'){const p=q.parts[0]||{};$('quotePiece').value=p.name||'';$('quoteQty').value=p.qty||1;$('quoteUnit').value=p.price||0}else{state.parts=q.parts.map(p=>({...p}));drawPartRows()}renderPartRows();$('quoteFormTitle').textContent='Editar orçamento';go('quotes');$('quoteForm').scrollIntoView({behavior:'smooth'})}
-function deleteQuote(id){if(!confirm('Excluir este orçamento?'))return;state.quotes=state.quotes.filter(q=>q.id!==id);persist()}
-function renderQuotes(){$('quoteList').innerHTML=state.quotes.length?state.quotes.map(q=>`<div class="item"><div class="itemTop"><strong>${esc(q.name)}</strong><span class="badge">${q.mode==='multiple'?'Várias peças':'Peça única'}</span></div><div class="muted">${q.parts.map(p=>`${esc(p.name)} × ${p.qty}`).join(' · ')}</div><div class="itemTop" style="margin-top:8px"><div><div class="money" style="font-size:21px">${money(q.total)}</div><div class="muted">Custo ${money(q.cost)} · Lucro ${money(q.total-q.cost)}</div></div><div class="actions"><button class="btn secondary" onclick="editQuote('${q.id}')">Editar</button><button class="btn danger" onclick="deleteQuote('${q.id}')">Excluir</button></div></div></div>`).join(''):'<div class="empty">Nenhum orçamento cadastrado.</div>';$('recentQuotes').innerHTML=state.quotes.slice(0,3).map(q=>`<div class="itemTop item"><span>${esc(q.name)}</span><strong>${money(q.total)}</strong></div>`).join('')||'<div class="empty">Seus orçamentos aparecerão aqui.</div>'}
-function renderProducts(){const term=($('productSearch')?.value||'').toLowerCase();const list=state.products.filter(p=>p.name.toLowerCase().includes(term)||p.id.toLowerCase().includes(term));$('productList').innerHTML=list.length?list.map(p=>`<div class="item"><div class="itemTop"><strong>${esc(p.name)}</strong><span class="badge">ID ${esc(p.id.slice(-6))}</span></div><div class="itemTop" style="margin-top:8px"><div><div class="money" style="font-size:21px">${money(p.price)}</div><div class="muted">Custo ${money(p.cost||0)}</div></div><div class="actions"><button class="btn secondary" onclick="editProduct('${p.id}')">Editar</button><button class="btn danger" onclick="deleteProduct('${p.id}')">Excluir</button></div></div></div>`).join(''):'<div class="empty">Nenhum produto encontrado.</div>'}
-function editProduct(id){const p=state.products.find(x=>x.id===id);if(!p)return;const name=prompt('Nome do produto:',p.name);if(name===null)return;const price=prompt('Preço de venda (R$):',p.price);if(price===null)return;p.name=name.trim()||p.name;p.price=Math.max(0,Number(price)||0);persist();toast('Produto atualizado')}
-function deleteProduct(id){if(!confirm('Excluir produto do catálogo?'))return;state.products=state.products.filter(p=>p.id!==id);persist()}
-function saveFilament(){const name=$('filamentName').value.trim();if(!name){toast('Informe o nome do filamento');return}const id=$('filamentEditId').value;const f={id:id||uid(),name,type:$('filamentType').value,color:$('filamentColor').value.trim(),price:Math.max(0,Number($('filamentPrice').value)||0),weight:Math.max(1,Number($('filamentWeight').value)||1000),stock:Math.max(0,Number($('filamentStock').value)||0)};const idx=state.filaments.findIndex(x=>x.id===id);if(idx>=0)state.filaments[idx]=f;else state.filaments.push(f);persist();clearFilament();toast('Filamento salvo')}
-function clearFilament(){['filamentEditId','filamentName','filamentColor'].forEach(id=>$(id).value='');$('filamentType').value='PLA';$('filamentPrice').value=100;$('filamentWeight').value=1000;$('filamentStock').value=1000}
-function editFilament(id){const f=state.filaments.find(x=>x.id===id);if(!f)return;$('filamentEditId').value=f.id;$('filamentName').value=f.name;$('filamentType').value=f.type;$('filamentColor').value=f.color;$('filamentPrice').value=f.price;$('filamentWeight').value=f.weight;$('filamentStock').value=f.stock;go('inventory');$('filamentName').scrollIntoView({behavior:'smooth'})}
-function deleteFilament(id){if(!confirm('Excluir este filamento?'))return;state.filaments=state.filaments.filter(f=>f.id!==id);persist()}
-function renderFilaments(){$('filamentList').innerHTML=state.filaments.length?state.filaments.map(f=>{const low=f.stock<100;return `<div class="item"><div class="itemTop"><strong>${esc(f.name)} · ${esc(f.color||'sem cor')}</strong><span class="badge">${esc(f.type)}</span></div><div class="itemTop" style="margin-top:8px"><div><div class="metric">${f.stock} g</div><div class="muted">${money(f.price)} por ${f.weight} g · ${money(f.price/f.weight)}/g</div></div><div class="actions"><button class="btn secondary" onclick="editFilament('${f.id}')">Editar</button><button class="btn danger" onclick="deleteFilament('${f.id}')">Excluir</button></div></div>${low?'<div class="muted" style="color:#ffbd63;margin-top:8px">Estoque baixo</div>':''}</div>`}).join(''):'<div class="empty">Nenhum filamento cadastrado.</div>';renderSelects();$('lowStock').innerHTML=state.filaments.filter(f=>f.stock<100).map(f=>`<div class="itemTop item"><span>${esc(f.name)} · ${esc(f.color)}</span><strong>${f.stock} g</strong></div>`).join('')||'<div class="empty">Nenhum alerta de estoque baixo.</div>'}
-function savePrinter(){const name=$('printerName').value.trim();if(!name){toast('Informe o nome da impressora');return}const id=$('printerEditId').value;const p={id:id||uid(),name,value:Math.max(0,Number($('printerValue').value)||0),life:Math.max(1,Number($('printerLife').value)||1),power:Math.max(0,Number($('printerPower').value)||0),maintenance:Math.max(0,Number($('printerMaintenance').value)||0)};const idx=state.printers.findIndex(x=>x.id===id);if(idx>=0)state.printers[idx]=p;else state.printers.push(p);persist();clearPrinter();toast('Impressora salva')}
-function clearPrinter(){['printerEditId','printerName'].forEach(id=>$(id).value='');$('printerValue').value=1800;$('printerLife').value=5000;$('printerPower').value=350;$('printerMaintenance').value=200}
+ function calculate(){
+const name=$('calcName').value.trim()||'Peça sem nome',f=state.filaments.find(x=>x.id===$('calcFilament').value),p=state.printers.find(x=>x.id===$('calcPrinter').value);
+const grams=Math.max(0,Number($('calcGrams').value)||0),hours=Math.max(0,Number($('calcHours').value)||0),kwh=Math.max(0,Number($('calcKwh').value)||state.kwh||0),margin=Math.max(0,Number($('calcMargin').value)||0),other=Math.max(0,Number($('calcOther').value)||0);
+const filamentCost=f&&Number(f.weight)>0?grams*(Number(f.price)||0)/Number(f.weight):0;
+const electricCost=p?hours*(Number(p.power)||0)/1000*kwh:0;
+const depreciation=p&&Number(p.life)>0?hours*((Number(p.value)||0)+(Number(p.maintenance)||0))/Number(p.life):0;
+const cost=filamentCost+electricCost+depreciation+other,price=cost*(1+margin/100),profit=price-cost;
+state.lastCalc={id:uid(),name,filamentId:f?.id||'',printerId:p?.id||'',grams,hours,kwh,margin,other,filamentCost,electricCost,depreciation,cost,price,profit};
+$('calcResult').style.display='block';$('resultPrice').textContent=money(price);$('resultFilament').textContent=money(filamentCost);$('resultElectric').textContent=money(electricCost);$('resultDep').textContent=money(depreciation);$('resultOther').textContent=money(other);$('resultCost').textContent=money(cost);$('resultProfit').textContent=money(profit);return state.lastCalc
+}
+function addCalcPieceToQuote(){
+const c=state.lastCalc||calculate();if(!c)return;
+const found=state.calcQuoteParts.find(x=>x.name.toLowerCase()===c.name.toLowerCase());
+if(found){found.qty=(Number(found.qty)||1)+1;found.price=c.price;found.cost=c.cost;found.grams=c.grams;found.hours=c.hours;found.filamentId=c.filamentId;found.printerId=c.printerId;found.margin=c.margin}
+else state.calcQuoteParts.push({...c,qty:1});
+persist();renderCalcParts();toast('Peça adicionada ao orçamento')
+}
+function renderCalcParts(){
+const el=$('calcQuoteParts'),totals=$('calcQuoteTotals');if(!el||!totals)return;
+if(!state.calcQuoteParts.length){el.innerHTML='<div class="empty">Nenhuma peça adicionada ainda.</div>';totals.style.display='none';return}
+el.innerHTML=state.calcQuoteParts.map((p,i)=>`<div class="partCalc"><div class="itemTop"><h4>${esc(p.name)}</h4><button class="btn danger" onclick="removeCalcPart(${i})">Remover</button></div><div class="muted">Custo por peça: ${money(p.cost)} · Preço por peça: ${money(p.price)} · Lucro por peça: ${money(p.profit)}</div><label>Quantidade</label><input type="number" min="1" value="${Number(p.qty)||1}" onchange="changeCalcPartQty(${i},this.value)"></div>`).join('');
+const cost=state.calcQuoteParts.reduce((s,p)=>s+(Number(p.cost)||0)*(Number(p.qty)||1),0),price=state.calcQuoteParts.reduce((s,p)=>s+(Number(p.price)||0)*(Number(p.qty)||1),0);
+totals.style.display='block';totals.innerHTML=`<div class="itemTop"><span>Custo total</span><strong>${money(cost)}</strong></div><div class="itemTop"><span>Preço total</span><strong>${money(price)}</strong></div><div class="itemTop"><span>Lucro total</span><strong>${money(price-cost)}</strong></div>`
+}
+function removeCalcPart(i){state.calcQuoteParts.splice(i,1);persist();renderCalcParts()}
+function changeCalcPartQty(i,v){state.calcQuoteParts[i].qty=Math.max(1,parseInt(v)||1);persist();renderCalcParts()}
+function clearCalcParts(){state.calcQuoteParts=[];persist();renderCalcParts();toast('Lista de peças limpa')}
+function startQuoteFromParts(){
+if(!state.calcQuoteParts.length){toast('Adicione pelo menos uma peça primeiro');return}
+newQuote();$('quoteMode').value='multiple';renderPartRows();$('quoteName').value='Orçamento com várias peças';
+state.parts=state.calcQuoteParts.map(p=>({...p,qty:Number(p.qty)||1}));renderPartRows();updateQuoteTotals();go('quotes')
+}
+function quoteFromCalc(){
+const c=state.lastCalc||calculate();newQuote();$('quoteMode').value='single';$('quoteSingleName').value=c.name;$('quoteSingleQty').value=1;$('quoteSinglePrice').value=c.price.toFixed(2);$('quoteSingleCost').value=c.cost.toFixed(2);$('quoteName').value='Orçamento - '+c.name;updateQuoteTotals();go('quotes')
+}
+function saveCalcProduct(){
+const c=state.lastCalc||calculate();const found=state.products.find(p=>p.name.toLowerCase()===c.name.toLowerCase());
+if(found){found.price=c.price;found.cost=c.cost;found.grams=c.grams;found.hours=c.hours;toast('Produto atualizado')}
+else{state.products.push({id:uid(),name:c.name,price:c.price,cost:c.cost,grams:c.grams,hours:c.hours});toast('Produto salvo')}
+persist()
+}
+function newQuote(){
+$('quoteEditId').value='';$('quoteFormTitle').textContent='Novo orçamento';$('quoteName').value='';$('quoteMode').value='single';$('quoteSingleName').value='';$('quoteSingleQty').value=1;$('quoteSinglePrice').value=0;$('quoteSingleCost').value=0;$('quoteAddProducts').checked=true;state.parts=[];renderPartRows();updateQuoteTotals()
+}
+function addQuotePartRow(part={}){
+state.parts.push({id:part.id||uid(),name:part.name||'',qty:Number(part.qty)||1,price:Number(part.price)||0,cost:Number(part.cost)||0,grams:Number(part.grams)||0,hours:Number(part.hours)||0,filamentId:part.filamentId||'',printerId:part.printerId||''});renderPartRows()
+}
+function renderPartRows(){
+const multi=$('quoteMode').value==='multiple';$('quoteSingle').style.display=multi?'none':'block';$('quoteMultiple').style.display=multi?'block':'none';
+if(multi&&state.parts.length===0)addQuotePartRow();
+$('quotePartsRows').innerHTML=state.parts.map((p,i)=>`<div class="partCalc"><div class="itemTop"><h4>Peça ${i+1}</h4><button class="btn danger" onclick="removeQuotePart(${i})">Remover</button></div><label>Nome da peça</label><input value="${esc(p.name)}" onchange="changeQuotePart(${i},'name',this.value)"><div class="grid"><div><label>Quantidade</label><input type="number" min="1" value="${p.qty}" onchange="changeQuotePart(${i},'qty',this.value)"></div><div><label>Preço unitário (R$)</label><input type="number" min="0" step="0.01" value="${p.price}" onchange="changeQuotePart(${i},'price',this.value)"></div></div><label>Custo unitário (R$)</label><input type="number" min="0" step="0.01" value="${p.cost}" onchange="changeQuotePart(${i},'cost',this.value)"><div class="muted">Custo total: ${money(p.cost*p.qty)} · Preço total: ${money(p.price*p.qty)} · Lucro: ${money((p.price-p.cost)*p.qty)}</div></div>`).join('');
+updateQuoteTotals()
+}
+function changeQuotePart(i,key,value){if(!state.parts[i])return;state.parts[i][key]=key==='name'?value:Math.max(key==='qty'?1:0,Number(value)||0);renderPartRows()}
+function removeQuotePart(i){state.parts.splice(i,1);renderPartRows()}
+function getQuoteParts(){
+if($('quoteMode').value==='single')return[{name:$('quoteSingleName').value.trim()||'Peça sem nome',qty:Math.max(1,parseInt($('quoteSingleQty').value)||1),price:Math.max(0,Number($('quoteSinglePrice').value)||0),cost:Math.max(0,Number($('quoteSingleCost').value)||0)}];
+return state.parts.filter(p=>p.name.trim()).map(p=>({...p,qty:Math.max(1,Number(p.qty)||1),price:Math.max(0,Number(p.price)||0),cost:Math.max(0,Number(p.cost)||0)}))
+}
+function updateQuoteTotals(){
+if(!$('quoteMode'))return;const parts=getQuoteParts(),price=parts.reduce((s,p)=>s+p.price*p.qty,0),cost=parts.reduce((s,p)=>s+p.cost*p.qty,0);
+$('quoteTotal').textContent=money(price);$('quoteCost').textContent=money(cost);$('quoteProfit').textContent=money(price-cost)
+              }
+ function saveQuote(){
+const parts=getQuoteParts();if(!parts.length){toast('Informe o nome de pelo menos uma peça');return}
+const id=$('quoteEditId').value||uid(),old=state.quotes.find(q=>q.id===id),price=parts.reduce((s,p)=>s+p.price*p.qty,0),cost=parts.reduce((s,p)=>s+p.cost*p.qty,0);
+const q={id,name:$('quoteName').value.trim()||'Orçamento sem nome',mode:$('quoteMode').value,parts,price,cost,profit:price-cost,updatedAt:new Date().toISOString(),createdAt:old?.createdAt||new Date().toISOString()};
+const ix=state.quotes.findIndex(x=>x.id===id);if(ix>=0)state.quotes[ix]=q;else state.quotes.unshift(q);
+if($('quoteAddProducts').checked){parts.forEach(p=>{const found=state.products.find(x=>x.name.toLowerCase()===p.name.toLowerCase());if(found){found.price=p.price;found.cost=p.cost}else state.products.push({id:uid(),name:p.name,price:p.price,cost:p.cost,grams:p.grams||0,hours:p.hours||0})})}
+state.calcQuoteParts=[];persist();renderCalcParts();newQuote();toast('Orçamento salvo')
+}
+function editQuote(id){
+const q=state.quotes.find(x=>x.id===id);if(!q)return;
+$('quoteEditId').value=q.id;$('quoteFormTitle').textContent='Editar orçamento';$('quoteName').value=q.name;$('quoteMode').value=q.mode||'single';$('quoteAddProducts').checked=false;
+state.parts=(q.parts||[]).map(p=>({...p}));if(q.mode==='single'&&state.parts[0]){$('quoteSingleName').value=state.parts[0].name;$('quoteSingleQty').value=state.parts[0].qty;$('quoteSinglePrice').value=state.parts[0].price;$('quoteSingleCost').value=state.parts[0].cost}
+renderPartRows();go('quotes')
+}
+function deleteQuote(id){if(!confirm('Excluir este orçamento?'))return;state.quotes=state.quotes.filter(q=>q.id!==id);persist();toast('Orçamento excluído')}
+function renderQuotes(){
+const el=$('quoteList');if(!state.quotes.length){el.innerHTML='<div class="empty">Nenhum orçamento cadastrado.</div>';return}
+el.innerHTML=state.quotes.map(q=>`<div class="item"><div class="itemTop"><strong>${esc(q.name)}</strong><span class="badge">${q.mode==='multiple'?'Várias peças':'Peça única'}</span></div><div class="muted">${(q.parts||[]).map(p=>`${esc(p.name)} × ${p.qty}`).join(' · ')}</div><div class="itemTop"><span>Preço ${money(q.price)}</span><span>Lucro ${money(q.profit)}</span></div><div class="actions"><button class="btn secondary" onclick="editQuote('${q.id}')">Editar</button><button class="btn danger" onclick="deleteQuote('${q.id}')">Excluir</button></div></div>`).join('')
+}
+function renderProducts(){
+const el=$('productList'),search=($('productSearch')?.value||'').trim().toLowerCase(),list=state.products.filter(p=>!search||p.name.toLowerCase().includes(search)||p.id.toLowerCase().includes(search));
+if(!list.length){el.innerHTML='<div class="empty">Nenhum produto encontrado.</div>';return}
+el.innerHTML=list.map(p=>`<div class="item"><div class="itemTop"><strong>${esc(p.name)}</strong><span class="badge">ID ${esc(p.id.slice(0,8))}</span></div><div class="itemTop"><span>Preço: ${money(p.price)}</span><span>Custo: ${money(p.cost)}</span></div><div class="muted">Lucro estimado: ${money(p.price-p.cost)}</div><div class="actions"><button class="btn secondary" onclick="editProduct('${p.id}')">Editar</button><button class="btn danger" onclick="deleteProduct('${p.id}')">Excluir</button></div></div>`).join('')
+}
+function editProduct(id){const p=state.products.find(x=>x.id===id);if(!p)return;const name=prompt('Nome do produto:',p.name);if(name===null)return;const price=prompt('Preço por unidade (R$):',p.price);if(price===null)return;const cost=prompt('Custo por unidade (R$):',p.cost);if(cost===null)return;p.name=name.trim()||p.name;p.price=Math.max(0,Number(price)||0);p.cost=Math.max(0,Number(cost)||0);persist();toast('Produto atualizado')}
+function deleteProduct(id){if(!confirm('Excluir este produto?'))return;state.products=state.products.filter(p=>p.id!==id);persist();toast('Produto excluído')}
+function saveFilament(){
+const id=$('filamentEditId').value||uid(),f={id,name:$('filamentName').value.trim(),type:$('filamentType').value,color:$('filamentColor').value.trim(),price:Math.max(0,Number($('filamentPrice').value)||0),weight:Math.max(1,Number($('filamentWeight').value)||1000),stock:Math.max(0,Number($('filamentStock').value)||0)};
+if(!f.name){toast('Informe o nome do filamento');return}
+const ix=state.filaments.findIndex(x=>x.id===id);if(ix>=0)state.filaments[ix]=f;else state.filaments.push(f);clearFilament();persist();toast('Filamento salvo')
+}
+function clearFilament(){$('filamentEditId').value='';$('filamentName').value='';$('filamentColor').value='';$('filamentPrice').value=100;$('filamentWeight').value=1000;$('filamentStock').value=1000}
+function editFilament(id){const f=state.filaments.find(x=>x.id===id);if(!f)return;$('filamentEditId').value=f.id;$('filamentName').value=f.name;$('filamentType').value=f.type;$('filamentColor').value=f.color;$('filamentPrice').value=f.price;$('filamentWeight').value=f.weight;$('filamentStock').value=f.stock;go('inventory')}
+function deleteFilament(id){if(!confirm('Excluir este filamento?'))return;state.filaments=state.filaments.filter(f=>f.id!==id);persist();toast('Filamento excluído')}
+function renderFilaments(){
+const el=$('filamentList');if(!state.filaments.length){el.innerHTML='<div class="empty">Nenhum filamento cadastrado.</div>';return}
+el.innerHTML=state.filaments.map(f=>`<div class="item"><div class="itemTop"><strong>${esc(f.name)} — ${esc(f.color||'sem cor')}</strong><span class="badge">${esc(f.type)}</span></div><div class="muted">Rolo: ${money(f.price)} / ${f.weight} g · Estoque: ${f.stock} g</div><div class="actions"><button class="btn secondary" onclick="editFilament('${f.id}')">Editar</button><button class="btn danger" onclick="deleteFilament('${f.id}')">Excluir</button></div></div>`).join('')
+}
+function savePrinter(){
+const id=$('printerEditId').value||uid(),p={id,name:$('printerName').value.trim(),value:Math.max(0,Number($('printerValue').value)||0),life:Math.max(1,Number($('printerLife').value)||1),power:Math.max(0,Number($('printerPower').value)||0),maintenance:Math.max(0,Number($('printerMaintenance').value)||0)};
+if(!p.name){toast('Informe o nome da impressora');return}
+const ix=state.printers.findIndex(x=>x.id===id);if(ix>=0)state.printers[ix]=p;else state.printers.push(p);clearPrinter();persist();toast('Impressora salva')
+}
+function clearPrinter(){$('printerEditId').value='';$('printerName').value='';$('printerValue').value=1800;$('printerLife').value=5000;$('printerPower').value=350;$('printerMaintenance').value=200}
 function editPrinter(id){const p=state.printers.find(x=>x.id===id);if(!p)return;$('printerEditId').value=p.id;$('printerName').value=p.name;$('printerValue').value=p.value;$('printerLife').value=p.life;$('printerPower').value=p.power;$('printerMaintenance').value=p.maintenance;go('printers')}
-function deletePrinter(id){if(!confirm('Excluir esta impressora?'))return;state.printers=state.printers.filter(p=>p.id!==id);persist()}
-function renderPrinters(){$('printerList').innerHTML=state.printers.length?state.printers.map(p=>`<div class="item"><div class="itemTop"><strong>${esc(p.name)}</strong><span class="badge">${p.power} W</span></div><div class="muted" style="margin-top:6px">Valor ${money(p.value)} · Vida útil ${p.life} h · Manutenção ${money(p.maintenance)}</div><div class="actions"><button class="btn secondary" onclick="editPrinter('${p.id}')">Editar</button><button class="btn danger" onclick="deletePrinter('${p.id}')">Excluir</button></div></div>`).join(''):'<div class="empty">Nenhuma impressora cadastrada.</div>';renderSelects()}
-function saveOrder(){const name=$('orderName').value.trim()||'Cliente';const product=state.products.find(p=>p.id===$('orderProduct').value);const qty=Math.max(1,Number($('orderQty').value)||1);const price=Math.max(0,Number($('orderPrice').value)||0);const grams=Math.max(0,Number($('orderGrams').value)||0);const status=$('orderStatus').value;if(status==='Concluída'||status==='Falhou'){if(grams>0){const f=state.filaments.find(x=>x.id===$('calcFilament').value);if(f)f.stock=Math.max(0,f.stock-grams)}}
-state.orders.unshift({id:uid(),name,productId:product?.id||'',product:product?.name||'Produto personalizado',qty,price,grams,status,created:Date.now()});persist();$('orderName').value='';toast('Encomenda salva')}
-function setOrderStatus(id,status){const o=state.orders.find(x=>x.id===id);if(!o)return;o.status=status;persist()}
-function deleteOrder(id){if(!confirm('Excluir esta encomenda?'))return;state.orders=state.orders.filter(o=>o.id!==id);persist()}
-function renderOrders(){$('orderList').innerHTML=state.orders.length?state.orders.map(o=>`<div class="item"><div class="itemTop"><strong>${esc(o.name)}</strong><span class="badge">${esc(o.status)}</span></div><div class="muted">${esc(o.product)} × ${o.qty} · ${money(o.price)}</div><label>Alterar status</label><select onchange="setOrderStatus('${o.id}',this.value)">${['Pendente','Em produção','Concluída','Falhou'].map(s=>`<option ${o.status===s?'selected':''}>${s}</option>`).join('')}</select><div class="actions"><button class="btn danger" onclick="deleteOrder('${o.id}')">Excluir</button></div></div>`).join(''):'<div class="empty">Nenhuma encomenda cadastrada.</div>';renderSelects()}
-function renderHome(){$('hello').textContent=state.name||'empreendedor';$('dashQuotes').textContent=state.quotes.length;$('dashOrders').textContent=state.orders.length;const done=state.orders.filter(o=>o.status==='Concluída');$('dashRevenue').textContent=money(done.reduce((s,o)=>s+o.price,0));$('dashProfit').textContent=money(done.reduce((s,o)=>s+o.price,0)-done.reduce((s,o)=>{const p=state.products.find(x=>x.id===o.productId);return s+(p?.cost||0)*o.qty},0));}
-function renderAll(){renderHome();renderQuotes();renderProducts();renderOrders();renderFilaments();renderPrinters();$('settingsName').value=state.name||'';$('settingsKwh').value=state.kwh??0.90;renderSelects()}
-function exportData(){const blob=new Blob([JSON.stringify(state,null,2)],{type:'application/json'});const a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='printprofit-backup.json';a.click();URL.revokeObjectURL(a.href)}
-function importData(){const file=$('importFile').files[0];if(!file){toast('Escolha um arquivo JSON');return}const reader=new FileReader();reader.onload=()=>{try{const d=JSON.parse(reader.result);if(!d||!Array.isArray(d.filaments)||!Array.isArray(d.quotes))throw Error();state={...state,...d};persist();toast('Dados importados')}catch(e){toast('Arquivo inválido')}};reader.readAsText(file)}
-function resetData(){if(!confirm('Tem certeza? Todos os dados salvos neste navegador serão apagados.'))return;localStorage.removeItem(KEY);state={name:'',kwh:0.90,filaments:[],printers:[],quotes:[],products:[],orders:[],lastCalc:null,parts:[]};persist();toast('Dados apagados')}
-load();renderAll();go('home');
-</script>
-</body>
-</html>
+function deletePrinter(id){if(!confirm('Excluir esta impressora?'))return;state.printers=state.printers.filter(p=>p.id!==id);persist();toast('Impressora excluída')}
+function renderPrinters(){
+const el=$('printerList');if(!state.printers.length){el.innerHTML='<div class="empty">Nenhuma impressora cadastrada.</div>';return}
+el.innerHTML=state.printers.map(p=>`<div class="item"><strong>${esc(p.name)}</strong><div class="muted">Valor ${money(p.value)} · Vida útil ${p.life} h · Potência ${p.power} W · Manutenção ${money(p.maintenance)}</div><div class="actions"><button class="btn secondary" onclick="editPrinter('${p.id}')">Editar</button><button class="btn danger" onclick="deletePrinter('${p.id}')">Excluir</button></div></div>`).join('')
+}
+function saveOrder(){
+const product=state.products.find(p=>p.id===$('orderProduct').value),qty=Math.max(1,Number($('orderQty').value)||1),price=Math.max(0,Number($('orderPrice').value)||((product?.price||0)*qty)),grams=Math.max(0,Number($('orderGrams').value)||0),status=$('orderStatus').value;
+const o={id:uid(),name:$('orderName').value.trim()||'Cliente sem nome',productId:product?.id||'',productName:product?.name||'Produto personalizado',qty,price,grams,status,createdAt:new Date().toISOString()};
+if(status==='Concluída'&&!o.stockApplied){const f=product?.filamentId&&state.filaments.find(x=>x.id===product.filamentId);if(f&&grams>0)f.stock=Math.max(0,f.stock-grams);o.stockApplied=true}
+state.orders.unshift(o);persist();toast('Encomenda salva')
+}
+function renderOrders(){
+const el=$('orderList');if(!state.orders.length){el.innerHTML='<div class="empty">Nenhuma encomenda cadastrada.</div>';return}
+el.innerHTML=state.orders.map(o=>`<div class="item"><div class="itemTop"><strong>${esc(o.name)}</strong><span class="badge">${esc(o.status)}</span></div><div class="muted">${esc(o.productName)} × ${o.qty} · ${money(o.price)}</div><div class="actions"><button class="btn secondary" onclick="changeOrderStatus('${o.id}')">Alterar status</button><button class="btn danger" onclick="deleteOrder('${o.id}')">Excluir</button></div></div>`).join('')
+}
+function changeOrderStatus(id){const o=state.orders.find(x=>x.id===id);if(!o)return;const s=prompt('Digite o novo status: Pendente, Em produção, Concluída ou Falhou',o.status);if(!s)return;o.status=s;if(s==='Concluída'&&!o.stockApplied){const p=state.products.find(x=>x.id===o.productId),f=p?.filamentId&&state.filaments.find(x=>x.id===p.filamentId);if(f&&o.grams>0)f.stock=Math.max(0,f.stock-o.grams);o.stockApplied=true}persist()}
+function deleteOrder(id){if(!confirm('Excluir esta encomenda?'))return;state.orders=state.orders.filter(o=>o.id!==id);persist();toast('Encomenda excluída')}
+function renderDashboard(){
+$('hello').textContent=state.name||'empreendedor';$('dashQuotes').textContent=state.quotes.length;$('dashOrders').textContent=state.orders.length;$('dashRevenue').textContent=money(state.orders.filter(o=>o.status==='Concluída').reduce((s,o)=>s+o.price,0));$('dashProfit').textContent=money(state.orders.filter(o=>o.status==='Concluída').reduce((s,o)=>{const p=state.products.find(x=>x.id===o.productId);return s+o.price-(p?(p.cost||0)*o.qty:0)},0));
+$('lowStock').innerHTML=state.filaments.filter(f=>f.stock<100).map(f=>`<div class="item">${esc(f.name)} (${esc(f.color||'sem cor')}): <strong>${f.stock} g</strong></div>`).join('')||'<div class="empty">Nenhum filamento com estoque baixo.</div>';
+$('recentQuotes').innerHTML=state.quotes.slice(0,4).map(q=>`<div class="item"><div class="itemTop"><strong>${esc(q.name)}</strong><span>${money(q.price)}</span></div><div class="muted">Lucro estimado: ${money(q.profit)}</div></div>`).join('')||'<div class="empty">Seus orçamentos aparecerão aqui.</div>'
+}
+function renderAll(){renderSelects();renderFilaments();renderPrinters();renderProducts();renderQuotes();renderOrders();renderDashboard();if($('settingsName'))$('settingsName').value=state.name||'';if($('settingsKwh'))$('settingsKwh').value=state.kwh??.90;renderCalcParts()}
+function exportData(){const blob=new Blob([JSON.stringify(state,null,2)],{type:'application/json'}),a=document.createElement('a');a.href=URL.createObjectURL(blob);a.download='printprofit-backup.json';a.click();URL.revokeObjectURL(a.href);toast('Backup exportado')}
+function importData(){const file=$('importFile').files[0];if(!file)return;const reader=new FileReader();reader.onload=()=>{try{const d=JSON.parse(reader.result);if(!d||typeof d!=='object')throw new Error();state={...state,...d};persist();toast('Backup importado')}catch(e){toast('Arquivo de backup inválido')}};reader.readAsText(file)}
+function resetData(){if(!confirm('Isso apagará os dados salvos neste navegador. Deseja continuar?'))return;localStorage.removeItem(KEY);location.reload()}
+load();renderAll();updateQuoteTotals();
+</script></body></html>
